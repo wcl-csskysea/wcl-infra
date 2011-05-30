@@ -17,12 +17,17 @@ read DOMAIN
 echo -n "Enter repository location : "
 read REPOSITORY
 
-echo -n "Enter branch (default: MASTER) : "
+echo -n "Enter branch (default: master) : "
 read BRANCH
+if [ -z "$BRANCH" ]; then
+	BRANCH='master'
+fi
 
 echo -n "Enter revision (default: current) : "
 read REVISION
-
+if [ -z "$REVISION" ]; then
+	REVISION='current'
+fi
 ######
 # Default webroot location :
 # 	/var/www/sites/$DOMAIN/
@@ -46,4 +51,4 @@ cd "$WEBROOT"
 echo "Do you want to retrieve the code ? [Enter to continue / Ctrl+C to cancel]"
 read 
 
-git pull "$REPOSITORY" .
+git pull "$REPOSITORY" "$BRANCH"

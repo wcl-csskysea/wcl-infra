@@ -1,6 +1,6 @@
 #!/bin/bash
 ####################################
-# git create script based on user input
+# json create config based on user input
 #
 ####################################
 # Contact:
@@ -27,6 +27,20 @@ echo -n "Enter revision (default: current) : "
 read REVISION
 if [ -z "$REVISION" ]; then
 	REVISION='current'
+fi
+
+echo -n "Automatic deployment ? (yes/NO) : "
+read AUTOMATIC
+if [ -z "$AUTOMATIC" ]; then 
+	AUTOMATIC='0'
+fi
+
+echo -n "Tag based ? (yes/NO) : "
+read TAG
+if [ "$TAG" == 'YES' -o "$TAG" == 'yes' -o "$TAG" == 'Y' -o "$TAG" == 'y' ]; then
+	TAG='1'
+else 
+	TAG='0'
 fi
 
 ######
