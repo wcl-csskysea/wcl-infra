@@ -1,5 +1,6 @@
 #!/bin/bash
 ####################################
+# HuoLongGuo !
 # git create script based on user input
 #
 ####################################
@@ -10,9 +11,6 @@ version=0.1
 
 # Load client config file
 [ -f /etc/huolongguo.conf ] && . /etc/huolongguo.conf
-
-# Load JSON file (dirty)
-# TODO : need real JSON parsing
 
 print_version() {
 	echo "$(basename $0) - version: $version"
@@ -163,6 +161,8 @@ get_options "$@"
 
 [ -z "$JSON" ] && prompt_user_json || load_json
 [ -z "$CONFIG" ] && prompt_user_config || load_config
+
+config_repository
 
 echo "Do you want to apply / build - press [Enter to continue / Ctrl+C to cancel]"
 	read 
