@@ -60,7 +60,7 @@ get_options() {
 #
 # prompt user when no JSON file provided
 #
-prompt_user_build() {
+prompt_user_json() {
 	#
 	# Retrieve input from user
 	#	TODO: check validity of user inputs
@@ -159,7 +159,8 @@ build() {
 #
 # MAIN
 #
-get_options
+get_options "$@"
+
 [ -z "$JSON" ] && prompt_user_json || load_json
 [ -z "$CONFIG" ] && prompt_user_config || load_config
 
