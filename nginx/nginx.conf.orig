@@ -1,0 +1,46 @@
+user www-data;
+worker_processes  2;
+
+error_log   /var/log/nginx/error.log;
+# error_log  /var/log/nginx/error.log  notice;
+# error_log  /var/log/nginx/error.log  info;
+
+pid    /var/run/nginx.pid;
+
+
+events {
+  worker_connections  1024;
+  # use epoll;
+}
+
+http {
+  include     	/etc/nginx/mime.types;
+  default_type  application/octet-stream;
+
+  log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
+              '$status $body_bytes_sent "$http_referer" '
+              '"$http_user_agent" "$http_x_forwarded_for"';
+
+  # access_log  /var/log/nginx/access.log  main;
+
+  sendfile    on;
+  tcp_nopush    on;
+  tcp_nodelay   on;
+  server_tokens   off;
+
+  gzip      on;
+  gzip_comp_level 5;
+  gzip_min_length 1024;
+  gzip_disable "MSIE [1-6]\.(?!.*SV1)";
+
+  keepalive_timeout  65;
+  limit_zone   myzone  $binary_remote_addr  10m;
+  client_max_body_size 4M;
+
+  # Load config files from the /etc/nginx/conf.d directory
+  include /etc/nginx/conf.d/*.conf;
+}
+<<<<<<< HEAD:nginx/nginx.conf
+=======
+
+>>>>>>> 61fc4ff65e679ff87f823bb81b9452fc452f5532:nginx/nginx.conf
