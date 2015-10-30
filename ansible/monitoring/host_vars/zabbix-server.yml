@@ -1,0 +1,4 @@
+---
+# Hosted on QingCloud
+ansible_ssh_host: 119.254.97.210
+ansible_ssh_port: 40024

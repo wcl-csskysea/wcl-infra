@@ -1,0 +1,24 @@
+---
+- hosts: zabbix-server
+  user: root
+  roles: 
+    - role: wcl-common
+
+    # Add web server to serve the assets to the internal servers
+#    - role: jdauphant.nginx
+#      nginx_sites:
+#        default:
+#            - listen 80
+#            - server_name _
+#            - root "/var/www/setup"
+#            - index index.html
+#    - role: ben.mildren.percona_mysql
+#      percona_mysql_installation_user: root
+#      percona_mysql_home_dir: /
+    - role: Rackspace_Automation.mysql
+      mysql_root_password: changeme123
+    - role: dj-wasabi.zabbix-server
+      zabbix_url: zabbix.service.wiredcraft.com
+      database_type: mysql
+      database_type_long: mysql
+#      zabbix_vhost: false

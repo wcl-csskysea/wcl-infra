@@ -1,0 +1,8 @@
+---
+# Install a role from the Ansible Galaxy
+# - src: jdauphant.nginx
+# - src: ben.mildren.percona_mysql
+- src: dj-wasabi.zabbix-server
+- src: Rackspace_Automation.mysql
+- src: https://github.com/Wiredcraft/infrastructure/
+  name: ansible/roles/wcl-common
