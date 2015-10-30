@@ -3,23 +3,28 @@
 LOG=/var/log/zabbix/$(basename $0).log
 
 # config
-#slack_url='https://hooks.slack.com/services/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'
-slack_url='https://starbucks-china.slack.com/services/hooks/slackbot?token=a2uOWiFT2IBegdNPcn2deaAv'
+slack_url='https://hooks.slack.com/services/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'
 slack_username='Zabbix'
 channel="$1"
 shift 1
 title="$1"
 shift 1
 params="$@"
-emoji=':scream:'
+emoji=':smile:'
 timeout="5"
 cmd_curl="/usr/bin/curl"
+color="good"
 
 # Some logs
 date >> $LOG
 echo "channel: $channel" >> $LOG
 echo "title: $title" >> $LOG
 echo "params: $params" >> $LOG
+
+if [ "${title:0:7}" == "PROBLEM" ]; then
+  emoji=':scream:'
+  color='danger'
+fi
 
 # set payload
 payload="payload={ \
@@ -44,4 +49,10 @@ payload="payload={ \
 }"
 
 # send to slack
-${cmd_curl} -m ${timeout} --data-urlencode "${payload}" "${slack_url}"
+echo "$payload" >> $LOG
+${cmd_curl} -m ${timeout} --data-urlencode "${payload}" "${slack_url}" >> $LOG 2>&1
+if [ $? -eq 0 ]; then 
+  echo "SUCCESS" >> $LOG
+else
+  echo "ERROR" >> $LOG
+fi
