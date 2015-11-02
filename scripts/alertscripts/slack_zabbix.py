@@ -61,7 +61,7 @@ def main():
 
     if result.content == "ok":
         print "%s Success: Notification sent successfully." % datetime.now()
-        logger.info("%s Success: Notification sent successfully." % datetime.now())
+        logger.error("%s Success: Notification sent successfully." % datetime.now())
     else:
         print "%s Error: %s" % (datetime.now(), result.content)
         logger.error("%s Error: %s" % (datetime.now(), result.content))
