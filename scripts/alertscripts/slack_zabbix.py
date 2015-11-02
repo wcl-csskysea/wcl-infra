@@ -56,14 +56,15 @@ def main():
         result = session.post(url, data=payload_string, timeout=30)
     except requests.exceptions.Timeout:
         print "%s Error: Timeout" % datetime.now()
-        logger.error("Error: Timeout")
+        logger.error("%s Error: Timeout" % datetime.now())
+        return
 
     if result.content == "ok":
         print "%s Success: Notification sent successfully." % datetime.now()
-        logger.info("Success: Notification sent successfully.")
+        logger.info("%s Success: Notification sent successfully." % datetime.now())
     else:
         print "%s Error: %s" % (datetime.now(), result.content)
-        logger.error("Error: %s" % result.content)
+        logger.error("%s Error: %s" % (datetime.now(), result.content))
 
 
 if __name__ == "__main__":
