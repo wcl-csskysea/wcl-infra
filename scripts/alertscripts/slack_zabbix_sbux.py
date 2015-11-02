@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 import logging
 import json
 import os
@@ -7,7 +8,7 @@ import requests
 
 
 slack_username = "Zabbix"
-url = "https://hooks.slack.com/services/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"
+url = "https://hooks.slack.com/services/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"
 session = requests.Session()
 session.mount("http://", requests.adapters.HTTPAdapter(max_retries=2))
 session.mount("https://", requests.adapters.HTTPAdapter(max_retries=2))
