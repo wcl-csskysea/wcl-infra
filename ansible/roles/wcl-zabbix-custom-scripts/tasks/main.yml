@@ -8,6 +8,4 @@
 - name: Copy userparameter configuration files to correct location.
   command: cp -r {{ scripts_folder }}/userparameters/* /etc/zabbix/zabbix_agentd.d/
   notify:
-    - service:
-        name=zabbix-agent
-        state=restarted
+    - restart zabbix-agent
