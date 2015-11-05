@@ -1,0 +1,4 @@
+---
+# vars file for wcl-zabbix-custom-scripts
+scripts_repo: ssh://git@github.com:zbal/zabbix.git
+scripts_folder: /usr/lib/zabbix
