@@ -1,11 +1,13 @@
 ---
 # tasks file for wcl-zabbix-custom-scripts
-- name: Clone the zabbix scripts to correct location.
-  git:
-      repo={{ scripts_repo }}
-      dest={{ scripts_folder }}
+- name: Copy each zabbix custom script to correct location.
+  copy: src={{ item }} dest=/usr/lib/zabbix/scripts/ owner=root mode=755
+  with_fileglob:
+    - zabbix-scripts/scripts/*
 
 - name: Copy userparameter configuration files to correct location.
-  command: cp -r {{ scripts_folder }}/userparameters/* /etc/zabbix/zabbix_agentd.d/
+  copy: src={{ item }} dest=/etc/zabbix/zabbix_agent.d/
+  with_fileglob:
+    - zabbix-scripts/userparameters/*
   notify:
     - restart zabbix-agent
