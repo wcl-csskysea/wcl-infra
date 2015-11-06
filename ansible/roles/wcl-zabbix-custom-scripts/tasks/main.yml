@@ -6,7 +6,7 @@
     - zabbix-scripts/scripts/*
 
 - name: Copy userparameter configuration files to correct location.
-  copy: src={{ item }} dest=/etc/zabbix/zabbix_agent.d/
+  copy: src={{ item }} dest=/etc/zabbix/zabbix_agentd.d/
   with_fileglob:
     - zabbix-scripts/userparameters/*
   notify:
