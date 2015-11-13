@@ -1,2 +1,2 @@
 [gateway]
-gw1.service.wiredcraft.com
+gw1.service.wiredcraft.com ansible_ssh_port=40025
