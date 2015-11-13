@@ -1,5 +1,5 @@
 ---
-- src: dj-wasabi.zabbix-server
-- src: dj-wasabi.zabbix-agent
+- name: dj-wasabi.zabbix-server
+- name: dj-wasabi.zabbix-agent
 
-- src: Rackspace_Automation.mysql
+- name: Rackspace_Automation.mysql

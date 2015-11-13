@@ -1,2 +1,2 @@
 ---
-- src: dj-wasabi.zabbix-agent
+- name: dj-wasabi.zabbix-agent
