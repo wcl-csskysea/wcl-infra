@@ -9,5 +9,14 @@
   copy: src={{ item }} dest=/etc/zabbix/zabbix_agentd.d/
   with_fileglob:
     - zabbix-scripts/userparameters/*
-  notify:
-    - restart zabbix-agent
+
+- name: check if zabbix-agent is installed.
+  stat:
+    path=/etc/init.d/zabbix-agent
+  register: service_status
+
+- name: restart zabbix-agent if installed.
+  service:
+    name=zabbix-agent
+    state=restarted
+  when: service_status.stat.exists == True
