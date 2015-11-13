@@ -1,0 +1,22 @@
+---
+- name: Update cache
+  yum:
+    update_cache=yes
+    state=latest
+
+- name: Update system
+  yum:
+    name=*
+    state=latest
+
+- name: Enable EPEL repository
+  yum:
+    name=epel-release
+    state=present
+
+- name: Add required binaries
+  yum:
+    name={{ item }}
+    state=present
+  with_items:
+    "{{ common_packages_redhat }}"

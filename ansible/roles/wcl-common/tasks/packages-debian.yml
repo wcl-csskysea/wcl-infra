@@ -1,0 +1,17 @@
+---
+- name: Update cache
+  apt:
+    update_cache=yes
+    state=latest
+
+- name: Update system
+  apt:
+    upgrade=yes
+    state=latest
+
+- name: Add required binaries
+  apt:
+    name={{ item }}
+    state=present
+  with_items:
+    "{{ common_packages_debian }}"
