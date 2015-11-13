@@ -1,5 +1,4 @@
 ---
-# Install a role from the Ansible Galaxy
 - src: dj-wasabi.zabbix-server
 - src: dj-wasabi.zabbix-agent
 
