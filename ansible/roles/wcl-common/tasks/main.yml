@@ -3,13 +3,7 @@
   hostname:
     name={{ inventory_hostname }}
 
-- name: Update APT
-  apt: 
-    update_cache=yes
-    state=latest
-
-
-# - include: packages.yml
-# - include: users.yml
-# - include: kernel.yml
-# - include: git.yml
+- include: packages.yml
+- include: users.yml
+- include: kernel.yml
+- include: git.yml

@@ -6,7 +6,7 @@ common_packages:
     - htop
     - sysstat
     - atop
-    - libselinux-python
+    #- libselinux-python (included in kernel.yml)
 
 common_users:
     - name: wcladmin
@@ -14,6 +14,7 @@ common_users:
       ssh: yes
       authorized: 
           - https://github.com/zbal.keys
+          - https://github.com/sunsongxp.keys
 
 common_limits:
     - name: nofile

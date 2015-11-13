@@ -3,10 +3,17 @@
 # Apply the limits to the linux system
 #
 
-- name: Add SELinux dependencies
+- name: Add SELinux dependencies for Redhat
   yum:
     name=libselinux-python
     state=present
+  when: ansible_os_family == 'RedHat'
+
+- name: Add SELinux dependencies for Debian
+  apt:
+    name=python-selinux
+    state=present
+  when: ansible_os_family == 'Debian'
 
 - name: Change SELinux mode to permissive
   selinux:
