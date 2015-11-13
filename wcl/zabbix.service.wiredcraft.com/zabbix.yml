@@ -16,6 +16,7 @@
     # Enable agent 
     - role: dj-wasabi.zabbix-agent
       agent_server: "127.0.0.1"
+      agent_listeninterface: 
 
     - role: wcl-zabbix-scripts
       zabbix_scripts:
