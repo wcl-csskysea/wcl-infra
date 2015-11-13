@@ -2,11 +2,17 @@
 common_git_user_name: User Name
 common_git_user_email: user@example.com
 
-common_packages:
+common_packages_redhat:
     - htop
     - sysstat
     - atop
-    #- libselinux-python (included in kernel.yml)
+    - libselinux-python
+
+common_packages_debian:
+    - htop
+    - sysstat
+    - atop
+    - python-selinux
 
 common_users:
     - name: wcladmin
