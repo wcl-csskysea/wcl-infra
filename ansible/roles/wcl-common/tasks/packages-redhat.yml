@@ -1,4 +1,8 @@
 ---
+#
+# Script handling package installation for RedHat / CentOS.
+#
+
 - name: Update system
   yum:
     update_cache=yes
