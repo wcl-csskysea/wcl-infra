@@ -1,11 +1,7 @@
 ---
-- name: Update cache
-  yum:
-    update_cache=yes
-    state=latest
-
 - name: Update system
   yum:
+    update_cache=yes
     name=*
     state=latest
 

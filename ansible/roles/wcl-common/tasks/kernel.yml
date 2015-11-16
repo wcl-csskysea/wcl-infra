@@ -6,6 +6,7 @@
 - name: Change SELinux mode to permissive
   selinux:
     state=disabled
+  when: ansible_os_family == 'RedHat'
 
 # Limits Tunning
 - name: Add ulimit into /etc/init.d/functions 
@@ -14,6 +15,7 @@
     insertafter='^export PATH'
     line='ulimit -n 65536'
     state=present
+  when: ansible_os_family == 'RedHat'
 
 - name: Enable iptables to load the netfilter module
   command:

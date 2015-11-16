@@ -1,11 +1,7 @@
 ---
-- name: Update cache
-  apt:
-    update_cache=yes
-    state=latest
-
 - name: Update system
   apt:
+    update_cache=yes
     upgrade=yes
     state=latest
 
