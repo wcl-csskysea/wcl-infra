@@ -1,4 +1,8 @@
 ---
+#
+# Script handling package installation for Debian / Ubuntu.
+#
+
 - name: Update system
   apt:
     update_cache=yes

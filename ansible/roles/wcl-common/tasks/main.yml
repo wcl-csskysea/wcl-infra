@@ -1,4 +1,8 @@
 ---
+#
+# Main tasks, having all sub tasks to be included.
+#
+
 - name: Set the hostname
   hostname:
     name={{ inventory_hostname }}
