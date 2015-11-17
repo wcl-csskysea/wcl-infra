@@ -1,7 +1,7 @@
 Role Name
 =========
 
-wcl-zabbix-custom-scripts
+wcl-zabbix-scripts
 
 Requirements
 ------------
@@ -26,7 +26,7 @@ Just include role wcl-zabbix-custom-scripts to the playbook.
     - hosts: all
       sudo: true
       roles:
-        - role: wcl-zabbix-custom-scripts
+        - role: wcl-zabbix-scripts
 
 License
 -------

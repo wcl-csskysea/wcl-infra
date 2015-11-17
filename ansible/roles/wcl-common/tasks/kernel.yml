@@ -24,6 +24,15 @@
     state=present
   when: ansible_os_family == 'RedHat'
 
+## Haven't been tested yet.
+#- name: Add ulimit into /lib/lsb/init-functions
+#  lineinfile:
+#    dest=/lib/lsb/init-functions
+#    insertafter='^export PATH'
+#    line='ulimit -n 65536'
+#    state=present
+#  when: ansible_os_family == 'Debian'
+
 - name: Enable iptables to load the netfilter module
   command:
     iptables -nvL

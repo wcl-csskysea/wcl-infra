@@ -1,5 +1,13 @@
 ---
-# tasks file for wcl-zabbix-custom-scripts
+#
+# Task file for deploying zabbix custom scripts to proper location.
+#
+
+- name: Check if zabbix-agent is installed.
+  stat:
+    path=/etc/init.d/zabbix-agent
+  register: service_status
+
 - name: Copy each zabbix custom script to correct location.
   copy:
     src={{ item }}
@@ -8,16 +16,13 @@
     mode=755
   with_fileglob:
     - zabbix-scripts/scripts/*
+  when: service_status.stat.exists == True
 
 - name: Copy userparameter configuration files to correct location.
   copy: src={{ item }} dest=/etc/zabbix/zabbix_agentd.d/
   with_fileglob:
     - zabbix-scripts/userparameters/*
-
-- name: Check if zabbix-agent is installed.
-  stat:
-    path=/etc/init.d/zabbix-agent
-  register: service_status
+  when: service_status.stat.exists == True
 
 - name: restart zabbix-agent if installed.
   service:
