@@ -1,4 +1,0 @@
----
-# vars file for wcl-zabbix-custom-scripts
-scripts_repo: https://github.com/Wiredcraft/zabbix-scripts.git
-scripts_folder: /usr/lib/zabbix
