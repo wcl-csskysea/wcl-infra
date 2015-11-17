@@ -1,7 +1,11 @@
 ---
 # tasks file for wcl-zabbix-custom-scripts
 - name: Copy each zabbix custom script to correct location.
-  copy: src={{ item }} dest=/usr/lib/zabbix/scripts/ owner=root mode=755
+  copy:
+    src={{ item }}
+    dest=/usr/lib/zabbix/scripts/
+    owner=root
+    mode=755
   with_fileglob:
     - zabbix-scripts/scripts/*
 
@@ -10,7 +14,7 @@
   with_fileglob:
     - zabbix-scripts/userparameters/*
 
-- name: check if zabbix-agent is installed.
+- name: Check if zabbix-agent is installed.
   stat:
     path=/etc/init.d/zabbix-agent
   register: service_status

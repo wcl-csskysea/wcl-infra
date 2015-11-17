@@ -3,7 +3,7 @@
 # Apply the limits to the linux system
 #
 
-- name: check if SELinux exists.
+- name: Check if SELinux exists.
   command: getenforce > /dev/null 2>&1
   register: getenforce_status
   ignore_errors: yes
