@@ -4,3 +4,5 @@
 
 - include: agent.yml
   when: '"agent" in zabbix_scripts'
+
+- include: custom-scripts.yml
