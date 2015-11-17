@@ -14,9 +14,7 @@ common_packages_debian:
     - sysstat
     - atop
     - git
-    #- python-selinux 
-    # No need for ubuntu because SELinux config is needed only for CentOS
-    # selinux ansible module haven't been tested on any Debian system.
+    - python-selinux
 
 common_users:
     - name: wcladmin
