@@ -13,12 +13,12 @@
     - zabbix-scripts/scripts/*
   notify: restart zabbix-agent
 
-- name: Copy userparameter configuration files to correct location.
+- name: Copy zabbix_agentd.d configuration files to correct location.
   copy: 
     src={{ item }}
     dest=/etc/zabbix/zabbix_agentd.d/
     backup=yes
   with_fileglob:
-    - zabbix-scripts/userparameters/*
+    - zabbix-scripts/zabbix_agentd.d/*
   notify: restart zabbix-agent
 
