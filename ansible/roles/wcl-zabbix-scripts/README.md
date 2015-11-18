@@ -21,7 +21,7 @@ None
 Example Playbook
 ----------------
 
-Just include role wcl-zabbix-custom-scripts to the playbook.
+Just include role wcl-zabbix-scripts to the playbook.
 
     - hosts: all
       sudo: true
