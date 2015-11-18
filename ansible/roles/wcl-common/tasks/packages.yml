@@ -1,15 +1,10 @@
 ---
-- name: Update system
-  yum: name=* state=latest
+#
+# Determine which package installation script to run according to OS types.
+#
 
-- name: Enable EPEL repository
-  yum:
-    name=epel-release
-    state=present
+- include: packages-debian.yml
+  when: ansible_os_family == 'Debian'
 
-- name: Add required binaries
-  yum:
-    name={{ item }}
-    state=present
-  with_items:
-    "{{ common_packages }}"
+- include: packages-redhat.yml
+  when: ansible_os_family == 'RedHat'

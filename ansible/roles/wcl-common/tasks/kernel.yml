@@ -3,14 +3,17 @@
 # Apply the limits to the linux system
 #
 
-- name: Add SELinux dependencies
-  yum:
-    name=libselinux-python
-    state=present
+- name: Check if SELinux exists.
+  command: getenforce > /dev/null 2>&1
+  register: getenforce_status
+  ignore_errors: yes
 
+# selinux ansible module haven't been tested on any Debian system according to ansible doc, but it works.
 - name: Change SELinux mode to permissive
   selinux:
-    state=disabled
+    policy=default
+    state=permissive
+  when: getenforce_status.rc == 0
 
 # Limits Tunning
 - name: Add ulimit into /etc/init.d/functions 
@@ -19,6 +22,16 @@
     insertafter='^export PATH'
     line='ulimit -n 65536'
     state=present
+  when: ansible_os_family == 'RedHat'
+
+## Haven't been tested yet.
+#- name: Add ulimit into /lib/lsb/init-functions
+#  lineinfile:
+#    dest=/lib/lsb/init-functions
+#    insertafter='^export PATH'
+#    line='ulimit -n 65536'
+#    state=present
+#  when: ansible_os_family == 'Debian'
 
 - name: Enable iptables to load the netfilter module
   command:

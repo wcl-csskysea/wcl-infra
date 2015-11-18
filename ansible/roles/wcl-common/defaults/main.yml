@@ -2,11 +2,19 @@
 common_git_user_name: User Name
 common_git_user_email: user@example.com
 
-common_packages:
+common_packages_redhat:
     - htop
     - sysstat
     - atop
+    - git
     - libselinux-python
+
+common_packages_debian:
+    - htop
+    - sysstat
+    - atop
+    - git
+    - python-selinux
 
 common_users:
     - name: wcladmin
@@ -14,6 +22,7 @@ common_users:
       ssh: yes
       authorized: 
           - https://github.com/zbal.keys
+          - https://github.com/sunsongxp.keys
 
 common_limits:
     - name: nofile
