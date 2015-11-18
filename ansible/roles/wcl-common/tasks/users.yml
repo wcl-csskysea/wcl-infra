@@ -30,7 +30,7 @@
 
 - name: Enable sudo users
   template:
-    src=sudo_user.conf.j2
+    src=sudo_user.j2
     dest=/etc/sudoers.d/{{ item.name }}
     owner=root
     group=root
