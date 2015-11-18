@@ -24,8 +24,6 @@
       agent_server: "127.0.0.1,172.16.10.2,zabbix.service.wiredcraft.com"
       agent_listeninterface: 
 
-    - role: wcl-zabbix-custom-scripts
-
     - role: wcl-zabbix-scripts
       zabbix_scripts:
         - agent
