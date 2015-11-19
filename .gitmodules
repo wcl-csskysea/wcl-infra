@@ -1,3 +1,0 @@
-[submodule "ansible/roles/wcl-zabbix-scripts/files/zabbix-scripts"]
-	path = ansible/roles/wcl-zabbix-scripts/files/zabbix-scripts
-	url = https://github.com/Wiredcraft/zabbix-scripts.git
