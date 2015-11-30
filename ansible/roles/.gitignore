@@ -1,5 +1,0 @@
-# List here the public roles not to track on our github repository
-!.gitignore
-.*
-/*
-!/wcl-*
