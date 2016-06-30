@@ -1,5 +1,7 @@
 - hosts: zabbix
   roles:
+    - role: wcl-common
+
     - role: zabbix-agent
       agent_server: "{{ inventory_hostname }},127.0.0.1"
 
