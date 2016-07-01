@@ -3,7 +3,7 @@
     - role: wcl-common
 
     - role: zabbix-agent
-      agent_server: "{{ inventory_hostname }},127.0.0.1"
+      agent_server: "zabbix.service.wiredcraft.com,127.0.0.1"
 
     - role: zabbix-proxy
       zabbix_server_host: zabbix.service.wiredcraft.com
