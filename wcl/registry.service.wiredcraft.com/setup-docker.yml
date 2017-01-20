@@ -1,13 +1,4 @@
 ---
-- hosts: all
-  roles:
-    - role: wcl-common
-      common_users:
-        - name: wcladmin
-          sudo: yes
-          ssh: yes
-          authorized: "{{ wcladmin_ssh_pub_keys }}"
-
 - hosts: registry-us
   roles:
     - role: wcl-docker
