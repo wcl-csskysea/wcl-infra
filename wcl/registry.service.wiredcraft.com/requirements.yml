@@ -1,0 +1,7 @@
+---
+- src: https://github.com/wiredcraft-ops/role-wcl-common.git
+  name: wcl-common
+  version: master
+- src: https://github.com/wiredcraft-ops/role-wcl-docker.git
+  name: wcl-docker
+  version: master

@@ -1,0 +1,23 @@
+---
+- hosts: all
+  roles:
+    - role: wcl-common
+      common_users:
+        - name: wcladmin
+          sudo: yes
+          ssh: yes
+          authorized: "{{ wcladmin_ssh_pub_keys }}"
+
+- hosts: registry-us
+  roles:
+    - role: wcl-docker
+      docker_users:
+        - wcladmin
+
+- hosts: registry-cn
+  roles:
+    - role: wcl-docker
+      docker_registry_mirror_url: "{{ _docker_registry_mirror_url }}"
+      pip_enable_douban_mirror: true
+      docker_users:
+        - wcladmin
