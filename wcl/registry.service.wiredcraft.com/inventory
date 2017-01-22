@@ -1,3 +1,6 @@
 [registry]
 registry-us ansible_host=138.68.31.245
 registry-cn ansible_host=139.198.191.109 ansible_port=40022
+
+[builder]
+builder ansible_host=139.59.245.148

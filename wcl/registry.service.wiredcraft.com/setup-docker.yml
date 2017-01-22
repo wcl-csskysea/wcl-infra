@@ -1,5 +1,5 @@
 ---
-- hosts: registry-us
+- hosts: registry-us:builder
   roles:
     - role: wcl-docker
       docker_users:
