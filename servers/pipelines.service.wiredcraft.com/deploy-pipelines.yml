@@ -22,7 +22,7 @@
     - name: Start {{ pipelines_name }}
       docker_container:
         name: "{{ pipelines_name }}"
-        image: "{{ wiredcraft_registry }}/pipelines:latest"
+        image: "{{ docker_registry }}/pipelines:latest"
         status: started
         pull: true
         restart: true
@@ -30,6 +30,8 @@
         hostname: "{{ pipelines_name }}"
         ports:
           - "8888:8888"
+        env:
+          ADMIN_PASS: '{{ vault_pipelines_admin_user }}'
         volumes:
           - /opt/{{ pipelines_name }}/workspace:/workspace
           - /opt/{{ pipelines_name }}/data:/data
