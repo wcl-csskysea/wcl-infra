@@ -10,4 +10,5 @@
     - name: Build and Push container's image to the registry
       docker_image:
         name: "{{ docker_registry }}/pipelines"
+        path: .
         push: yes
