@@ -1,0 +1,2 @@
+[pipelines]
+pipelines ansible_host= ansible_port=

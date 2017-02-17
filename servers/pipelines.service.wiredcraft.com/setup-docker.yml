@@ -1,0 +1,7 @@
+---
+- hosts: pipelines
+  roles:
+    - role: wcl-docker
+      docker_pip_mirror_enable: true
+      docker_users:
+        - wcladmin
