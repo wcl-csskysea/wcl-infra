@@ -1,5 +1,11 @@
 ---
 - hosts: pipelines
+  handlers:
+    - name: reload nginx
+      service:
+        name: nginx
+        state: reload
+
   tasks:
     - name: Create volumes for container
       file:
@@ -34,8 +40,6 @@
         restart: true
         restart_policy: always
         hostname: "{{ pipelines_name }}"
-        ports:
-          - "8888:8888"
         env:
           ADMIN_PASS: '{{ pipelines_admin_pass }}'
         volumes:
@@ -43,3 +47,29 @@
           - /opt/{{ pipelines_name }}/data:/data
           - /opt/{{ pipelines_name }}/id_rsa:/home/pipelines/.ssh/id_rsa:ro
           - /opt/{{ pipelines_name }}/id_rsa.pub:/home/pipelines/.ssh/id_rsa.pub:ro
+
+    - name: Get IP address of the new pipelines
+      command: |
+        docker inspect --format '{{'{{ .NetworkSettings.IPAddress }}'}}' {{ pipelines_name }}
+      register: container_ip
+
+    - name: Create new upstream config
+      template:
+        src: upstream.conf.j2
+        dest: /etc/nginx/conf.d/upstream_{{ pipelines_name }}.conf
+      notify: reload nginx
+
+    - name: Add DNS entry to cloudflare
+      uri:
+        url: "https://api.cloudflare.com/client/v4/zones/{{ cloudflare_zone_id }}/dns_records"
+        method: POST
+        headers:
+          X-Auth-Email: "{{ cloudflare_email }}"
+          X-Auth-Key: "{{ cloudflare_key }}"
+          Content-Type: "application/json"
+        body:
+          type: CNAME
+          name: pipelines-{{ pipelines_name }}.{{ service_domain }}
+          content: pipelines.{{ service_domain }}
+          ttl: 120
+        body_format: json

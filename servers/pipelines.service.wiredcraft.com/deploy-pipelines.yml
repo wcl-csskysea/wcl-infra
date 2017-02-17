@@ -15,3 +15,9 @@
         user: wcladmin
         key: "{{ ssh_admin_pub.stdout }}"
 
+    - name: Copy primary pipelines
+      copy:
+        src: pipelines/data
+        dest: /opt/pipelines-0/data
+
+        

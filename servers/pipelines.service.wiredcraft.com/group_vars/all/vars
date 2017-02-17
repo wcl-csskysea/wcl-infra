@@ -22,6 +22,7 @@ wcladmin_ssh_pub_keys:
 #################
 
 service_domain: service.wiredcraft.com
+pipelines_admin_pass: "{{ vault_pipelines_admin_pass }}"
 
 #################
 #
