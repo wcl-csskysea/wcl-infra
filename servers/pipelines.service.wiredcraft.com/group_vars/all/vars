@@ -17,6 +17,14 @@ wcladmin_ssh_pub_keys:
 
 #################
 #
+# Define Pipelines
+#
+#################
+
+service_domain: service.wiredcraft.com
+
+#################
+#
 # Define registry
 #
 #################

@@ -2,6 +2,7 @@
 !.gitignore
 !.placeholder
 
+*retry
 *pyc
 *log
 *~

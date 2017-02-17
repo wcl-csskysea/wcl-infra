@@ -1,5 +1,19 @@
 ---
 - hosts: pipelines
+  pre_tasks:
+    - name: Prepare SSL certs folder
+      file:
+        name: /opt/certs
+        state: directory
+
+    - name: Copy SSL key and crt files
+      copy: 
+        src: ssl/{{ item }}
+        dest: /opt/certs/{{ item }}
+      with_items:
+        - server.key
+        - server.crt
+
   roles:
     - role: wcl-nginx
       nginx_user: "nginx"
@@ -32,5 +46,9 @@
           - location / { proxy_pass http://$pipelines; }
 
       nginx_configs:
+        ssl:
+          - ssl_certificate_key /opt/certs/server.key
+          - ssl_certificate /opt/certs/server.crt
+
         upstream:
           - upstream admin { server {{ ansible_default_ipv4.address }}:8888; }
