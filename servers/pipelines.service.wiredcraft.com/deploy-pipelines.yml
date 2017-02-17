@@ -1,0 +1,37 @@
+---
+- hosts: pipelines
+  vars: 
+    pipelines_name: "pipelines-0"
+
+  tasks:
+    - name: Create volumes for container
+      file:
+        name: /opt/{{ pipelines_name }}/{{ item }}
+        state: directory
+      with_items:
+        - workspace
+        - data
+
+    - name: Create private SSH key for container
+      user: 
+        name: root
+        generate_ssh_key: yes
+        ssh_key_file: /opt/{{ pipelines_name }}/id_rsa
+        ssh_key_comment: 'SSH key for pipelines {{ pipelines_name }}'
+
+    - name: Start {{ pipelines_name }}
+      docker_container:
+        name: "{{ pipelines_name }}"
+        image: "{{ wiredcraft_registry }}/pipelines:latest"
+        status: started
+        pull: true
+        restart: true
+        restart_policy: always
+        hostname: "{{ pipelines_name }}"
+        ports:
+          - "8888:8888"
+        volumes:
+          - /opt/{{ pipelines_name }}/workspace:/workspace
+          - /opt/{{ pipelines_name }}/data:/data
+          - /opt/{{ pipelines_name }}/id_rsa:/home/pipelines/.ssh/id_rsa:ro
+          - /opt/{{ pipelines_name }}/id_rsa.pub:/home/pipelines/.ssh/id_rsa.pub:ro

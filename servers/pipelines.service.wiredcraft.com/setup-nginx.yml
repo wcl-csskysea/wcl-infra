@@ -20,6 +20,17 @@
         - gzip_types text/plain text/css application/json application/x-javascript application/javascript text/xml application/xml application/xml+rss text/javascript image/svg+xml
 
       nginx_sites:
-        status:
-          - listen 127.0.0.1:80
-          - location /nginx_status { stub_status on; access_log off; }
+        pipelines:
+          - listen 0.0.0.0:80
+          - listen 0.0.0.0:443 ssl
+          - if ($scheme = 'http') { rewrite https://$host/$uri 301; }
+          - port_in_redirect off
+          - set $pipelines bad
+          - if ($host = "pipelines\.{{ service_domain }}") { set $pipelines admin; }
+          - if ($host ~ "^pipelines-(.*)\.{{ service_domain }}$") { set $pipelines $1; }
+          - if ($pipelines = 'bad') {return 404;}
+          - location / { proxy_pass http://$pipelines; }
+
+      nginx_configs:
+        upstream:
+          - upstream admin { server {{ ansible_default_ipv4.address }}:8888; }

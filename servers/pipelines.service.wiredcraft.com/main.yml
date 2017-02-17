@@ -1,0 +1,6 @@
+---
+
+- include: setup-base.yml
+- include: setup-docker.yml
+- include: setup-nginx.yml
+

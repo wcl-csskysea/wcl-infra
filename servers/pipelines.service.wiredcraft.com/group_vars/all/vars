@@ -20,6 +20,18 @@ wcladmin_ssh_pub_keys:
 # Define registry
 #
 #################
-wiredcraft_registry: registry.service.wiredcraft.com
-wiredcraft_registry_deploy_user: wcl-deploy
-wiredcraft_registry_deploy_pass: "{{ vault_wiredcraft_registry_deploy_pass }}"
+
+docker_log_max_size: "50m"
+docker_log_max_file: "100"
+
+# Wiredcraft registry
+customer_name: wiredcraft
+docker_registry: registry.service.wiredcraft.com/{{ customer_name }}
+
+# Deploy user used to pull and deploy
+docker_user_deploy: wcl-deploy
+docker_pass_deploy: "{{ vault_docker_pass_deploy }}"
+
+# Build user used to build and push
+docker_user_build: wcl-build
+docker_pass_build: "{{ vault_docker_pass_build }}"
