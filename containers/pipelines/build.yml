@@ -1,0 +1,13 @@
+---
+#
+# Requirements:
+#   - builder server need to have the credentials to push to the registry
+#
+- hosts: builder
+  vars:
+    docker_registry: "registry.service.wiredcraft.com/wiredcraft"
+  tasks:
+    - name: Build and Push container's image to the registry
+      docker_image:
+        name: "{{ docker_registry }}/pipelines"
+        push: yes
