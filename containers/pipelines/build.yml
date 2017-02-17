@@ -12,3 +12,4 @@
         name: "{{ docker_registry }}/pipelines"
         path: .
         push: yes
+        force: yes
