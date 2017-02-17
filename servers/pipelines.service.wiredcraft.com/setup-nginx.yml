@@ -40,8 +40,8 @@
           - if ($scheme = 'http') { rewrite https://$host/$uri 301; }
           - port_in_redirect off
           - set $pipelines bad
-          - if ($host = "pipelines\.{{ service_domain }}") { set $pipelines admin; }
-          - if ($host ~ "^pipelines-(.*)\.{{ service_domain }}$") { set $pipelines $1; }
+          - if ($host = "pipelines.{{ service_domain }}") { set $pipelines admin; }
+          - if ($host ~ "^pipelines-(.*)\.{{ service_domain | replace('.', '\.') }}$") { set $pipelines $1; }
           - if ($pipelines = 'bad') {return 404;}
           - location / { proxy_pass http://$pipelines; }
 
