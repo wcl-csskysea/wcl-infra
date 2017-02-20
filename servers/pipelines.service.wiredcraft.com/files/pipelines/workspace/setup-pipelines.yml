@@ -2,7 +2,8 @@
 name: Add a new Pipelines setup
 
 prompt:
-  project: project-name
+  project: Project Name
+  password: admin
 
 actions:
-  - cd /data/provision && ansible-playbook -i host add-pipelines.yml --vault-password-file vault.key -u wcladmin -b -e "pipelines_name={{ project }}"
+  - cd /data/provision && ansible-playbook -i host add-pipelines.yml --vault-password-file vault.key -u wcladmin -b -e "pipelines_name={{ project }}" -e "pipelines_admin_pass={{ password }}"

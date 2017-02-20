@@ -15,9 +15,22 @@
         user: wcladmin
         key: "{{ ssh_admin_pub.stdout }}"
 
-    - name: Copy primary pipelines
-      copy:
-        src: pipelines/data
-        dest: /opt/pipelines-0/data
+    - name: Sync primary pipelines and playbook
+      synchronize:
+        src: pipelines/
+        dest: /opt/pipelines-0/
+        rsync_opts:
+          - "--exclude=vault.key"
 
-        
+    - name: Copy and decrypt primary pipelines vault.key
+      copy:
+        src: pipelines/data/provision/vault.key
+        dest: /opt/pipelines-0/data/provision/vault.key
+
+    - name: Update permissions for the pipelines and playbook
+      file:
+        name: /opt/pipelines-0
+        recurse: true
+        state: directory
+        owner: 999
+        group: 999

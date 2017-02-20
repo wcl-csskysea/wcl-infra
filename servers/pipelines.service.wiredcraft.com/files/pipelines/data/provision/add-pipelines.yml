@@ -4,12 +4,14 @@
     - name: reload nginx
       service:
         name: nginx
-        state: reload
+        state: reloaded
 
   tasks:
     - name: Create volumes for container
       file:
         name: /opt/{{ pipelines_name }}/{{ item }}
+        owner: 999
+        group: 999
         state: directory
       with_items:
         - workspace
@@ -30,6 +32,13 @@
       with_items:
         - id_rsa
         - id_rsa.pub
+
+    - name: Add bootstrap pipelines yaml file
+      copy: 
+        src: bootstrap.yml
+        dest: /opt/{{ pipelines_name }}/workspace
+        owner: 999
+        group: 999
 
     - name: Start {{ pipelines_name }}
       docker_container:

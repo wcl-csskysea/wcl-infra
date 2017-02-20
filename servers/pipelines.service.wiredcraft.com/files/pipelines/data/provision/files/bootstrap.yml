@@ -1,0 +1,27 @@
+---
+#
+# This is a bootstrap pipelines that let's you add pipelines from 
+# a git repository.
+#
+
+name: Bootstrap pipelines
+
+prompt:
+  url: https://github.com/my_user/my_repo.git
+  branch: master
+  name: pipelines
+
+actions:
+  # 
+  # Note; this is ugly
+  #
+  - name: Clone the repository
+    type: bash
+    cmd: cd /data && if [ ! -e "{{ name }}" ]; then git clone -b {{ branch }} {{ url }} {{ name }}; else cd {{ name }}; git fetch origin; git reset --hard; git checkout {{ branch }}; git merge origin {{ branch }}; fi
+
+  # 
+  # Note; expect to find pipelines definition in the `pipelines` folder of the cloned repo
+  # 
+  - name: Link pipelines from repo to workspace
+    type: bash
+    cmd: cd /data/{{ name }}/pipelines && for pipeline in *yml; do ln -s /data/{{ name }}/pipelines/$pipeline /workspace; done
