@@ -1,0 +1,37 @@
+---
+- hosts: pipelines
+  handlers:
+    - name: reload nginx
+      service:
+        name: nginx
+        state: reloaded
+
+  tasks:
+    - name: Update and restart {{ pipelines_name }}
+      docker_container:
+        name: "{{ pipelines_name }}"
+        image: "{{ docker_registry }}/pipelines:latest"
+        state: started
+        pull: true
+        restart: true
+        restart_policy: always
+        hostname: "{{ pipelines_name }}"
+        env:
+          ADMIN_PASS: '{{ pipelines_admin_pass }}'
+        volumes:
+          - /opt/{{ pipelines_name }}/workspace:/workspace
+          - /opt/{{ pipelines_name }}/data:/data
+          - /opt/{{ pipelines_name }}/id_rsa:/home/pipelines/.ssh/id_rsa:ro
+          - /opt/{{ pipelines_name }}/id_rsa.pub:/home/pipelines/.ssh/id_rsa.pub:ro
+
+    - name: Get IP address of the new pipelines
+      command: |
+        docker inspect --format '{{'{{ .NetworkSettings.IPAddress }}'}}' {{ pipelines_name }}
+      register: container_ip
+
+    - name: Update new upstream config
+      template:
+        src: upstream.conf.j2
+        dest: /etc/nginx/conf.d/upstream_{{ pipelines_name }}.conf
+      notify: reload nginx
+

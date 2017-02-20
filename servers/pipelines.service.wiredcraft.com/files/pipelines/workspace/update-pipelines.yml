@@ -1,16 +1,16 @@
 ---
-name: Add a new Pipelines setup
+name: Update an existing Pipelines setup
 
 prompt:
   project: Project Name
   password: admin
 
 actions:
-  - name: "Run add-pipelines playbook"
+  - name: "Run update-pipelines playbook"
     type: bash
     cmd: |
       cd /data/provision && \
-      ansible-playbook -i host add-pipelines.yml \
+      ansible-playbook -i host update-pipelines.yml \
         --vault-password-file vault.key \
         -u wcladmin -b \
         -e "pipelines_name={{ project }}" \
