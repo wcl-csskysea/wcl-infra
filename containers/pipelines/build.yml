@@ -6,10 +6,25 @@
 - hosts: builder
   vars:
     docker_registry: "registry.service.wiredcraft.com/wiredcraft"
+    
   tasks:
+    - name: Prepare temp folder
+      command: mktemp -d 
+      register: temp_folder
+
+    - name: Copy Dockerfile over to the temp folder
+      copy: 
+        src: Dockerfile
+        dest: "{{ temp_folder.stdout }}/Dockerfile"
+
     - name: Build and Push container's image to the registry
       docker_image:
         name: "{{ docker_registry }}/pipelines"
-        path: .
+        path: "{{ temp_folder.stdout }}"
         push: yes
         force: yes
+
+    - name: Remove temp folder
+      file: 
+        name: "{{ temp_folder.stdout }}"
+        state: absent

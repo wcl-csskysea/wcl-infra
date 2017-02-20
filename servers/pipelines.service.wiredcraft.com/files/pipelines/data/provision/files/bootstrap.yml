@@ -9,7 +9,7 @@ name: Bootstrap pipelines
 prompt:
   url: https://github.com/my_user/my_repo.git
   branch: master
-  name: pipelines
+  name: bootstrap
 
 actions:
   # 

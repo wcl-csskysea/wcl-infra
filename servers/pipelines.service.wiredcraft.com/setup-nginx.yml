@@ -43,6 +43,7 @@
           - if ($host = "pipelines.{{ service_domain }}") { set $pipelines admin; }
           - if ($host ~ "^pipelines-(.*)\.{{ service_domain | replace('.', '\.') }}$") { set $pipelines $1; }
           - if ($pipelines = 'bad') {return 404;}
+          - location /key { root /opt/$pipelines; add_header Content-Type text/plain; rewrite ^ /id_rsa.pub break; }
           - location / { proxy_pass http://$pipelines; }
 
       nginx_configs:

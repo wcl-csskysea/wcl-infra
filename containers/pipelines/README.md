@@ -7,7 +7,7 @@ Based on the bare pipelines image, we add Ansible
 You can rely on ansible to build the image, tag it and push it.
 
 ```
-ansible-playbook -i hosts build.yml
+ansible-playbook -i hosts build.yml -u user
 ```
 
 ## Docker build
