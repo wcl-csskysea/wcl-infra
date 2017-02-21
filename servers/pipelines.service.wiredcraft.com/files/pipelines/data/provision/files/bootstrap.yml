@@ -23,12 +23,12 @@ actions:
       if [ ! -e "{{ name }}" ]; then 
         git clone -b {{ branch }} {{ url }} {{ name }}
       else 
-        echo "Already exist - new stuff only"
+        echo "Already exist - new stuff only - may be worth ithing"
         cd {{ name }}
-        git fetch origin
         git reset --hard
+        git pull
         git checkout {{ branch }}
-        git merge origin {{ branch }}
+        exit 0
       fi
 
   # 
