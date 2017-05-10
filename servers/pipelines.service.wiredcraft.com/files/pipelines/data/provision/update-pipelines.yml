@@ -21,6 +21,8 @@
         volumes:
           - /opt/{{ pipelines_name }}/workspace:/workspace
           - /opt/{{ pipelines_name }}/data:/data
+          - /opt/{{ pipelines_name }}/home/.config:/home/pipelines/.config
+          - /opt/{{ pipelines_name }}/home/.kube:/home/pipelines/.kube
           - /opt/{{ pipelines_name }}/id_rsa:/home/pipelines/.ssh/id_rsa:ro
           - /opt/{{ pipelines_name }}/id_rsa.pub:/home/pipelines/.ssh/id_rsa.pub:ro
 

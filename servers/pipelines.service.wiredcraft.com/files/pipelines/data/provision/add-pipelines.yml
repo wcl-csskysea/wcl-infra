@@ -16,6 +16,17 @@
       with_items:
         - workspace
         - data
+        - home
+
+    - name: Create extra volumes for container (k8s)
+      file:
+        name: /opt/{{ pipelines_name }}/home/{{ item }}
+        state: directory
+        owner: 999
+        group: 999
+      with_items:
+        - .config
+        - .kube
 
     - name: Create private SSH key for container
       user: 
@@ -54,6 +65,8 @@
         volumes:
           - /opt/{{ pipelines_name }}/workspace:/workspace
           - /opt/{{ pipelines_name }}/data:/data
+          - /opt/{{ pipelines_name }}/home/.config:/home/pipelines/.config
+          - /opt/{{ pipelines_name }}/home/.kube:/home/pipelines/.kube
           - /opt/{{ pipelines_name }}/id_rsa:/home/pipelines/.ssh/id_rsa:ro
           - /opt/{{ pipelines_name }}/id_rsa.pub:/home/pipelines/.ssh/id_rsa.pub:ro
 
