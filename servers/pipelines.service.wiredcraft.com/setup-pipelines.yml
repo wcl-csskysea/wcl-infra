@@ -47,6 +47,10 @@
         restart: true
         restart_policy: always
         hostname: "{{ pipelines_name }}"
+        log_driver: json-file
+        log_options:
+          max-size: "5m"
+          max-file: "50"
         ports:
           - "8888:8888"
         env:
