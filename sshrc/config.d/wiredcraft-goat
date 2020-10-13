@@ -1,0 +1,4 @@
+Host goat-admin
+  Hostname 47.103.21.59
+  Port 40022
+  User wcladmin

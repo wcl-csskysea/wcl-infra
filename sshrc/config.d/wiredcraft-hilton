@@ -1,0 +1,45 @@
+Host hilton-qr
+  Hostname 139.198.176.192
+  Port 40024
+  User wcladmin
+
+Host hilton-gw
+  # jumpxhhcl00shmg
+  Hostname 106.14.195.98
+  Port 22
+  #User kcheng9
+  User ssun29
+  #IdentitiesOnly yes
+
+Host hilton-admin
+  # wrdcrthhcl00shmgt
+  Hostname 10.153.8.3
+  Port 22
+  User wcladmin
+  ProxyCommand ssh -W %h:%p -q hilton-gw
+
+Host hilton-builder
+  # wrdcrthhcl01shmgt
+  Hostname 10.153.6.4
+  Port 22
+  User wcladmin
+  ProxyCommand ssh -W %h:%p -q hilton-gw
+
+Host hilton-registry
+  # wrdcrthhcl02shmgt
+  Hostname 10.153.6.6
+  Port 22
+  User wcladmin
+  ProxyCommand ssh -W %h:%p -q hilton-gw
+
+Host hilton-dev
+  # wrdcrthhcl00shdev
+  Hostname 10.153.22.3
+  Port 22
+  User wcladmin
+  ProxyCommand ssh -W %h:%p -q hilton-gw
+
+Host hilton-admin-wcl
+  Hostname admin-hilton.wiredcraft.cn
+  Port 40022
+  User wcladmin

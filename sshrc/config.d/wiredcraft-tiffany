@@ -1,0 +1,29 @@
+Host tiffany-admin
+  Hostname 139.198.189.183
+  User wcladmin
+  Port 40025
+
+Host tiffany-dev
+  Hostname dev
+  User wcladmin
+  ProxyCommand ssh -W %h:%p -q tiffany-admin
+
+Host tiffany-staging
+  Hostname staging
+  User wcladmin
+  ProxyCommand ssh -W %h:%p -q tiffany-admin
+
+Host tiffany-prod-1
+  Hostname prod-1
+  User wcladmin
+  ProxyCommand ssh -W %h:%p -q tiffany-admin
+
+Host tiffany-prod-2
+  Hostname prod-2
+  User wcladmin
+  ProxyCommand ssh -W %h:%p -q tiffany-admin
+
+Host tiffany-prod-2
+  Hostname prod-2
+  User wcladmin
+  ProxyCommand ssh -W %h:%p -q tiffany-admin

@@ -1,0 +1,54 @@
+Host omnisaas-admin
+  Hostname 139.224.110.46
+  Port 40022
+  User wcladmin
+
+Host omnisaas-demo-staging-db
+  Hostname 172.16.5.4
+  User wcladmin
+  ProxyCommand ssh -W %h:%p -q omnisaas-admin
+
+Host omnisaas-demo-prod-db
+  Hostname 172.16.5.5
+  User wcladmin
+  ProxyCommand ssh -W %h:%p -q omnisaas-admin
+
+Host omnisaas-wiredcraft-staging-db
+  Hostname 172.16.5.1
+  User wcladmin
+  ProxyCommand ssh -W %h:%p -q omnisaas-admin
+
+Host omnisaas-wiredcraft-prod-db
+  Hostname 172.16.5.2
+  User wcladmin
+  ProxyCommand ssh -W %h:%p -q omnisaas-admin
+
+Host omnisaas-bulgari-staging-db
+  Hostname 172.16.5.10
+  User wcladmin
+  ProxyCommand ssh -W %h:%p -q omnisaas-admin
+
+Host omnisaas-bulgari-prod-db-1
+  Hostname 172.16.5.12
+  User wcladmin
+  ProxyCommand ssh -W %h:%p -q omnisaas-admin
+
+Host omnisaas-zara-staging-db
+  Hostname 172.16.5.249
+  User wcladmin
+  ProxyCommand ssh -W %h:%p -q omnisaas-admin
+
+Host omnisaas-zara-prod-db-1
+  Hostname 172.16.5.250
+  User wcladmin
+  ProxyCommand ssh -W %h:%p -q omnisaas-admin
+
+Host omnisaas-zara-prod-db-2
+  Hostname 172.16.6.102
+  User wcladmin
+  ProxyCommand ssh -W %h:%p -q omnisaas-admin
+
+Host omnisaas-zara-prod-db-3
+  Hostname 172.16.7.109
+  User wcladmin
+  ProxyCommand ssh -W %h:%p -q omnisaas-admin

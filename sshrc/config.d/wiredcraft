@@ -1,0 +1,69 @@
+Host gw1
+  Hostname gw1.service.wiredcraft.com
+  User kaleo
+  Port 40025
+
+Host gw1-root
+  Hostname gw1.service.wiredcraft.com
+  User root
+  Port 40025
+
+Host gw3
+  Hostname gw3.service.wiredcraft.com
+  User kaleo
+  Port 40025
+
+Host gw3-root
+  Hostname 139.198.191.229
+  User root
+  Port 40025
+
+Host kibana
+  Hostname logs.service.wiredcraft.com
+  User wcladmin
+  Port 40026
+
+Host es-1
+  Hostname prod-es-1
+  User wcladmin
+  ProxyCommand ssh -W %h:%p -q kibana
+
+Host es-2
+  Hostname prod-es-2
+  User wcladmin
+  ProxyCommand ssh -W %h:%p -q kibana
+
+Host es-3
+  Hostname prod-es-3
+  User wcladmin
+  ProxyCommand ssh -W %h:%p -q kibana
+
+Host monitor
+  Hostname 139.198.191.109
+  Port 40024
+  User wcladmin
+
+Host brease
+  Hostname brease.io
+  User root
+
+Host jekyllpro
+  Port 22
+  Hostname 139.198.191.128
+  User wcladmin
+
+Host teleport
+  Hostname teleport.wiredcraft.cn
+  User wcladmin
+
+Host influxdb-us
+  Hostname 198.199.100.211
+  User wcladmin
+
+Host harbor-china
+  Hostname registry.wiredcraft.cn
+  User wcladmin
+
+Host nexus
+  Hostname 45.120.216.193
+  User wcladmin

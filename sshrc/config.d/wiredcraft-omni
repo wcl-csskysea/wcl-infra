@@ -1,0 +1,19 @@
+Host omni-prod
+  Hostname 139.198.176.192
+  Port 40023
+  User wcladmin
+
+Host omni-demo
+  Hostname 139.198.189.210
+  User root
+  Port 40022
+
+Host omni-dev
+  Hostname 139.198.176.192
+  User root
+  Port 40022
+
+Host omni-docs
+  Hostname 103.61.38.197
+  Port 22
+  User wcladmin

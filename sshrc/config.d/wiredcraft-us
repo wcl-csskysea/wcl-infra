@@ -1,0 +1,13 @@
+Host omni-us-admin
+  Hostname 157.245.134.13
+  Port 22
+  User wcladmin
+
+Host monitoring-us
+  Hostname 198.199.100.211
+  Port 22
+  User wcladmin
+
+Host elk-us
+  Hostname logs-us.service.wiredcraft.com
+  User wcladmin

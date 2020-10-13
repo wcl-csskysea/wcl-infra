@@ -1,0 +1,25 @@
+Host sbux-public-dev-admin
+  Hostname public-dev-sbux.wiredcraft.net
+  User wcladmin
+  Port 40022
+
+Host sbux-stats-db
+  Hostname 172.16.0.21
+  User root
+  ProxyCommand ssh -W %h:%p -q sbux-public-dev-admin
+
+Host sbux-prod-admin
+  Hostname localhost
+  User wcladmin
+  Port 1235
+  ProxyCommand ssh -W %h:%p -q gw3
+
+Host sbux-hk1-builder
+  Hostname 209.9.107.56
+  User wcladmin
+  Port 40022
+
+Host sbux-staging-artwork-admin
+  User root
+  HostName 124.42.117.235
+  Port 40022

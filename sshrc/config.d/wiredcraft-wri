@@ -1,0 +1,14 @@
+Host wri-admin
+  Hostname 34.215.156.233
+  Port 22
+  User wcladmin
+
+Host wri-staging
+  Hostname 34.221.244.137 
+  Port 22
+  User wcladmin
+
+Host wri-prod
+  Hostname 54.202.225.66
+  Port 22
+  User wcladmin

@@ -1,0 +1,36 @@
+Host in-house-server
+  Port 22
+  Hostname 10.10.1.10
+  User wcladmin
+
+Host in-house-builder
+  Hostname 10.10.1.12
+  User wcladmin
+
+Host in-house-omni-dev
+  Hostname 10.10.1.13
+  User wcladmin
+
+Host in-house-weblate
+  Hostname 10.10.1.11
+  User wcladmin
+
+Host in-house-outline
+  Hostname 10.10.1.15
+  User wcladmin
+
+Host in-house-ssh-reverse-proxy
+  Hostname 10.10.1.17
+  User wcladmin
+
+Host in-house-nexus
+  Hostname 10.10.1.19
+  User wcladmin
+
+Host in-house-android-builder
+  Hostname 10.10.1.16
+  User root
+
+Host in-house-ios-builder
+  Hostname 10.10.1.30
+  User wcladmin

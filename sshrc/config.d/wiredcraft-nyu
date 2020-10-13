@@ -1,0 +1,22 @@
+Host nyu-mini-server
+  Hostname gcp.haishan.me
+  Port 40022
+  User wcladmin
+
+Host nyu-dev-server
+  Hostname 139.198.190.11
+  User wcladmin
+
+Host nyu-prod-admin
+  Hostname 13.115.229.255
+  User wcladmin
+
+Host nyu-prod-main
+  Hostname 10.0.2.198
+  User wcladmin
+  ProxyCommand ssh -W %h:%p -q nyu-prod-admin
+
+Host nyu-prod-couchbase
+  Hostname 10.0.2.83
+  User wcladmin
+  ProxyCommand ssh -W %h:%p -q nyu-prod-admin

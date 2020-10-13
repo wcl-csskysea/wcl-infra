@@ -1,0 +1,21 @@
+Host swire-admin
+  Hostname 52.77.82.159
+  User hhadmin
+  Port 22
+
+Host swire-prod
+  Hostname 10.232.0.192
+  User hhadmin
+  Port 22
+  ProxyCommand ssh -W %h:%p -q swire-admin
+
+Host swire-staging
+  Hostname 10.232.16.212
+  User hhadmin
+  Port 22
+  ProxyCommand ssh -W %h:%p -q swire-admin
+
+Host swire-dev
+  Hostname 139.198.189.204
+  Port 40022
+  User root

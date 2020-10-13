@@ -1,0 +1,30 @@
+Host timevallee-admin
+  Hostname 47.110.158.182
+  User wcladmin
+  Port 22
+
+Host timevallee-dev
+  Hostname 172.16.179.102
+  User wcladmin
+  Port 22
+  ProxyCommand ssh -W %h:%p -q timevallee-admin
+
+Host timevallee-builder
+  Hostname 172.16.179.103
+  User wcladmin
+  Port 22
+
+Host timevallee-qua
+  Hostname 172.16.179.107
+  User wcladmin
+  Port 22
+
+Host timevallee-val
+  Hostname 172.16.179.105
+  User wcladmin
+  Port 22
+
+Host timevallee-prod
+  Hostname 172.16.179.106
+  User root
+  Port 22

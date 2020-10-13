@@ -1,0 +1,114 @@
+# BBY jump box
+Host bby-admin
+    # Hostname pipelines-burberry.wiredcraft.cn
+    Hostname 52.83.164.162
+    Port 22
+    User wcladmin
+
+# Dev environment
+Host bby-dev
+    Hostname dev
+    User wcladmin
+    ProxyCommand ssh -W %h:%p -q bby-admin
+
+# Staging environment
+Host bby-staging-gw-1
+    Hostname staging-gw-1
+    User wcladmin
+    ProxyCommand ssh -W %h:%p -q bby-admin
+
+Host bby-staging-gw-2
+    Hostname staging-gw-2
+    User wcladmin
+    ProxyCommand ssh -W %h:%p -q bby-admin
+
+Host bby-staging-oms-1
+    Hostname staging-oms-1
+    User wcladmin
+    ProxyCommand ssh -W %h:%p -q bby-admin
+
+Host bby-staging-oms-2
+    Hostname staging-oms-2
+    User wcladmin
+    ProxyCommand ssh -W %h:%p -q bby-admin
+
+Host bby-staging-och-1
+    Hostname staging-och-1
+    User wcladmin
+    ProxyCommand ssh -W %h:%p -q bby-admin
+
+Host bby-staging-och-2
+    Hostname staging-och-2
+    User wcladmin
+    ProxyCommand ssh -W %h:%p -q bby-admin
+
+Host bby-staging-wms
+    Hostname staging-wms
+    User wcladmin
+    ProxyCommand ssh -W %h:%p -q bby-admin
+
+Host bby-staging-db-1
+    Hostname staging-db-1
+    User wcladmin
+    ProxyCommand ssh -W %h:%p -q bby-admin
+
+Host bby-staging-db-2
+    Hostname staging-db-2
+    User wcladmin
+    ProxyCommand ssh -W %h:%p -q bby-admin
+
+Host bby-staging-db-3
+    Hostname staging-db-3
+    User wcladmin
+    ProxyCommand ssh -W %h:%p -q bby-admin
+
+# Prod environment
+Host bby-prod-gw-1
+    Hostname prod-gw-1
+    User wcladmin
+    ProxyCommand ssh -W %h:%p -q bby-admin
+
+Host bby-prod-gw-2
+    Hostname prod-gw-2
+    User wcladmin
+    ProxyCommand ssh -W %h:%p -q bby-admin
+
+Host bby-prod-oms-1
+    Hostname prod-oms-1
+    User wcladmin
+    ProxyCommand ssh -W %h:%p -q bby-admin
+
+Host bby-prod-oms-2
+    Hostname prod-oms-2
+    User wcladmin
+    ProxyCommand ssh -W %h:%p -q bby-admin
+
+Host bby-prod-och-1
+    Hostname prod-och-1
+    User wcladmin
+    ProxyCommand ssh -W %h:%p -q bby-admin
+
+Host bby-prod-och-2
+    Hostname prod-och-2
+    User wcladmin
+    ProxyCommand ssh -W %h:%p -q bby-admin
+
+Host bby-prod-wms
+    Hostname prod-wms
+    User wcladmin
+    ProxyCommand ssh -W %h:%p -q bby-admin
+
+Host bby-prod-db-1
+    Hostname prod-db-1
+    User wcladmin
+    ProxyCommand ssh -W %h:%p -q bby-admin
+
+Host bby-prod-db-2
+    Hostname prod-db-2
+    User wcladmin
+    ProxyCommand ssh -W %h:%p -q bby-admin
+
+Host bby-prod-db-3
+    Hostname prod-db-3
+    User wcladmin
+    ProxyCommand ssh -W %h:%p -q bby-admin

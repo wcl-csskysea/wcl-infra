@@ -1,0 +1,17 @@
+Host hagerty-old-sandbox-admin
+  Hostname 54.87.253.22
+  Port 22
+  User wcladmin
+
+Host hagerty-sandbox-admin
+  Hostname 54.160.177.87
+  Port 22
+  User wcladmin
+
+
+Host hagerty-sandbox-db
+  Hostname 10.128.64.4
+  Port 22
+  User wcladmin
+  ProxyCommand ssh -W %h:%p -q hagerty-sandbox-admin
+
