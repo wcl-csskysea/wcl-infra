@@ -67,3 +67,9 @@ Host harbor-china
 Host nexus
   Hostname 45.120.216.193
   User wcladmin
+
+Host translate
+  Hostname 103.61.38.70
+  User wcladmin
+  Port 40022
+

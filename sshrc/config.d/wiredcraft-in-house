@@ -11,10 +11,6 @@ Host in-house-omni-dev
   Hostname 10.10.1.13
   User wcladmin
 
-Host in-house-weblate
-  Hostname 10.10.1.11
-  User wcladmin
-
 Host in-house-outline
   Hostname 10.10.1.15
   User wcladmin
