@@ -19,7 +19,7 @@ Host in-house-ssh-reverse-proxy
   Hostname 10.10.1.17
   User wcladmin
 
-Host in-house-nexus
+Host in-house-gh-runner-1
   Hostname 10.10.1.19
   User wcladmin
 
