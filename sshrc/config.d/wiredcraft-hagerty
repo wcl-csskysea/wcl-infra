@@ -1,13 +1,9 @@
-Host hagerty-old-sandbox-admin
-  Hostname 54.87.253.22
-  Port 22
-  User wcladmin
-
+# HDC
 Host hagerty-sandbox-admin
   Hostname 54.160.177.87
   Port 22
   User wcladmin
-
+  
 
 Host hagerty-sandbox-db
   Hostname 10.128.64.4
@@ -15,3 +11,137 @@ Host hagerty-sandbox-db
   User wcladmin
   ProxyCommand ssh -W %h:%p -q hagerty-sandbox-admin
 
+Host hagerty-ci-admin
+  Hostname 3.94.142.200
+  Port 22
+  User wcladmin
+  
+
+Host hagerty-ci-db
+  Hostname 10.128.135.176
+  Port 22
+  User wcladmin
+  ProxyCommand ssh -W %h:%p -q hagerty-ci-admin
+
+Host hagerty-pre-prod-admin
+  Hostname 3.222.88.100
+  Port 22
+  User wcladmin
+
+Host hagerty-pre-prod-db-1
+  Hostname 10.128.194.24
+  Port 22
+  User wcladmin
+  ProxyCommand ssh -W %h:%p -q hagerty-pre-prod-admin
+
+Host hagerty-pre-prod-db-2
+  Hostname 10.128.201.45
+  Port 22
+  User wcladmin
+  ProxyCommand ssh -W %h:%p -q hagerty-pre-prod-admin
+
+Host hagerty-pre-prod-db-3
+  Hostname 10.128.215.146
+  Port 22
+  User wcladmin
+  ProxyCommand ssh -W %h:%p -q hagerty-pre-prod-admin
+
+Host hagerty-prod-admin
+  Hostname 107.20.183.202
+  Port 22
+  User wcladmin
+
+Host hagerty-prod-db-1
+  Hostname 10.129.2.60
+  Port 22
+  User wcladmin
+  ProxyCommand ssh -W %h:%p -q hagerty-prod-admin
+
+Host hagerty-prod-db-2
+  Hostname 10.129.9.209
+  Port 22
+  User wcladmin
+  ProxyCommand ssh -W %h:%p -q hagerty-prod-admin
+
+Host hagerty-prod-db-3
+  Hostname 10.129.20.117
+  Port 22
+  User wcladmin
+  ProxyCommand ssh -W %h:%p -q hagerty-prod-admin
+
+# REFERRAL
+Host hagerty-referral-ci-admin
+  Hostname 54.164.27.57
+  Port 22
+  User wcladmin
+
+Host hagerty-referral-ci-backend
+  Hostname referral-ci-backend
+  Port 22
+  User wcladmin
+  ProxyCommand ssh -W %h:%p -q hagerty-referral-ci-admin
+
+Host hagerty-referral-preprod-admin
+  Hostname 54.146.251.136
+  Port 22
+  User wcladmin
+
+Host hagerty-referral-preprod-backend-1
+  Hostname referral-preprod-backend-1
+  Port 22
+  User wcladmin
+  ProxyCommand ssh -W %h:%p -q hagerty-referral-preprod-admin
+
+Host hagerty-referral-preprod-backend-2
+  Hostname referral-preprod-backend-2
+  Port 22
+  User wcladmin
+  ProxyCommand ssh -W %h:%p -q hagerty-referral-preprod-admin
+
+Host hagerty-referral-prod-admin
+  Hostname 107.21.159.138
+  Port 22
+  User wcladmin
+
+Host hagerty-referral-prod-backend-1
+  Hostname referral-prod-backend-1
+  Port 22
+  User wcladmin
+  ProxyCommand ssh -W %h:%p -q hagerty-referral-prod-admin
+
+
+Host hagerty-referral-prod-backend-2
+  Hostname referral-prod-backend-2
+  Port 22
+  User wcladmin
+  ProxyCommand ssh -W %h:%p -q hagerty-referral-prod-admin
+
+
+# UBI
+Host hagerty-ubi-sandbox-admin
+  Hostname 54.158.5.113
+  Port 22
+  User wcladmin
+  
+Host hagerty-ubi-sandbox-ec2
+  Hostname 10.208.4.226
+  Port 22
+  User wcladmin
+  ProxyCommand ssh -W %h:%p -q hagerty-ubi-sandbox-admin
+
+Host hagerty-ubi-prod-admin
+  Hostname 54.87.77.93
+  Port 22
+  User wcladmin
+
+Host hagerty-ubi-prod-ec2-1
+  Hostname 10.211.1.83
+  Port 22
+  User wcladmin
+  ProxyCommand ssh -W %h:%p -q hagerty-ubi-prod-admin 
+
+Host hagerty-ubi-prod-ec2-2
+  Hostname 10.211.24.228
+  Port 22
+  User wcladmin
+  ProxyCommand ssh -W %h:%p -q hagerty-ubi-prod-admin 

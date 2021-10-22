@@ -73,3 +73,44 @@ Host translate
   User wcladmin
   Port 40022
 
+#  omni-us was few servers for initial testing for Hagerty  
+Host omni-us-admin
+  Hostname 157.245.134.13
+  Port 22
+  User wcladmin
+
+Host omni-us-dev
+  Hostname dev
+  User wcladmin
+  ProxyCommand ssh -W %h:%p -q omni-us-admin
+
+Host omni-us-staging
+  Hostname staging
+  User wcladmin
+  ProxyCommand ssh -W %h:%p -q omni-us-admin
+
+
+# GH runners
+Host ghr-cn1
+  Hostname 10.10.1.19
+  User wcladmin
+
+Host ghr-cn2
+  Hostname 10.10.1.11
+  User wcladmin
+
+Host ghr-cn3
+  Hostname 10.10.1.27
+  User wcladmin
+
+Host ghr-us1
+  Hostname 159.89.188.205
+  User wcladmin
+
+Host ghr-us2
+  Hostname 159.89.41.6
+  User wcladmin
+
+Host ghr-us3
+  Hostname 165.227.182.85
+  User wcladmin
