@@ -1,144 +1,43 @@
-Host blue-dev-single-box
-  Hostname 139.198.176.155
-  User wcladmin
-  Port 22
 
 Host blue-admin
   Hostname 54.223.165.242
   Port 22
   User wcladmin
 
-Host blue-dev
-  Hostname 10.0.1.12
+Host blue-prod-db-users-8
+  Hostname 10.205.67.252
   Port 22
   User wcladmin
   ProxyCommand ssh -W %h:%p -q blue-admin
 
-Host blue-staging-cb-users
-  Hostname 172.16.2.42
-  Port 22
-  User wcladmin
-  ProxyCommand ssh -W %h:%p -q blue-admin
 
-Host blue-staging-cb-orders
-  Hostname 172.16.2.46
-  Port 22
-  User wcladmin
-  ProxyCommand ssh -W %h:%p -q blue-admin
-
-Host blue-pre-prod-cb-orders-1
-  Hostname 172.16.3.38
-  Port 22
-  User wcladmin
-  ProxyCommand ssh -W %h:%p -q blue-admin
-
-Host blue-pre-prod-cb-orders-2
-  Hostname 172.16.3.61
-  Port 22
-  User wcladmin
-  ProxyCommand ssh -W %h:%p -q blue-admin
-
-Host blue-pre-prod-cb-orders-3
-  Hostname 172.16.3.40
-  Port 22
-  User wcladmin
-  ProxyCommand ssh -W %h:%p -q blue-admin
-
-Host blue-pre-prod-cb-users-1
-  Hostname 172.16.3.45
-  Port 22
-  User wcladmin
-  ProxyCommand ssh -W %h:%p -q blue-admin
-
-Host blue-pre-prod-cb-users-2
-  Hostname 172.16.3.52
-  Port 22
-  User wcladmin
-  ProxyCommand ssh -W %h:%p -q blue-admin
-
-Host blue-pre-prod-cb-users-3
-  Hostname 172.16.3.42
-  Port 22
-  User wcladmin
-  ProxyCommand ssh -W %h:%p -q blue-admin
-
-Host blue-pre-prod-redis-1
-  Hostname 172.16.3.43
-  Port 22
-  User wcladmin
-  ProxyCommand ssh -W %h:%p -q blue-admin
-
-Host blue-pre-prod-redis-2
-  Hostname 172.16.3.53
-  Port 22
-  User wcladmin
-  ProxyCommand ssh -W %h:%p -q blue-admin
-
-Host blue-pre-prod-redis-3
-  Hostname 172.16.3.36
-  Port 22
-  User wcladmin
-  ProxyCommand ssh -W %h:%p -q blue-admin
-
-Host blue-prod-cb-orders-1
-  Hostname 10.205.67.145
-  Port 22
-  User wcladmin
-  ProxyCommand ssh -W %h:%p -q blue-admin
-
-Host blue-prod-cb-orders-2
-  Hostname 10.205.67.244
-  Port 22
-  User wcladmin
-  ProxyCommand ssh -W %h:%p -q blue-admin
-
-Host blue-prod-cb-orders-3
-  Hostname 10.205.67.185
-  Port 22
-  User wcladmin
-  ProxyCommand ssh -W %h:%p -q blue-admin
-
-Host blue-prod-cb-orders-4
-  Hostname 10.205.67.233
-  Port 22
-  User wcladmin
-  ProxyCommand ssh -W %h:%p -q blue-admin
-
-Host blue-prod-cb-orders-5
-  Hostname 10.205.67.135
-  Port 22
-  User wcladmin
-  ProxyCommand ssh -W %h:%p -q blue-admin
-
-Host blue-prod-cb-users-1
+Host blue-prod-db-users-1
   Hostname 10.205.67.160
   Port 22
   User wcladmin
   ProxyCommand ssh -W %h:%p -q blue-admin
 
-Host blue-prod-cb-users-2
-  Hostname 10.205.67.226
+
+Host blue-prod-db-users-6
+  Hostname 10.205.67.243
   Port 22
   User wcladmin
   ProxyCommand ssh -W %h:%p -q blue-admin
 
-Host blue-prod-cb-users-3
-  Hostname 10.205.67.177
+
+Host blue-prod-db-users-7
+  Hostname 10.205.67.179
   Port 22
   User wcladmin
   ProxyCommand ssh -W %h:%p -q blue-admin
 
-Host blue-prod-cb-users-4
-  Hostname 10.205.67.219
+
+Host blue-prod-db-users-9
+  Hostname 10.205.67.184
   Port 22
   User wcladmin
   ProxyCommand ssh -W %h:%p -q blue-admin
 
-Host blue-prod-cb-users-5
-  Hostname 10.205.67.153
-  Port 22
-  User wcladmin
-  ProxyCommand ssh -W %h:%p -q blue-admin
 
 Host blue-prod-redis-1
   Hostname 10.205.67.137
@@ -146,14 +45,235 @@ Host blue-prod-redis-1
   User wcladmin
   ProxyCommand ssh -W %h:%p -q blue-admin
 
-Host blue-prod-redis-2
-  Hostname 10.205.67.229
+
+Host blue-prod-db-orders-8
+  Hostname 10.205.67.203
   Port 22
   User wcladmin
   ProxyCommand ssh -W %h:%p -q blue-admin
+
+
+Host blue-prod-db-orders-1
+  Hostname 10.205.67.145
+  Port 22
+  User wcladmin
+  ProxyCommand ssh -W %h:%p -q blue-admin
+
+
+Host blue-prod-db-orders-6
+  Hostname 10.205.67.215
+  Port 22
+  User wcladmin
+  ProxyCommand ssh -W %h:%p -q blue-admin
+
+
+Host blue-prod-db-orders-11
+  Hostname 10.205.67.132
+  Port 22
+  User wcladmin
+  ProxyCommand ssh -W %h:%p -q blue-admin
+
+
+Host blue-prod-db-orders-7
+  Hostname 10.205.67.157
+  Port 22
+  User wcladmin
+  ProxyCommand ssh -W %h:%p -q blue-admin
+
+
+Host blue-prod-db-orders-9
+  Hostname 10.205.67.170
+  Port 22
+  User wcladmin
+  ProxyCommand ssh -W %h:%p -q blue-admin
+
+
+Host blue-prod-db-orders-10
+  Hostname 10.205.67.235
+  Port 22
+  User wcladmin
+  ProxyCommand ssh -W %h:%p -q blue-admin
+
 
 Host blue-prod-redis-3
   Hostname 10.205.67.140
   Port 22
   User wcladmin
   ProxyCommand ssh -W %h:%p -q blue-admin
+
+
+Host blue-prod-db-users-5
+  Hostname 10.205.67.153
+  Port 22
+  User wcladmin
+  ProxyCommand ssh -W %h:%p -q blue-admin
+
+
+Host blue-prod-db-users-2
+  Hostname 10.205.67.226
+  Port 22
+  User wcladmin
+  ProxyCommand ssh -W %h:%p -q blue-admin
+
+
+Host blue-prod-redis-2
+  Hostname 10.205.67.229
+  Port 22
+  User wcladmin
+  ProxyCommand ssh -W %h:%p -q blue-admin
+
+
+Host blue-prod-db-users-3
+  Hostname 10.205.67.177
+  Port 22
+  User wcladmin
+  ProxyCommand ssh -W %h:%p -q blue-admin
+
+
+Host blue-prod-db-users-4
+  Hostname 10.205.67.219
+  Port 22
+  User wcladmin
+  ProxyCommand ssh -W %h:%p -q blue-admin
+
+
+Host blue-prod-db-orders-15
+  Hostname 10.205.67.174
+  Port 22
+  User wcladmin
+  ProxyCommand ssh -W %h:%p -q blue-admin
+
+
+Host blue-prod-db-orders-12
+  Hostname 10.205.67.253
+  Port 22
+  User wcladmin
+  ProxyCommand ssh -W %h:%p -q blue-admin
+
+
+Host blue-prod-db-orders-5
+  Hostname 10.205.67.135
+  Port 22
+  User wcladmin
+  ProxyCommand ssh -W %h:%p -q blue-admin
+
+
+Host blue-prod-db-orders-2
+  Hostname 10.205.67.244
+  Port 22
+  User wcladmin
+  ProxyCommand ssh -W %h:%p -q blue-admin
+
+
+Host blue-prod-db-orders-13
+  Hostname 10.205.67.190
+  Port 22
+  User wcladmin
+  ProxyCommand ssh -W %h:%p -q blue-admin
+
+
+Host blue-prod-db-orders-14
+  Hostname 10.205.67.221
+  Port 22
+  User wcladmin
+  ProxyCommand ssh -W %h:%p -q blue-admin
+
+
+Host blue-prod-db-orders-3
+  Hostname 10.205.67.185
+  Port 22
+  User wcladmin
+  ProxyCommand ssh -W %h:%p -q blue-admin
+
+
+Host blue-prod-db-orders-4
+  Hostname 10.205.67.233
+  Port 22
+  User wcladmin
+  ProxyCommand ssh -W %h:%p -q blue-admin
+
+
+Host blue-staging-db-users
+  Hostname 172.16.2.42
+  Port 22
+  User wcladmin
+  ProxyCommand ssh -W %h:%p -q blue-admin
+
+
+Host blue-staging-db-orders
+  Hostname 172.16.2.46
+  Port 22
+  User wcladmin
+  ProxyCommand ssh -W %h:%p -q blue-admin
+
+
+Host blue-pre-prod-db-users-1
+  Hostname 172.16.3.45
+  Port 22
+  User wcladmin
+  ProxyCommand ssh -W %h:%p -q blue-admin
+
+
+Host blue-pre-prod-redis-1
+  Hostname 172.16.3.43
+  Port 22
+  User wcladmin
+  ProxyCommand ssh -W %h:%p -q blue-admin
+
+
+Host blue-pre-prod-db-orders-3
+  Hostname 172.16.3.40
+  Port 22
+  User wcladmin
+  ProxyCommand ssh -W %h:%p -q blue-admin
+
+
+Host blue-pre-prod-db-orders-2
+  Hostname 172.16.3.61
+  Port 22
+  User wcladmin
+  ProxyCommand ssh -W %h:%p -q blue-admin
+
+
+Host blue-pre-prod-db-users-2
+  Hostname 172.16.3.52
+  Port 22
+  User wcladmin
+  ProxyCommand ssh -W %h:%p -q blue-admin
+
+
+Host blue-pre-prod-redis-2
+  Hostname 172.16.3.53
+  Port 22
+  User wcladmin
+  ProxyCommand ssh -W %h:%p -q blue-admin
+
+
+Host blue-pre-prod-redis-3
+  Hostname 172.16.3.36
+  Port 22
+  User wcladmin
+  ProxyCommand ssh -W %h:%p -q blue-admin
+
+
+Host blue-pre-prod-db-users-3
+  Hostname 172.16.3.42
+  Port 22
+  User wcladmin
+  ProxyCommand ssh -W %h:%p -q blue-admin
+
+
+Host blue-pre-prod-db-orders-1
+  Hostname 172.16.3.38
+  Port 22
+  User wcladmin
+  ProxyCommand ssh -W %h:%p -q blue-admin
+
+
+Host blue-dev-db
+  Hostname 10.0.1.12
+  Port 22
+  User wcladmin
+  ProxyCommand ssh -W %h:%p -q blue-admin
+
+
