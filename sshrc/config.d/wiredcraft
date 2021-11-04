@@ -24,17 +24,17 @@ Host kibana
   Port 40026
 
 Host es-1
-  Hostname prod-es-1
+  Hostname es-1
   User wcladmin
   ProxyCommand ssh -W %h:%p -q kibana
 
 Host es-2
-  Hostname prod-es-2
+  Hostname es-2
   User wcladmin
   ProxyCommand ssh -W %h:%p -q kibana
 
 Host es-3
-  Hostname prod-es-3
+  Hostname es-3
   User wcladmin
   ProxyCommand ssh -W %h:%p -q kibana
 
