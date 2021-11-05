@@ -52,10 +52,6 @@ Host jekyllpro
   Hostname 139.198.191.128
   User wcladmin
 
-Host teleport
-  Hostname teleport.wiredcraft.cn
-  User wcladmin
-
 Host influxdb-us
   Hostname 198.199.100.211
   User wcladmin
@@ -114,3 +110,8 @@ Host ghr-us2
 Host ghr-us3
   Hostname 165.227.182.85
   User wcladmin
+
+Host teleport
+  Hostname 139.198.157.213
+  User wcladmin
+  Port 40022
