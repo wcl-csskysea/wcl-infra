@@ -68,82 +68,95 @@ Host omnisaas-prod-db
   ProxyCommand ssh -W %h:%p -q omnisaas-admin
 
 # Tiffany
-Host omnisaas-tco-dev-db
+Host omnisaas-tiffany-dev-db
   Hostname 172.16.5.42
   Port 22
   User wcladmin
   ProxyCommand ssh -W %h:%p -q omnisaas-admin
 
-Host omnisaas-tco-staging-cdp
+Host omnisaas-tiffany-staging-cdp
   Hostname 172.16.5.59
   Port 22
   User wcladmin
   ProxyCommand ssh -W %h:%p -q omnisaas-admin
 
-Host omnisaas-tco-qa-db
+Host omnisaas-tiffany-qa-db
   Hostname 172.16.5.43
   Port 22
   User wcladmin
   ProxyCommand ssh -W %h:%p -q omnisaas-admin
 
-Host omnisaas-tco-staging-db
+Host omnisaas-tiffany-staging-db
   Hostname 172.16.5.35
   Port 22
   User wcladmin
   ProxyCommand ssh -W %h:%p -q omnisaas-admin
 
-Host omnisaas-tco-prod-db-1
+Host omnisaas-tiffany-prod-db-1
   Hostname 172.16.5.58
   Port 22
   User wcladmin
   ProxyCommand ssh -W %h:%p -q omnisaas-admin
 
-Host omnisaas-tco-prod-db-2
+Host omnisaas-tiffany-prod-db-2
   Hostname 172.16.6.111
   Port 22
   User wcladmin
   ProxyCommand ssh -W %h:%p -q omnisaas-admin
 
-Host omnisaas-tco-prod-db-3
+Host omnisaas-tiffany-prod-db-3
   Hostname 172.16.7.119
   Port 22
   User wcladmin
   ProxyCommand ssh -W %h:%p -q omnisaas-admin
 
-Host omnisaas-tco-prod-cdp
+Host omnisaas-tiffany-prod-cdp
   Hostname 172.16.5.65
   Port 22
   User wcladmin
   ProxyCommand ssh -W %h:%p -q omnisaas-admin
 
 # Lululemon
-Host omnisaas-lll-staging-db
+Host omnisaas-lululemon-staging-db
   Hostname 172.16.5.18
   Port 22
   User wcladmin
   ProxyCommand ssh -W %h:%p -q omnisaas-admin
 
-Host omnisaas-lll-prod-db-1
+Host omnisaas-lululemon-prod-db-1
   Hostname 172.16.5.27
   Port 22
   User wcladmin
   ProxyCommand ssh -W %h:%p -q omnisaas-admin
 
-Host omnisaas-lll-prod-db-2
+Host omnisaas-lululemon-prod-db-2
   Hostname 172.16.6.106
   Port 22
   User wcladmin
   ProxyCommand ssh -W %h:%p -q omnisaas-admin
 
 # Suitsupply
-Host omnisaas-ss-staging-db
+Host omnisaas-suitsupply-staging-db
   Hostname 172.16.5.19
   Port 22
   User wcladmin
   ProxyCommand ssh -W %h:%p -q omnisaas-admin
 
-Host omnisaas-ss-prod-db
+Host omnisaas-suitsupply-prod-db
   Hostname 172.16.5.20
+  Port 22
+  User wcladmin
+  ProxyCommand ssh -W %h:%p -q omnisaas-admin
+
+# Swire
+Host omnisaas-swire-staging-db
+  Hostname 172.16.5.15
+  Port 22
+  User wcladmin
+  ProxyCommand ssh -W %h:%p -q omnisaas-admin
+
+Host omnisaas-swire-prod-db
+  Hostname 172.16.5.16
   Port 22
   User wcladmin
   ProxyCommand ssh -W %h:%p -q omnisaas-admin
