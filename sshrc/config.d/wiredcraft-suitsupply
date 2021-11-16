@@ -1,0 +1,12 @@
+# Suitsupply
+Host omnisaas-ss-staging-db
+  Hostname 172.16.5.19
+  Port 22
+  User wcladmin
+  ProxyCommand ssh -W %h:%p -q omnisaas-admin
+
+Host omnisaas-ss-prod-db
+  Hostname 172.16.5.20
+  Port 22
+  User wcladmin
+  ProxyCommand ssh -W %h:%p -q omnisaas-admin

@@ -1,0 +1,10 @@
+Host omnisaas-demo-staging-db
+  Hostname 172.16.5.4
+  User wcladmin
+  ProxyCommand ssh -W %h:%p -q omnisaas-admin
+
+Host omnisaas-demo-prod-db
+  Hostname 172.16.5.5
+  User wcladmin
+  ProxyCommand ssh -W %h:%p -q omnisaas-admin
+

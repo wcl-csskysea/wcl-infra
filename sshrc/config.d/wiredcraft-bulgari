@@ -1,0 +1,10 @@
+Host omnisaas-bulgari-staging-db
+  Hostname 172.16.5.10
+  User wcladmin
+  ProxyCommand ssh -W %h:%p -q omnisaas-admin
+
+Host omnisaas-bulgari-prod-db-1
+  Hostname 172.16.5.12
+  User wcladmin
+  ProxyCommand ssh -W %h:%p -q omnisaas-admin
+

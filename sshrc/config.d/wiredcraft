@@ -69,7 +69,7 @@ Host translate
   User wcladmin
   Port 40022
 
-#  omni-us was few servers for initial testing for Hagerty  
+#  omni-us was few servers for initial testing for Hagerty
 Host omni-us-admin
   Hostname 157.245.134.13
   Port 22
@@ -115,3 +115,16 @@ Host teleport
   Hostname 139.198.157.213
   User wcladmin
   Port 40022
+
+# Wiredcraft
+Host omnisaas-staging-db
+  Hostname 172.16.5.1
+  Port 22
+  User wcladmin
+  ProxyCommand ssh -W %h:%p -q omnisaas-admin
+
+Host omnisaas-prod-db
+  Hostname 172.16.5.2
+  Port 22
+  User wcladmin
+  ProxyCommand ssh -W %h:%p -q omnisaas-admin

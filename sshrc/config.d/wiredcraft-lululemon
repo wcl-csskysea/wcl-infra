@@ -1,0 +1,18 @@
+# Lululemon
+Host omnisaas-lll-staging-db
+  Hostname 172.16.5.18
+  Port 22
+  User wcladmin
+  ProxyCommand ssh -W %h:%p -q omnisaas-admin
+
+Host omnisaas-lll-prod-db-1
+  Hostname 172.16.5.27
+  Port 22
+  User wcladmin
+  ProxyCommand ssh -W %h:%p -q omnisaas-admin
+
+Host omnisaas-lll-prod-db-2
+  Hostname 172.16.6.106
+  Port 22
+  User wcladmin
+  ProxyCommand ssh -W %h:%p -q omnisaas-admin

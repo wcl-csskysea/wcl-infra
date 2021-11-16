@@ -1,4 +1,19 @@
-Host zara-admin
-  Hostname 139.224.110.46
+Host omnisaas-zara-staging-db
+  Hostname 172.16.5.249
   User wcladmin
-  Port 40022
+  ProxyCommand ssh -W %h:%p -q omnisaas-admin
+
+Host omnisaas-zara-prod-db-1
+  Hostname 172.16.5.250
+  User wcladmin
+  ProxyCommand ssh -W %h:%p -q omnisaas-admin
+
+Host omnisaas-zara-prod-db-2
+  Hostname 172.16.6.102
+  User wcladmin
+  ProxyCommand ssh -W %h:%p -q omnisaas-admin
+
+Host omnisaas-zara-prod-db-3
+  Hostname 172.16.7.109
+  User wcladmin
+  ProxyCommand ssh -W %h:%p -q omnisaas-admin
