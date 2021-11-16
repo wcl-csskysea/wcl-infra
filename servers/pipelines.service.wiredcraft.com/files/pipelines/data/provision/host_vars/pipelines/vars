@@ -1,7 +1,0 @@
----
-service_domain: service.wiredcraft.com
-docker_registry: registry.service.wiredcraft.com/wiredcraft
-
-cloudflare_zone_id: "{{ vault_cloudflare_zone_id }}"
-cloudflare_email: "{{ vault_cloudflare_email }}"
-cloudflare_key: "{{ vault_cloudflare_key }}"

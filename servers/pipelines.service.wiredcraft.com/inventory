@@ -1,2 +1,0 @@
-[pipelines]
-pipelines ansible_ssh_host=207.226.141.238 ansible_ssh_port=40024

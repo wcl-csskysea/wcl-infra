@@ -1,1 +1,0 @@
-Keep track of Wiredcraft infrastructure, servers and playbooks for each component of the WCL environment.

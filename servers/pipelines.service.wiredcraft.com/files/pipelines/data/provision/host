@@ -1,2 +1,0 @@
-[pipelines]
-pipelines ansible_ssh_host=172.17.0.1

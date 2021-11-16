@@ -1,8 +1,0 @@
----
-# Hosted on QingCloud - rely on .ssh/config 
-ansible_ssh_host: zabbix-server
-# ansible_ssh_host: 172.16.10.2
-# ansible_ssh_port: 22
-
-# Webhooks are sensitive - set in vault
-wcl_slack_webhooks: "{{ vault_wcl_slack_webhooks }}"
