@@ -128,3 +128,9 @@ Host omnisaas-prod-db
   Port 22
   User wcladmin
   ProxyCommand ssh -W %h:%p -q omnisaas-admin
+
+Host sentry
+  Hostname 139.198.186.75
+  Port 22
+  User wcladmin
+
