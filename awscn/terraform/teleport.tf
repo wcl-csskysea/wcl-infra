@@ -1,3 +1,13 @@
+output "teleport_iam_user_access_id" {
+  value = aws_iam_access_key.teleport.id
+}
+
+# uncomment this if you need to get the secret key
+#resource "local_file" "teleport_iam_user_access_secret" {
+#  content  = aws_iam_access_key.teleport.secret
+#  filename = ".aws_secret"
+#}
+
 resource "aws_iam_user" "teleport" {
   name = "teleport"
 }
