@@ -8,14 +8,10 @@ output "teleport_iam_user_access_id" {
 #  filename = ".aws_secret"
 #}
 
-resource "aws_iam_user" "teleport" {
-  name = "teleport"
-}
 
-resource "aws_iam_access_key" "teleport" {
-  user = aws_iam_user.teleport.name
-}
-
+##########################################
+# Dynamodb
+##########################################
 resource "aws_dynamodb_table" "teleport_auth" {
   name           = "teleport-auth"
   hash_key       = "HashKey"
@@ -113,6 +109,50 @@ resource "aws_dynamodb_table" "teleport_events" {
   }
 }
 
+##########################################
+# S3
+##########################################
+resource "aws_s3_bucket" "teleport_sessions" {
+  bucket = "teleport-sessions"
+  acl    = "private"
+
+
+  versioning {
+    enabled = true
+  }
+
+  lifecycle {
+    prevent_destroy = true
+  }
+
+  lifecycle_rule {
+    id      = "sessions files"
+    enabled = true
+
+    transition {
+      days          = 730
+      storage_class = "GLACIER"
+    }
+  }
+}
+
+
+
+##########################################
+# IAM
+##########################################
+resource "aws_iam_user" "teleport" {
+  name = "teleport"
+}
+
+resource "aws_iam_access_key" "teleport" {
+  user = aws_iam_user.teleport.name
+}
+
+
+##########################################
+# IAM Policy
+##########################################
 resource "aws_iam_policy" "teleport_dynamodb_access" {
   name        = "teleport-dynamodb-access"
   path        = "/infrastructure/teleport/"
@@ -150,7 +190,40 @@ resource "aws_iam_policy" "teleport_dynamodb_access" {
   })
 }
 
+resource "aws_iam_policy" "teleport_s3_access" {
+  name        = "teleport-s3-access"
+  path        = "/infrastructure/teleport/"
+  description = "Allow all actions for object to ${aws_s3_bucket.teleport_sessions.bucket}"
+
+  # Terraform's "jsonencode" function converts a
+  # Terraform expression result to valid JSON syntax.
+  policy = jsonencode({
+    "Version" : "2012-10-17",
+    "Statement" : [
+      {
+        "Action" : [
+          "s3:ListBucket",
+          "s3:PutObject",
+          "s3:PutObjectAcl",
+          "s3:HeadObject"
+        ],
+        "Effect" : "Allow",
+        "Resource" : [
+          "arn:aws-cn:s3:::${aws_s3_bucket.teleport_sessions.bucket}/",
+          "arn:aws-cn:s3:::${aws_s3_bucket.teleport_sessions.bucket}/*"
+        ]
+      }
+    ]
+  })
+}
+
+
 resource "aws_iam_user_policy_attachment" "teleport_auth_dynamondb_attach" {
   user       = aws_iam_user.teleport.name
   policy_arn = aws_iam_policy.teleport_dynamodb_access.arn
+}
+
+resource "aws_iam_user_policy_attachment" "teleport_s3_attach" {
+  user       = aws_iam_user.teleport.name
+  policy_arn = aws_iam_policy.teleport_s3_access.arn
 }
