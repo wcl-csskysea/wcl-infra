@@ -1,3 +1,8 @@
+Host harmay-dev
+  Port 40027
+  Hostname 139.198.191.109
+  User wcladmin
+
 Host harmay-staging
   Port 22
   Hostname 47.101.208.150
