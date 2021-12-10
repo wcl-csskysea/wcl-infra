@@ -1,0 +1,9 @@
+Host harmay-staging
+  Port 22
+  Hostname 47.101.208.150
+  User wcladmin
+
+Host harmay-prod
+  Port 22
+  Hostname 139.196.108.57
+  User wcladmin
