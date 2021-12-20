@@ -1,0 +1,23 @@
+[Unit]
+Description=Teleport SSH Service
+After=network.target
+
+[Service]
+Type=simple
+Restart=on-failure
+ExecStart=/usr/local/bin/teleport start --auth-github-proxy=socks5://127.0.0.1:1112 --config=/etc/teleport.yaml --pid-file=/run/teleport.pid
+ExecReload=/bin/kill -HUP $MAINPID
+PIDFile=/run/teleport.pid
+User=root
+Group=root
+
+#sudo setcap CAP_NET_BIND_SERVICE=+eip /usr/local/bin/teleport
+#Because Teleport is a non-roto user, to use the port below 1024, rights need to be raised.
+#This parameter limits what capabilities the service can use only
+#CapabilityBoundingSet=CAP_NET_BIND_SERVICE
+
+#This allow what capabilities can use at the beginning
+#AmbientCapabilities=CAP_NET_BIND_SERVICE
+
+[Install]
+WantedBy=multi-user.target

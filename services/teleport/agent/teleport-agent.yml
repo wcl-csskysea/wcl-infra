@@ -1,0 +1,85 @@
+---
+- name: Download or Update/Install Teleport for agent
+  hosts: staging
+  become: yes
+  vars_prompt:
+    - name: agent_token
+      #Run this command on the leaf-cluster admin server to generate the token
+      prompt: 'tctl tokens add --type=node --ttl=30m <enter node token>'
+      private: false
+
+    - name: labels_env
+      prompt: 'pls labels env[make sure your hosts is corresponding]: < staging , prod or otherwise>'
+      private: false
+
+    - name: labels_project
+      prompt: 'pls labels project: <such as bby/blue and so on>'
+      private: false
+
+    - name: leaf_admin_ip
+      prompt: 'pls enter leaf-admin internal ip '
+      default: '172.42.92.204'
+      private: false
+
+    - name: teleport_version
+      prompt: 'teleport version'
+      default: 'v7.3.3'
+      private: false
+
+  tasks:
+    - name: create user devops/developer/teleport and upload devops sudo file
+      block:
+        - user:
+            name: devops
+            groups: systemd-journal
+            state: present
+        - user:
+            name: developer
+            groups: systemd-journal
+            state: present
+        - template:
+            src: teleport/devops
+            dest: /etc/sudoers.d/
+      tags: sudo
+
+    #Teleport source files are downloaded when leaf-Cluster is initialized, so use them directly.
+    - name: Copy teleport.tar.gz from leaf-admin server and install teleport
+      block:
+        - file:
+            path: /download
+            state: directory
+        - copy:
+            src: /download/teleport-{{ teleport_version }}-linux-amd64-bin.tar.gz
+            dest: /download/
+        - unarchive:
+            src: /download/teleport-{{ teleport_version }}-linux-amd64-bin.tar.gz
+            dest: /tmp/
+            remote_src: yes
+        - copy:
+            remote_src: yes
+            src: "/tmp/teleport/{{ item }}"
+            dest: /usr/local/bin
+            mode: 755
+          with_items:
+            - teleport
+            - tctl
+            - tsh
+        - file:
+            path: /etc/teleport.d
+            state: directory
+      tags: install
+
+    - name: Generate teleport config
+      block: 
+        - template:
+            src: teleport/teleport.yaml
+            dest: /etc/teleport.yaml
+        - template:
+            src: teleport/teleport.service
+            dest: /usr/lib/systemd/system/teleport.service
+        - systemd:
+            name: teleport
+            state: restarted
+            enabled: yes
+            daemon_reload: yes
+      tags: config

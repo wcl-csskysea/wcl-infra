@@ -1,0 +1,26 @@
+kind: user
+metadata:
+  id: 1637030854848273279
+  name: teleport-admin
+spec:
+  created_by:
+    time: "2021-11-04T02:39:32.096580638Z"
+    user:
+      name: 8f8c44bb-6314-4a31-9c40-9b4ae17256dc.teleport-admin
+  expires: "0001-01-01T00:00:00Z"
+  roles:
+  - devops
+  - editor
+  status:
+    is_locked: false
+    lock_expires: "0001-01-01T00:00:00Z"
+    locked_time: "0001-01-01T00:00:00Z"
+  traits:
+    kubernetes_groups:
+    - ""
+    kubernetes_users:
+    - ""
+    logins:
+    - ""
+    
+version: v2

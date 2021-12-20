@@ -1,0 +1,19 @@
+teleport:
+    nodename: "{{ inventory_hostname }}"
+    data_dir: /var/lib/teleport/
+    auth_token: "{{ agent_token }}"
+    auth_servers:
+      - "{{ leaf_admin_ip }}:3030"
+
+auth_service:
+  enabled: "no"
+
+proxy_service:
+  enabled: "no"
+
+ssh_service:
+  enabled: "yes"
+  labels:
+    project: "{{ labels_project }}"
+    env: "{{ labels_env }}"
+    

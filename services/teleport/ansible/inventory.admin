@@ -1,0 +1,15 @@
+[root-cluster-admin]
+teleport-admin
+
+[leaf-cluster-admin]
+omni-saas-admin
+bby-admin
+
+[all]
+teleport-admin
+omni-saas-admin
+bby-admin
+
+[omni-saas-admin]
+omni-saas-admin
+

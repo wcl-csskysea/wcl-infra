@@ -1,0 +1,24 @@
+---
+- name: update root-cluster and all leaf-cluster roles
+  hosts: all
+  become: yes
+  tasks:
+    - name: distribution roles
+      copy:
+        src: templates/public/roles
+        dest: /etc/teleport.d/
+
+    - name: list roles
+      shell: "ls /etc/teleport.d/roles/*.yaml"
+      register: role_list
+      tags: update
+    
+    - name: Show home_dirs results
+      debug:
+        var: role_list.stdout_lines
+      tags: update
+      
+    - name: create/update roles
+      shell: "/usr/local/bin/tctl create -f {{ item }}"
+      loop: "{{ role_list.stdout_lines }}"
+      tags: update

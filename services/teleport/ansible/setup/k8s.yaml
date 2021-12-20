@@ -1,0 +1,29 @@
+---
+- name: access kubernetes
+  hosts: omni-saas-admin
+  become: yes
+  vars_prompt:
+    - name: configfile
+      prompt: 'could you generated k8s config at /root/.kube/config?'
+      default: 'no'
+      private: false
+
+  roles:
+    - role: kubernetes 
+      when: configfile == 'yes'
+
+  tasks:
+    - name: Generating Configuration File
+      block:
+        - template:
+            src: leaf-cluster/teleport.yaml
+            dest: /etc/teleport.yaml
+        - template:
+            src: leaf-cluster/teleport.service
+            dest: /usr/lib/systemd/system/teleport.service
+        - systemd:
+            name: teleport
+            state: restarted
+            enabled: yes
+            daemon_reload: yes
+      when: configfile == 'yes'

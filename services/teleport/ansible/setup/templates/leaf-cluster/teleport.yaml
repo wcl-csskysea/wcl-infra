@@ -1,0 +1,34 @@
+teleport:
+  nodename: "{{ inventory_hostname }}"
+  data_dir: /var/lib/teleport/
+  log:
+    output: stderr
+    severity: INFO
+    format:
+      output: text
+  diag_addr: ""
+auth_service:
+  enabled: "yes"
+  listen_addr: 0.0.0.0:3030
+  cluster_name: "{{ inventory_hostname }}"
+
+ssh_service:
+  enabled: "yes"
+  labels:
+    env: leaf-admin
+    project: "{{ inventory_hostname }}"
+proxy_service:
+  enabled: "yes"
+  listen_addr: 0.0.0.0:3023
+  web_listen_addr: 0.0.0.0:4443
+{% if kubernetes_switch == 'yes' %}
+  kube_listen_addr: 0.0.0.0:3026
+
+kubernetes_service:
+  enabled: yes
+  listen_addr: 0.0.0.0:3027
+  kubeconfig_file: "/root/.kube/kubeconfig"
+{% endif %}
+
+
+

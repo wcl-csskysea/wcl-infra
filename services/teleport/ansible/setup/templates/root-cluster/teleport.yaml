@@ -1,0 +1,36 @@
+teleport:
+  nodename: teleport-admin
+  data_dir: /var/lib/teleport
+  log:
+    output: stderr
+    severity: INFO
+    format:
+      output: text
+  diag_addr: ""
+  storage:
+    type: dynamodb
+    region: cn-north-1
+    table_name: teleport-auth
+    audit_events_uri: ['dynamodb://teleport-events', 'file:///var/lib/teleport/audit/eventd','stdout://']
+    audit_sessions_uri: s3://teleport-sessions/records
+    
+auth_service:
+  enabled: "yes"
+  listen_addr: 0.0.0.0:3025
+  cluster_name: teleport-admin
+ssh_service:
+  enabled: "yes"
+  labels:
+    env: prod
+    project: teleport-admin
+proxy_service:
+  enabled: "yes"
+  tunnel_listen_addr: 0.0.0.0:3024
+  listen_addr: 0.0.0.0:3023
+  web_listen_addr: 0.0.0.0:443
+  public_addr: teleport.wiredcraft.cn:443
+  kube_listen_addr: 0.0.0.0:3026
+  https_keypairs: []
+  acme:
+    enabled: "yes"
+    email: devops+teleport@wiredcraft.com

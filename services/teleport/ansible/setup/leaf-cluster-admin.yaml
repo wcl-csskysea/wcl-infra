@@ -1,0 +1,79 @@
+---
+- name: teleport leaf cluster admin
+  hosts: omni-saas-admin
+  become: yes
+  vars_prompt:
+    - name: trusted_token
+      #Run this command on the root-cluster server to generate the token
+      prompt: 'tctl tokens add --type=trusted_cluster --ttl=30m <enter trusted token>'
+      private: false
+
+  tasks:
+    - name: create user devops/developer and upload devops sudo file
+      block:
+        - user:
+            name: devops
+            groups: systemd-journal
+            state: present
+        - user:
+            name: developer
+            groups: systemd-journal
+            state: present
+        - template:
+            src: public/sudo/devops
+            dest: /etc/sudoers.d/
+      tags: sudo
+
+    # set main group ```usermod -g teleport teleport```
+    - name: download and install the teleport 
+      block:
+        - file:
+            path: /download
+            state: directory
+        - get_url:
+            url: https://get.gravitational.com/teleport-{{ teleport_version }}-linux-amd64-bin.tar.gz 
+            dest: /download/teleport-{{ teleport_version }}-linux-amd64-bin.tar.gz
+            validate_certs: no
+        - unarchive:
+            src: /download/teleport-{{ teleport_version }}-linux-amd64-bin.tar.gz
+            dest: "/tmp/"
+            remote_src: yes
+        - copy:
+            remote_src: yes
+            src: "/tmp/teleport/{{ item }}"
+            dest: /usr/local/bin
+            mode: 755
+          with_items:
+            - teleport
+            - tctl
+            - tsh
+        - file:
+            path: /etc/teleport.d
+            state: directory
+      tags: install
+
+    - name: Generating  Configuration File
+      block:
+        - template:
+            src: leaf-cluster/teleport.yaml
+            dest: /etc/teleport.yaml
+        - template:
+            src: leaf-cluster/teleport.service
+            dest: /usr/lib/systemd/system/teleport.service
+        - systemd:
+            name: teleport
+            state: restarted
+            enabled: yes
+            daemon_reload: yes
+      tags: config
+
+    - name: join trusted clusters
+      block:
+        - template:
+            src: leaf-cluster/cluster.yml
+            dest: /etc/teleport.d/cluster.yml
+        - shell:
+            "/usr/local/bin/tctl rm tc/teleport-admin"
+        - shell:
+            "/usr/local/bin/tctl create -f /etc/teleport.d/cluster.yml"
+      tags: trusted
