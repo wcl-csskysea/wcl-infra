@@ -1,0 +1,14 @@
+kind: role
+version: v4
+metadata:
+  name: bby-developer
+spec:
+  allow:
+    cluster_labels:
+      'project': 'bby'
+    node_labels:
+      'env': staging
+    logins:
+    - developer
+
+  deny: {}

@@ -24,7 +24,6 @@
             dest: /etc/sudoers.d/
       tags: sudo
 
-    # set main group ```usermod -g teleport teleport```
     - name: download and install the teleport 
       block:
         - file:

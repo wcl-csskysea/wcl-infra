@@ -1,0 +1,32 @@
+kind: role
+version: v4
+metadata:
+  name: devops
+spec:
+  options:
+    forward_agent: true
+    
+  allow:
+    cluster_labels:
+      '*': '*'
+    node_labels:
+      '*': '*'
+    kubernetes_labels:
+      '*': '*'
+    logins:
+    - devops
+    kubernetes_groups: 
+    - devops
+    
+    rules:
+    - resources:
+      - session
+      verbs:
+      - list
+      - read
+    - resources:
+      - event
+      verbs:
+      - list
+      - read
+  deny: {}

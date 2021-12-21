@@ -1,0 +1,111 @@
+kind: role
+metadata:
+  description: Edit cluster configuration
+  name: editor
+spec:
+  allow:
+    app_labels:
+      '*': '*'
+    db_labels:
+      '*': '*'
+    kubernetes_labels:
+      '*': '*'
+    rules:
+    - resources:
+      - user
+      verbs:
+      - list
+      - create
+      - read
+      - update
+      - delete
+    - resources:
+      - role
+      verbs:
+      - list
+      - create
+      - read
+      - update
+      - delete
+    - resources:
+      - oidc
+      verbs:
+      - list
+      - create
+      - read
+      - update
+      - delete
+    - resources:
+      - saml
+      verbs:
+      - list
+      - create
+      - read
+      - update
+      - delete
+    - resources:
+      - github
+      verbs:
+      - list
+      - create
+      - read
+      - update
+      - delete
+    - resources:
+      - cluster_auth_preference
+      verbs:
+      - list
+      - create
+      - read
+      - update
+      - delete
+    - resources:
+      - auth_connector
+      verbs:
+      - list
+      - create
+      - read
+      - update
+      - delete
+    - resources:
+      - cluster_config
+      verbs:
+      - list
+      - create
+      - read
+      - update
+      - delete
+    - resources:
+      - trusted_cluster
+      verbs:
+      - list
+      - create
+      - read
+      - update
+      - delete
+    - resources:
+      - remote_cluster
+      verbs:
+      - list
+      - create
+      - read
+      - update
+      - delete
+    - resources:
+      - token
+      verbs:
+      - list
+      - create
+      - read
+      - update
+      - delete
+  deny: {}
+  options:
+    cert_format: standard
+    enhanced_recording:
+    - command
+    - network
+    forward_agent: true
+    max_session_ttl: 30h0m0s
+    port_forwarding: true
+version: v3

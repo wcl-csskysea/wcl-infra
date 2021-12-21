@@ -1,0 +1,45 @@
+kind: role
+metadata:
+  description: Review cluster events and replay sessions
+  name: auditor
+spec:
+  allow:
+    app_labels:
+      '*': '*'
+    db_labels:
+      '*': '*'
+    kubernetes_labels:
+      '*': '*'
+    logins:
+    - no-login-c53ee228-12e6-459d-b2b1-3b77a2d2f8f0
+    node_labels:
+      '*': '*'
+    rules:
+    - resources:
+      - session
+      verbs:
+      - list
+      - read
+    - resources:
+      - event
+      verbs:
+      - list
+      - read
+  deny:
+    app_labels:
+      '*': '*'
+    db_labels:
+      '*': '*'
+    kubernetes_labels:
+      '*': '*'
+    node_labels:
+      '*': '*'
+  options:
+    cert_format: standard
+    enhanced_recording:
+    - command
+    - network
+    forward_agent: false
+    max_session_ttl: 30h0m0s
+    port_forwarding: true
+version: v3

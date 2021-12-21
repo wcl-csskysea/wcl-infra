@@ -1,0 +1,16 @@
+kind: role
+version: v4
+metadata:
+  name: omni-developer
+spec:
+  allow:
+    cluster_labels:
+      'project': 'omni-saas'
+    kubernetes_labels:
+      '*': '*'
+    logins:
+    - developer 
+    kubernetes_groups: 
+    - developer
+    
+  deny: {}

@@ -1,0 +1,12 @@
+apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: ClusterRoleBinding
+metadata:
+  name: devops-clusterrolebinding
+subjects:
+- kind: Group
+  name: devops
+  apiGroup: ""
+roleRef:
+  kind: ClusterRole
+  name: devops-clusterrole
+  apiGroup: ""
