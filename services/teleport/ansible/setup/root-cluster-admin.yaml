@@ -18,32 +18,32 @@
             dest: /etc/sudoers.d/
       tags: sudo
       
-    # - name: download and install the teleport 
-    #   block:
-    #     - file:
-    #         path: /download
-    #         state: directory
-    #     - get_url:
-    #         url: https://get.gravitational.com/teleport-{{ teleport_version }}-linux-amd64-bin.tar.gz 
-    #         dest: /download/teleport-{{ teleport_version }}-linux-amd64-bin.tar.gz
-    #         validate_certs: no
-    #     - unarchive:
-    #         src: /download/teleport-{{ teleport_version }}-linux-amd64-bin.tar.gz
-    #         dest: "/tmp/"
-    #         remote_src: yes
-    #     - copy:
-    #         remote_src: yes
-    #         src: "/tmp/teleport/{{ item }}"
-    #         dest: /usr/local/bin
-    #         mode: 755
-    #       with_items:
-    #         - teleport
-    #         - tctl
-    #         - tsh
-    #     - file:
-    #         path: /etc/teleport.d
-    #         state: directory
-    #  tags: install
+    - name: download and install the teleport 
+      block:
+        - file:
+            path: /download
+            state: directory
+        - get_url:
+            url: https://get.gravitational.com/teleport-{{ teleport_version }}-linux-amd64-bin.tar.gz 
+            dest: /download/teleport-{{ teleport_version }}-linux-amd64-bin.tar.gz
+            validate_certs: no
+        - unarchive:
+            src: /download/teleport-{{ teleport_version }}-linux-amd64-bin.tar.gz
+            dest: "/tmp/"
+            remote_src: yes
+        - copy:
+            remote_src: yes
+            src: "/tmp/teleport/{{ item }}"
+            dest: /usr/local/bin
+            mode: 755
+          with_items:
+            - teleport
+            - tctl
+            - tsh
+        - file:
+            path: /etc/teleport.d
+            state: directory
+     tags: install
 
     - name: Generating  Configuration File
       block:

@@ -3,14 +3,14 @@
   hosts: omni-saas-admin
   become: yes
   vars_prompt:
-    - name: configfile
+    - name: k8sconfigfile
       prompt: 'could you generated k8s config at /root/.kube/config?'
       default: 'no'
       private: false
 
   roles:
     - role: kubernetes 
-      when: configfile == 'yes'
+      when: k8sconfigfile == 'yes'
 
   tasks:
     - name: Generating Configuration File
@@ -26,4 +26,4 @@
             state: restarted
             enabled: yes
             daemon_reload: yes
-      when: configfile == 'yes'
+      when: k8sconfigfile == 'yes'
