@@ -24,7 +24,8 @@
             path: /download
             state: directory
         - get_url:
-            url: https://get.gravitational.com/teleport-{{ teleport_version }}-linux-amd64-bin.tar.gz 
+            url: https://wcl-download.sh1a.qingstor.com/teleport-{{ teleport_version }}-linux-amd64-bin.tar.gz
+            #url: https://get.gravitational.com/teleport-{{ teleport_version }}-linux-amd64-bin.tar.gz 
             dest: /download/teleport-{{ teleport_version }}-linux-amd64-bin.tar.gz
             validate_certs: no
         - unarchive:
