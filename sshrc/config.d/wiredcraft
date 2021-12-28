@@ -134,3 +134,12 @@ Host sentry
   Port 22
   User wcladmin
 
+Host dev-cdp
+  Hostname 139.198.172.60
+  Port 22
+  User wcladmin
+
+Host prod-cdp
+  Hostname 139.198.160.14
+  Port 22
+  User wcladmin
