@@ -4,6 +4,8 @@ metadata:
   name: administrator
 spec:
   allow:
+    cluster_labels:
+      '*': '*'
     app_labels:
       '*': '*'
     db_labels:
