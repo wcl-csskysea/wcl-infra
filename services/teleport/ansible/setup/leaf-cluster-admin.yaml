@@ -13,12 +13,14 @@
       block:
         - user:
             name: devops
-            groups: systemd-journal
+            groups: systemd-journal,docker
             state: present
+            append: yes
         - user:
             name: developer
-            groups: systemd-journal
+            groups: systemd-journal,docker
             state: present
+            append: yes
         - template:
             src: public/sudo/devops
             dest: /etc/sudoers.d/
