@@ -9,16 +9,16 @@
       private: false
 
     - name: labels_env
-      prompt: 'pls labels env[make sure your hosts is corresponding]: < staging , prod or otherwise>'
+      prompt: 'pls labels env[make sure your hosts is corresponding]: <e.g. dev, staging, pre-prod, prod>'
       private: false
 
     - name: labels_project
-      prompt: 'pls labels project: <such as bby/blue and so on>'
+      prompt: 'pls labels project: <e.g. project1, blue, red>'
       private: false
 
     - name: leaf_admin_ip
-      prompt: 'pls enter leaf-admin internal ip '
-      default: '172.42.92.204'
+      prompt: 'pls enter your project admin server internal ip'
+      default: '127.0.0.1'
       private: false
 
     - name: teleport_version

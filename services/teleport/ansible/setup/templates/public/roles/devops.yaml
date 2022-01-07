@@ -5,7 +5,6 @@ metadata:
 spec:
   options:
     forward_agent: true
-    
   allow:
     cluster_labels:
       '*': '*'
@@ -15,9 +14,9 @@ spec:
       '*': '*'
     logins:
     - devops
+    - developer
     kubernetes_groups: 
     - devops
-    
     rules:
     - resources:
       - session

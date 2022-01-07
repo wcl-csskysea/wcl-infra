@@ -5,7 +5,7 @@ metadata:
 spec:
   allow:
     cluster_labels:
-      'project': 'omni-saas'
+      'project': 'omni-saas-admin'
     kubernetes_labels:
       '*': '*'
     logins:

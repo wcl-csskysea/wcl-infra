@@ -5,7 +5,7 @@ metadata:
 spec:
   allow:
     cluster_labels:
-      'project': 'bby'
+      'project': 'bby-admin'
     node_labels:
       'env': staging
     logins:
