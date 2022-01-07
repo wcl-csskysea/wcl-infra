@@ -3,7 +3,7 @@ metadata:
   name: wiredcraft_github_connector
 spec:
   client_id: 072ffbd1534c376feb7d
-  client_secret: 89a8a574907a941defec3d8ab33ee02503d7630e
+  client_secret: '{{ client_secret }}'
   display: Github
   redirect_url: https://teleport.wiredcraft.cn/v1/webapi/github/callback
   teams_to_logins:
