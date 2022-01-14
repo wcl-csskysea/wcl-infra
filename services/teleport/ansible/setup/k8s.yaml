@@ -4,7 +4,7 @@
   become: yes
   vars_prompt:
     - name: k8sconfigfile
-      prompt: 'could you generated k8s config at /root/.kube/config?'
+      prompt: 'could you generated k8s config at /root/.kube/config? [yes / no]'
       default: 'no'
       private: false
 

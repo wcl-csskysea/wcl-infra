@@ -1,4 +1,5 @@
 [Teleport Official Website](https://goteleport.com/docs/)
+[confluence](https://wiredcraft.atlassian.net/wiki/spaces/knowledge/pages/407633942/Bastion+server)
 * version: ~~7.03~~ | 7.3.3
 
 ## Distribution roles

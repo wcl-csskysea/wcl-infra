@@ -1,6 +1,6 @@
 ---
 - name: Download or Update/Install Teleport for agent
-  hosts: staging
+  hosts: bby-registry
   become: yes
   vars_prompt:
     - name: agent_token
@@ -21,11 +21,14 @@
       default: '127.0.0.1'
       private: false
 
-    - name: teleport_version
-      prompt: 'teleport version'
-      default: 'v7.3.3'
+    - name: jump_server
+      prompt: 'pls enter your project admin server ssh name'
       private: false
 
+  vars:
+    ansible_ssh_common_args: ' -o StrictHostKeyChecking=accept-new -o ProxyCommand="ssh -W %h:%p -q {{ jump_server }}"'
+    ansible_user: wcladmin
+        
   tasks:
     - name: create user devops/developer/teleport and upload devops sudo file
       block:
@@ -40,7 +43,7 @@
             state: present
             append: yes
         - template:
-            src: teleport/devops
+            src: agent/devops
             dest: /etc/sudoers.d/
       tags: sudo
 
@@ -50,11 +53,12 @@
         - file:
             path: /download
             state: directory
-        - copy:
-            src: /download/teleport-{{ teleport_version }}-linux-amd64-bin.tar.gz
+        - get_url:
+            url: https://wcl-download.sh1a.qingstor.com/teleport-{{ teleport_version }}-linux-amd64-centos7-bin.tar.gz
             dest: /download/
+            validate_certs: no
         - unarchive:
-            src: /download/teleport-{{ teleport_version }}-linux-amd64-bin.tar.gz
+            src: /download/teleport-{{ teleport_version }}-linux-amd64-centos7-bin.tar.gz
             dest: /tmp/
             remote_src: yes
         - copy:
@@ -67,6 +71,9 @@
             - tctl
             - tsh
         - file:
+            path: /tmp/teleport
+            state: absent
+        - file:
             path: /etc/teleport.d
             state: directory
       tags: install
@@ -74,10 +81,10 @@
     - name: Generate teleport config
       block: 
         - template:
-            src: teleport/teleport.yaml
+            src: agent/teleport.yaml
             dest: /etc/teleport.yaml
         - template:
-            src: teleport/teleport.service
+            src: agent/teleport.service
             dest: /usr/lib/systemd/system/teleport.service
         - systemd:
             name: teleport

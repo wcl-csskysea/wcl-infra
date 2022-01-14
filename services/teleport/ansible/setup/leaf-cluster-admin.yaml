@@ -1,7 +1,9 @@
 ---
 - name: teleport leaf cluster admin
-  hosts: omni-saas-admin
+  hosts: leaf-cluster-admin
   become: yes
+  vars:
+    - k8sconfigfile: 'yes'
   vars_prompt:
     - name: trusted_token
       #Run this command on the root-cluster server to generate the token
@@ -32,12 +34,12 @@
             path: /download
             state: directory
         - get_url:
-            url: https://wcl-download.sh1a.qingstor.com/teleport-{{ teleport_version }}-linux-amd64-bin.tar.gz
-            #url: https://get.gravitational.com/teleport-{{ teleport_version }}-linux-amd64-bin.tar.gz 
-            dest: /download/teleport-{{ teleport_version }}-linux-amd64-bin.tar.gz
+            url: https://wcl-download.sh1a.qingstor.com/teleport-{{ teleport_version }}-linux-amd64-centos7-bin.tar.gz
+            #url: https://get.gravitational.com/teleport-{{ teleport_version }}-linux-amd64-centos7-bin.tar.gz
+            dest: /download/
             validate_certs: no
         - unarchive:
-            src: /download/teleport-{{ teleport_version }}-linux-amd64-bin.tar.gz
+            src: /download/teleport-{{ teleport_version }}-linux-amd64-centos7-bin.tar.gz
             dest: "/tmp/"
             remote_src: yes
         - copy:
@@ -49,6 +51,9 @@
             - teleport
             - tctl
             - tsh
+        - file:
+            path: /tmp/teleport
+            state: absent
         - file:
             path: /etc/teleport.d
             state: directory
