@@ -2,8 +2,6 @@
 - name: teleport leaf cluster admin
   hosts: leaf-cluster-admin
   become: yes
-  vars:
-    - k8sconfigfile: 'yes'
   vars_prompt:
     - name: trusted_token
       #Run this command on the root-cluster server to generate the token
