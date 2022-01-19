@@ -15,4 +15,9 @@ page_size=100
 aliyun bssopenapi QueryInstanceBill \
     --BillingCycle "$billing_cycle" \
     --PageSize "$page_size" \
-  | jq -f billing-by-tags-and-products.jq
+  | jq -f billing-by-tags-and-products.jq \
+  | tee >(
+      apprise \
+        -t "Aliyun Billing Report for $billing_cycle" \
+        "$APPRISE_SERVER_URL&name=$MAIL_FROM_NAME&to=$MAIL_TO_EMAILS"
+    )
