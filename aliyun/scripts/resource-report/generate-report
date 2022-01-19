@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+set -euxo pipefail
+
+# Set working directory to the script directory
+cd "$(dirname "$0")"
+
+# Default billing cycle to last month, alternatively set it in $1.
+billing_cycle=${1:-$(date --date 'last month' +'%Y-%m')}
+# Set page size to max (100)
+# TODO: support paging
+page_size=100
+
+# TODO: support untagged resources
+aliyun bssopenapi QueryInstanceBill \
+    --BillingCycle "$billing_cycle" \
+    --PageSize "$page_size" \
+  | jq -f billing-by-tags-and-products.jq
