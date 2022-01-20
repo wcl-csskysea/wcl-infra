@@ -4,9 +4,13 @@ set -euxo pipefail
 
 # Set working directory to the script directory
 cd "$(dirname "$0")"
+# Create reports directory
+mkdir -p reports
 
 # Default billing cycle to last month, alternatively set it in $1.
 billing_cycle=${1:-$(date --date 'last month' +'%Y-%m')}
+report_json=reports/billing_data_$billing_cycle.json
+report_html=reports/billing_data_$billing_cycle.html
 # Set page size to max (100)
 # TODO: support paging
 page_size=100
@@ -15,11 +19,14 @@ page_size=100
 aliyun bssopenapi QueryInstanceBill \
     --BillingCycle "$billing_cycle" \
     --PageSize "$page_size" \
-  | jq -f billing-by-tags-and-products.jq \
-  | mustache - billing-report.html.mustache \
-  | tee >(
-      apprise \
-        -t "Aliyun Billing Report for $billing_cycle" \
-        --input-format html \
-        "$APPRISE_SERVER_URL&name=$MAIL_FROM_NAME&to=$MAIL_TO_EMAILS"
-    )
+  | jq -f billing-by-tags-and-products.jq > "$report_json"
+
+# Generate html report
+mustache "$report_json" billing-report.html.mustache > "$report_html"
+
+# Send mail
+apprise \
+  -t "Aliyun Billing Report for $billing_cycle" \
+  --input-format html \
+  "$APPRISE_SERVER_URL&name=$MAIL_FROM_NAME&to=$MAIL_TO_EMAILS" \
+  < "$report_html"
