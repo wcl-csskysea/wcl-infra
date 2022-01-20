@@ -20,7 +20,7 @@ ssh_service:
 proxy_service:
   enabled: "yes"
   listen_addr: 0.0.0.0:3023
-  web_listen_addr: 0.0.0.0:4443
+  #web_listen_addr: 0.0.0.0:4443
 {% if k8sconfigfile == 'yes' %}
   kube_listen_addr: 0.0.0.0:3026
 

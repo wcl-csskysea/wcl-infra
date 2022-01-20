@@ -1,24 +1,39 @@
 ---
 - name: update root-cluster and all leaf-cluster roles
-  hosts: all
+  hosts: role
   become: yes
-  tasks:
-    - name: distribution roles
-      copy:
-        src: templates/public/roles
-        dest: /etc/teleport.d/
+  vars_prompt:
+    - name: role_name
+      prompt: 'distribution the specified Role,if not enter anything, will update all of the roles'
+      default: 'empty'
+      private: false
 
-    - name: list roles
-      shell: "ls /etc/teleport.d/roles/*.yaml"
-      register: role_list
-      tags: update
-    
-    - name: Show home_dirs results
-      debug:
-        var: role_list.stdout_lines
-      tags: update
-      
-    - name: create/update roles
-      shell: "/usr/local/bin/tctl create -f {{ item }}"
-      loop: "{{ role_list.stdout_lines }}"
-      tags: update
+  tasks:
+    - name: distribution the specified Role.
+      block:
+        - copy:
+            src: templates/public/roles/{{ role_name }}
+            dest: /etc/teleport.d/roles/{{ role_name }}
+        - shell: 
+            "ls /etc/teleport.d/roles/{{ role_name }}"
+          register: role_list
+        - debug:
+            var: role_list.stdout_lines
+        - shell: 
+            "/usr/local/bin/tctl create -f /etc/teleport.d/roles/{{ role_name }}"
+      when: role_name != 'empty'
+
+    - name: distribution all of the  roles.
+      block:
+        - copy:
+            src: templates/public/roles
+            dest: /etc/teleport.d/
+        - shell: 
+            "ls /etc/teleport.d/roles/*.yaml"
+          register: role_list
+        - debug:
+            var: role_list.stdout_lines
+        - shell: 
+            "/usr/local/bin/tctl create -f {{ item }}"
+          loop: "{{ role_list.stdout_lines }}"
+      when: role_name == 'empty'

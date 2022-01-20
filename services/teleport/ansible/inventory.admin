@@ -1,3 +1,7 @@
+[role]
+teleport-admin
+omni-saas-admin
+bby-admin
 
 [root-cluster-admin]
 teleport-admin
@@ -7,31 +11,38 @@ omni-saas-admin
 bby-admin
 
 [bby-staging]
-staging-gw-1
-staging-gw-2
-staging-oms-1
-staging-oms-2
-staging-och-1
-staging-och-2
-staging-wms
-staging-db-1 
+staging-db-1
 staging-db-2
 staging-db-3
+staging-gw-1
+staging-gw-2
+staging-och-1
+staging-och-2
+staging-oms-1
+staging-oms-2
+staging-wms
+staging-pg-1
+
+
 
 [bby-prod]
-prod-gw-1
-prod-gw-2
-prod-oms-1
-prod-oms-2
-prod-och-1
-prod-och-2
-prod-wms
 prod-db-1
 prod-db-2
 prod-db-3
+prod-gw-1
+prod-gw-2
+prod-och-1
+prod-och-2
+prod-oms-1
+prod-oms-2
+prod-wms
+prod-pg-1
+prod-pg-2
 
 [bby-registry]
 registry
 
+[tco-dev-db]
+tco-dev-db
 
 

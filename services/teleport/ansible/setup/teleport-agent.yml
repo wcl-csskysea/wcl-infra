@@ -1,6 +1,6 @@
 ---
 - name: Download or Update/Install Teleport for agent
-  hosts: bby-registry
+  hosts: bby-staging
   become: yes
   vars_prompt:
     - name: agent_token
@@ -30,8 +30,11 @@
     ansible_user: wcladmin
         
   tasks:
-    - name: create user devops/developer/teleport and upload devops sudo file
+    - name: create user devops/developer and upload devops sudo file
       block:
+        - group:
+            name: docker
+            state: present
         - user:
             name: devops
             groups: systemd-journal,docker
@@ -86,9 +89,12 @@
         - template:
             src: agent/teleport.service
             dest: /usr/lib/systemd/system/teleport.service
-        - systemd:
-            name: teleport
-            state: restarted
-            enabled: yes
-            daemon_reload: yes
       tags: config
+    
+    - name: restart teleport
+      systemd:
+        name: teleport
+        state: restarted
+        enabled: yes
+        daemon_reload: yes
+      tags: restart

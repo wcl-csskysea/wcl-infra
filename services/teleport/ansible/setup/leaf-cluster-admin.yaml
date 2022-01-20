@@ -10,7 +10,10 @@
 
   tasks:
     - name: create user devops/developer and upload devops sudo file
-      block:
+      block:.
+        - group:
+            name: docker
+            state: present
         - user:
             name: devops
             groups: systemd-journal,docker
