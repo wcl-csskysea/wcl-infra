@@ -20,5 +20,9 @@
       PaymentAmount,
     })
   | map(select(.Customer)) # Only take into consideration resources with cust tag
-  | group_by(.Customer, .Environment)  # Group by cust-env tags
-  | add   # Remove the nesting introduced by group_by
+  | group_by(.Customer, .Environment, .ProductCode)  # Group by customer, environment, product
+  | map(reduce .[] as $item (   # Combine cost of multiple instances of the same customer, environment, product
+        .[0] * { PaymentAmount: 0 };
+        .PaymentAmount += $item.PaymentAmount * 100         # Calculate in cents
+      ) | .PaymentAmount = (.PaymentAmount | round) / 100   # Display in yuan
+    )
