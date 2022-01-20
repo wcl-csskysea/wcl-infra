@@ -1,0 +1,5 @@
+---
+labels_env: "tool"
+labels_project: "bby"
+leaf_admin_ip: "172.42.92.204"
+jump_server: "bby-admin"

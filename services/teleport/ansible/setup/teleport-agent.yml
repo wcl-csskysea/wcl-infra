@@ -1,28 +1,11 @@
 ---
 - name: Download or Update/Install Teleport for agent
-  hosts: bby-staging
+  hosts: bby
   become: yes
   vars_prompt:
     - name: agent_token
       #Run this command on the leaf-cluster admin server to generate the token
       prompt: 'tctl tokens add --type=node --ttl=30m <enter node token>'
-      private: false
-
-    - name: labels_env
-      prompt: 'pls labels env[make sure your hosts is corresponding]: <e.g. dev, staging, pre-prod, prod>'
-      private: false
-
-    - name: labels_project
-      prompt: 'pls labels project: <e.g. project1, blue, red>'
-      private: false
-
-    - name: leaf_admin_ip
-      prompt: 'pls enter your project admin server internal ip'
-      default: '127.0.0.1'
-      private: false
-
-    - name: jump_server
-      prompt: 'pls enter your project admin server ssh name'
       private: false
 
   vars:

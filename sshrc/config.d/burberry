@@ -5,6 +5,12 @@ Host bby-admin
     Port 22
     User wcladmin
 
+# Tool server
+Host bby-registry
+    Hostname registry
+    User wcladmin
+    ProxyCommand ssh -W %h:%p -q bby-admin
+
 # Dev environment
 Host bby-dev
     Hostname dev
@@ -62,6 +68,11 @@ Host bby-staging-db-3
     User wcladmin
     ProxyCommand ssh -W %h:%p -q bby-admin
 
+Host bby-staging-pg-1
+    Hostname staging-pg-1
+    User wcladmin
+    ProxyCommand ssh -W %h:%p -q bby-admin
+
 # Prod environment
 Host bby-prod-gw-1
     Hostname prod-gw-1
@@ -110,5 +121,15 @@ Host bby-prod-db-2
 
 Host bby-prod-db-3
     Hostname prod-db-3
+    User wcladmin
+    ProxyCommand ssh -W %h:%p -q bby-admin
+
+Host bby-prod-pg-1
+    Hostname prod-pg-1
+    User wcladmin
+    ProxyCommand ssh -W %h:%p -q bby-admin
+
+Host bby-prod-pg-2
+    Hostname prod-pg-2
     User wcladmin
     ProxyCommand ssh -W %h:%p -q bby-admin
