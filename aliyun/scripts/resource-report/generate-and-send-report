@@ -16,8 +16,10 @@ aliyun bssopenapi QueryInstanceBill \
     --BillingCycle "$billing_cycle" \
     --PageSize "$page_size" \
   | jq -f billing-by-tags-and-products.jq \
+  | mustache - billing-report.html.mustache \
   | tee >(
       apprise \
         -t "Aliyun Billing Report for $billing_cycle" \
+        --input-format html \
         "$APPRISE_SERVER_URL&name=$MAIL_FROM_NAME&to=$MAIL_TO_EMAILS"
     )

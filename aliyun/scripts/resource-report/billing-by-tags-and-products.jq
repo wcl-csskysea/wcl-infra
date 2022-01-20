@@ -15,8 +15,4 @@
     )
   | map(select(.Tag.cust // .Tag.customer)) # Only take into consideration resources with cust tag
   | group_by(.Tag.cust // .Tag.customer, .Tag.env)  # Group by cust-env tags
-  | map({
-      ((.[0].Tag.cust // .[0].Tag.customer) + "-" + .[0].Tag.env): map({
-        (.ProductCode): .PaymentAmount  # Show payment amount by product code
-      }) | add
-    }) | add
+  | map(map({ Tag, ProductCode, PaymentAmount }))

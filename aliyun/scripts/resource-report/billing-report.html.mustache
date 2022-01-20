@@ -1,0 +1,28 @@
+<h2>Aliyun Billing Report</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Cust - Env</th>
+      <th>Product</th>
+      <th>Payment Amount</th>
+    </tr>
+  </thead>
+  <tbody>
+  {{#.}}
+  {{#.}}
+    <tr>
+      <td>
+        {{ Tag.cust }}{{ Tag.customer }} - {{ Tag.env }}
+      </td>
+      <td>
+        {{ ProductCode }}
+      </td>
+      <td>
+        {{ PaymentAmount }}
+      </td>
+    </tr>
+  {{/.}}
+  {{/.}}
+  </tbody>
+</table>
