@@ -15,4 +15,5 @@
     )
   | map(select(.Tag.cust // .Tag.customer)) # Only take into consideration resources with cust tag
   | group_by(.Tag.cust // .Tag.customer, .Tag.env)  # Group by cust-env tags
-  | map(map({ Tag, ProductCode, PaymentAmount }))
+  | add   # Remove the nesting introduced by group_by
+  | map({ Tag, ProductCode, PaymentAmount })
