@@ -1,4 +1,4 @@
-.Data.Items.Item
+.
   | map(
       # Convert Tag from string to object
       # e.g. {"Tag": "key:role value:db; key:cust value:company; key:env value:qa"}
