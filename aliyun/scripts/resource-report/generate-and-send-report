@@ -10,6 +10,7 @@ mkdir -p reports
 # Default billing cycle to last month, alternatively set it in $1.
 billing_cycle=${1:-$(date --date 'last month' +'%Y-%m')}
 report_json=reports/billing_data_$billing_cycle.json
+report_csv=reports/billing_data_$billing_cycle.csv
 report_html=reports/billing_data_$billing_cycle.html
 # Set page size to max (100)
 # TODO: support paging
@@ -21,12 +22,14 @@ aliyun bssopenapi QueryInstanceBill \
     --PageSize "$page_size" \
   | jq -f billing-by-tags-and-products.jq > "$report_json"
 
-# Generate html report
+# Generate html and CSV report
 mustache "$report_json" billing-report.html.mustache > "$report_html"
+mustache "$report_json" billing-report.csv.mustache > "$report_csv"
 
 # Send mail
 apprise \
   -t "Aliyun Billing Report for $billing_cycle" \
+  --attach "$report_csv" \
   --input-format html \
   "$APPRISE_SERVER_URL&name=$MAIL_FROM_NAME&to=$MAIL_TO_EMAILS" \
   < "$report_html"

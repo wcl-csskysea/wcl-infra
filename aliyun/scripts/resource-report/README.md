@@ -33,6 +33,7 @@ set -a
 ```
 .
 ├── billing-by-tags-and-products.jq   # jq script to mangle Aliyun API response
+├── billing-report.csv.mustache       # csv template used in email attachment
 ├── billing-report.html.mustache      # email template
 └── generate-and-send-report          # entrypoint script
 ```
