@@ -3,7 +3,8 @@
 <table>
   <thead>
     <tr>
-      <th>Cust - Env</th>
+      <th>Customer</th>
+      <th>Environment</th>
       <th>Product</th>
       <th>Payment Amount</th>
     </tr>
@@ -12,7 +13,10 @@
   {{#.}}
     <tr>
       <td>
-        {{ Tag.cust }}{{ Tag.customer }} - {{ Tag.env }}
+        {{ Customer }}
+      </td>
+      <td>
+        {{ Environment }}
       </td>
       <td>
         {{ ProductCode }}

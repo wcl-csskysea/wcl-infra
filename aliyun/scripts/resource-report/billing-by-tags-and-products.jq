@@ -13,7 +13,12 @@
           | add                           # {"role":"db","cust":"company","env":"qa"}
       )
     )
-  | map(select(.Tag.cust // .Tag.customer)) # Only take into consideration resources with cust tag
-  | group_by(.Tag.cust // .Tag.customer, .Tag.env)  # Group by cust-env tags
+  | map({
+      Customer: (.Tag.cust // .Tag.customer),
+      Environment: .Tag.env,
+      ProductCode,
+      PaymentAmount,
+    })
+  | map(select(.Customer)) # Only take into consideration resources with cust tag
+  | group_by(.Customer, .Environment)  # Group by cust-env tags
   | add   # Remove the nesting introduced by group_by
-  | map({ Tag, ProductCode, PaymentAmount })
