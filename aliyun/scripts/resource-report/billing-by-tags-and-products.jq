@@ -18,11 +18,13 @@
       Environment: .Tag.env,
       ProductCode,
       PaymentAmount,
+      InstanceID,
     })
   | map(select(.Customer)) # Only take into consideration resources with cust tag
   | group_by(.Customer, .Environment, .ProductCode)  # Group by customer, environment, product
   | map(reduce .[] as $item (   # Combine cost of multiple instances of the same customer, environment, product
-        .[0] * { PaymentAmount: 0 };
+        .[0] * { PaymentAmount: 0, InstanceIDs: [] };
         .PaymentAmount += $item.PaymentAmount * 100         # Calculate in cents
+          | .InstanceIDs += [$item.InstanceID]
       ) | .PaymentAmount = (.PaymentAmount | round) / 100   # Display in yuan
     )
