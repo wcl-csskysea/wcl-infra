@@ -21,14 +21,12 @@ proxy_service:
   enabled: "yes"
   listen_addr: 0.0.0.0:3023
   #web_listen_addr: 0.0.0.0:4443
-{% if k8sconfigfile == 'yes' %}
   kube_listen_addr: 0.0.0.0:3026
 
 kubernetes_service:
-  enabled: yes
+  enabled: "{{ kube_enabled }}"
   listen_addr: 0.0.0.0:3027
   kubeconfig_file: "/root/.kube/kubeconfig"
-{% endif %}
-
-
+  labels:
+    env: "{{ kubernetes_env }}"
 

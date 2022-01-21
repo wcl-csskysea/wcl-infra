@@ -17,8 +17,8 @@
     dest: /root/.kube/
 
 - name: create k8s developer sa && clusterrole && clusterolebinding
-   shell: "kubectl create sa developer -n teleport && kubectl create -f /root/.kube/role/developer-clusteerrole.yaml && kubectl create -f /root/.kube/role/developer-clusterrolebind.yaml"
+  shell: "kubectl create sa developer -n teleport && kubectl create -f /root/.kube/role/developer-clusteerrole.yaml && kubectl create -f /root/.kube/role/developer-clusterrolebind.yaml"
 
 - name: create k8s devops sa && clusterrole && clusterolebinding
-   shell: "kubectl create sa devops -n teleport && kubectl create -f /root/.kube/role/devops-clusteerrole.yaml && kubectl create -f /root/.kube/role/devops-clusterrolebind.yaml"
+  shell: "kubectl create sa devops -n teleport && kubectl create -f /root/.kube/role/devops-clusteerrole.yaml && kubectl create -f /root/.kube/role/devops-clusterrolebind.yaml"
   

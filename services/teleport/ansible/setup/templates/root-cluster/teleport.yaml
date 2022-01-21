@@ -30,7 +30,9 @@ proxy_service:
   web_listen_addr: 0.0.0.0:443
   public_addr: teleport.wiredcraft.cn:443
   kube_listen_addr: 0.0.0.0:3026
-  https_keypairs: []
+  https_keypairs:
+  - key_file: /etc/letsencrypt/live/teleport.wiredcraft.cn/privkey.pem
+    cert_file: /etc/letsencrypt/live/teleport.wiredcraft.cn/fullchain.pem
   acme:
-    enabled: "yes"
+    enabled: "no"
     email: devops+teleport@wiredcraft.com

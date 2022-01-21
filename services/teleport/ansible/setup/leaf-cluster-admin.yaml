@@ -7,10 +7,14 @@
       #Run this command on the root-cluster server to generate the token
       prompt: 'tctl tokens add --type=trusted_cluster --ttl=30m <enter trusted token>'
       private: false
+  
+  vars:
+    kube_enabled: 'no'
+    kubernetes_env: 'not_enabled'
 
   tasks:
     - name: create user devops/developer and upload devops sudo file
-      block:.
+      block:
         - group:
             name: docker
             state: present
