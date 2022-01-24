@@ -1,0 +1,24 @@
+# TODO: Migrate to batch/v1 once we have kubernetes v1.21+
+# batch/v1beta1 will no longer be served in v1.25.
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: aliyun-scripts-resource-report
+spec:
+  # Report will be available after 10:00 on 4th of every month
+  schedule: "0 10 4 * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          restartPolicy: OnFailure
+          containers:
+          - name: generate-and-send-report
+            # Use a specific tag other than `latest` when deploying
+            image: registry.wiredcraft.cn/internal/aliyun-scripts-resource-report:latest
+            imagePullPolicy: Always
+            envFrom:
+            - secretRef:
+                name: aliyun-scripts-resource-report
+          imagePullSecrets:
+          - name: harbor-auth
