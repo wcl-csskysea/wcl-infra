@@ -28,10 +28,10 @@ omnisaas-tco-staging-db
 omnisaas-tco-staging-cdp
 
 [tco-prod]
-omnisaas-tiffany-prod-db-1
-omnisaas-tiffany-prod-db-2
-omnisaas-tiffany-prod-db-3
-omnisaas-tiffany-prod-cdp
+omnisaas-tco-prod-db-1
+omnisaas-tco-prod-db-2
+omnisaas-tco-prod-db-3
+omnisaas-tco-prod-cdp
 
 [zara:children]
 omnisaas-zara-prod
