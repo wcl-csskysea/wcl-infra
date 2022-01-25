@@ -20,11 +20,11 @@ page_size=300
 page_num=1
 continue=true
 
-# TODO: support untagged resources
+# Fetch data
 while [ "$continue" = true ]; do
   paged_json=reports/instance-bill-page-$page_num.json
 
-  aliyun bssopenapi QueryInstanceBill \
+  aliyun bssopenapi QuerySplitItemBill \
     --BillingCycle "$billing_cycle" \
     --PageSize "$page_size" \
     --PageNum "$page_num" \

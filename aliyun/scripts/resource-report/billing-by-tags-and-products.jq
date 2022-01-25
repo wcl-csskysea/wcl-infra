@@ -27,4 +27,5 @@
         .PaymentAmount += $item.PaymentAmount * 100         # Calculate in cents
           | .InstanceIDs += [$item.InstanceID]
       ) | .PaymentAmount = (.PaymentAmount | round) / 100   # Display in yuan
+        | .InstanceIDs = (.InstanceIDs | unique)            # Remove duplicates as bill of a single instance will be split in QuerySplitItemBill api
     )
