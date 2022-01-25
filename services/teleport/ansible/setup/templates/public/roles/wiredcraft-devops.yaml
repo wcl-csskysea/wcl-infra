@@ -1,0 +1,33 @@
+kind: role
+version: v4
+metadata:
+  name: wiredcraft-devops
+spec:
+  options:
+    forward_agent: true
+  allow:
+    cluster_labels:
+      '*': '*'
+    node_labels:
+      env: '*'
+      project: wiredcraft
+    logins:
+    - devops
+    - developer
+    kubernetes_labels:
+      '*': '*'
+    kubernetes_groups:
+    - devops
+    rules:
+    - resources:
+      - session
+      verbs:
+      - list
+      - read
+    - resources:
+      - event
+      verbs:
+      - list
+      - read
+  deny: {}
+

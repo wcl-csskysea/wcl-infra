@@ -8,6 +8,11 @@ spec:
   redirect_url: https://teleport.wiredcraft.cn/v1/webapi/github/callback
   teams_to_logins:
   - logins:
+    - devops-new
+    - wiredcraft-devops
+    organization: Wiredcraft
+    team: wcl-devops-new
+  - logins:
     - bby-developer
     organization: Wiredcraft
     team: burberry
