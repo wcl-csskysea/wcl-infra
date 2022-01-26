@@ -51,6 +51,16 @@ omnisaas-zara-prod-db-3
 [zara_staging]
 omnisaas-zara-staging-db
 
+[suitsupply_staging]
+omnisaas-ss-staging-db
+
+[suitsupply_prod]
+omnisaas-ss-prod-db
+
+[suitsupply:children]
+suitsupply_staging
+suitsupply_prod
+
 [bby:children]
 bby_staging
 bby_prod

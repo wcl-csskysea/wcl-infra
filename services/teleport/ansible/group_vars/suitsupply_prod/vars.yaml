@@ -1,0 +1,5 @@
+---
+labels_env: "prod"
+labels_project: "suitsupply"
+leaf_admin_ip: "172.16.1.229"
+jump_server: "omnisaas-admin"
