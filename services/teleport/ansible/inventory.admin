@@ -3,56 +3,56 @@ teleport
 omnisaas-admin
 bby-admin
 
-[root-cluster-admin]
+[root_cluster_admin]
 teleport
 
-[leaf-cluster-admin]
+[leaf_cluster_admin]
 omnisaas-admin
 bby-admin
 
 [tco:children]
-tco-dev
-tco-qa
-tco-staging
-tco-prod
+tco_dev
+tco_qa
+tco_staging
+tco_prod
 
-[monitor]
+[wiredcraft_infra]
 monitor
 
-[tco-dev]
+[tco_dev]
 omnisaas-tco-dev-db
 
-[tco-qa]
+[tco_qa]
 omnisaas-tco-qa-db
 
-[tco-staging]
+[tco_staging]
 omnisaas-tco-staging-db
 omnisaas-tco-staging-cdp
 
-[tco-prod]
+[tco_prod]
 omnisaas-tco-prod-db-1
 omnisaas-tco-prod-db-2
 omnisaas-tco-prod-db-3
 omnisaas-tco-prod-cdp
 
 [zara:children]
-omnisaas-zara-prod
-omnisaas-zara-staging
+zara_prod
+zara_staging
 
-[zara-prod]
+[zara_prod]
 omnisaas-zara-prod-db-1
 omnisaas-zara-prod-db-2
 omnisaas-zara-prod-db-3
 
-[zara-staging]
+[zara_staging]
 omnisaas-zara-staging-db
 
 [bby:children]
-bby-staging
-bby-prod
-bby-tool
+bby_staging
+bby_prod
+bby_tool
 
-[bby-staging]
+[bby_staging]
 bby-staging-db-1
 bby-staging-db-2
 bby-staging-db-3
@@ -65,7 +65,7 @@ bby-staging-oms-2
 bby-staging-wms
 bby-staging-pg-1
 
-[bby-prod]
+[bby_prod]
 bby-prod-db-1
 bby-prod-db-2
 bby-prod-db-3
@@ -79,5 +79,5 @@ bby-prod-wms
 bby-prod-pg-1
 bby-prod-pg-2
 
-[bby-tool]
+[bby_tool]
 bby-registry
