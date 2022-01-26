@@ -1,0 +1,168 @@
+From 62f8b2874c88b004c27b1dd2ec56e5c1894b3e9b Mon Sep 17 00:00:00 2001
+From: guinan.huang <guinan.huang@wiredcraft.com>
+Date: Fri, 14 Jan 2022 15:18:02 +0800
+Subject: [PATCH] github proxy write by kaleo
+
+---
+ lib/auth/auth.go                 |  4 ++++
+ lib/auth/github.go               | 17 ++++++++++++++++-
+ lib/auth/init.go                 |  4 ++++
+ lib/config/configuration.go      | 10 ++++++++++
+ lib/service/cfg.go               |  6 ++++++
+ lib/service/service.go           |  1 +
+ tool/teleport/common/teleport.go |  2 ++
+ webassets                        |  2 +-
+ 8 files changed, 44 insertions(+), 2 deletions(-)
+
+diff --git a/lib/auth/auth.go b/lib/auth/auth.go
+index b1706e8c7..b8bf7f6f2 100644
+--- a/lib/auth/auth.go
++++ b/lib/auth/auth.go
+@@ -170,6 +170,7 @@ func NewServer(cfg *InitConfig, opts ...ServerOption) (*Server, error) {
+ 		limiter:         limiter,
+ 		Authority:       cfg.Authority,
+ 		AuthServiceName: cfg.AuthServiceName,
++		AuthGithubProxy: cfg.AuthGithubProxy,
+ 		oidcClients:     make(map[string]*oidcClient),
+ 		samlProviders:   make(map[string]*samlProvider),
+ 		githubClients:   make(map[string]*githubClient),
+@@ -307,6 +308,9 @@ type Server struct {
+ 	// It usually defaults to the hostname of the machine the Auth service runs on.
+ 	AuthServiceName string
+ 
++	// AuthGithubProxy is a proxy host for Github
++	AuthGithubProxy *url.URL
++
+ 	// Services encapsulate services - provisioner, trust, etc
+ 	// used by the auth server in a separate structure
+ 	Services
+diff --git a/lib/auth/github.go b/lib/auth/github.go
+index 5b004ca6a..6d2811e8b 100644
+--- a/lib/auth/github.go
++++ b/lib/auth/github.go
+@@ -468,6 +468,20 @@ func populateGithubClaims(client githubAPIClientI) (*types.GithubClaims, error)
+ func (a *Server) getGithubOAuth2Client(connector types.GithubConnector) (*oauth2.Client, error) {
+ 	a.lock.Lock()
+ 	defer a.lock.Unlock()
++	httpClient := http.DefaultClient
++	if a.AuthGithubProxy != nil{
++		proxy := func(_ *http.Request) (*url.URL, error) {
++			return a.AuthGithubProxy, nil
++		}
++
++		httpTransport := &http.Transport{
++			Proxy: proxy,
++		}
++
++		httpClient = &http.Client{
++			Transport: httpTransport,
++		}
++	}
+ 	config := oauth2.Config{
+ 		Credentials: oauth2.ClientCredentials{
+ 			ID:     connector.GetClientID(),
+@@ -483,7 +497,8 @@ func (a *Server) getGithubOAuth2Client(connector types.GithubConnector) (*oauth2
+ 		return cachedClient.client, nil
+ 	}
+ 	delete(a.githubClients, connector.GetName())
+-	client, err := oauth2.NewClient(http.DefaultClient, config)
++	//client, err := oauth2.NewClient(http.DefaultClient, config)
++	client, err := oauth2.NewClient(httpClient, config)
+ 	if err != nil {
+ 		return nil, trace.Wrap(err)
+ 	}
+diff --git a/lib/auth/init.go b/lib/auth/init.go
+index a110485a2..ccc63679e 100644
+--- a/lib/auth/init.go
++++ b/lib/auth/init.go
+@@ -21,6 +21,7 @@ import (
+ 	"crypto/tls"
+ 	"crypto/x509"
+ 	"fmt"
++        "net/url"
+ 	"strings"
+ 	"time"
+ 
+@@ -139,6 +140,9 @@ type InitConfig struct {
+ 	// factor (off, otp, u2f) passed in from a configuration file.
+ 	AuthPreference types.AuthPreference
+ 
++	// AuthGithubProxy defines the http or sock5 proxy to access Github
++	AuthGithubProxy *url.URL 
++
+ 	// AuditLog is used for emitting events to audit log.
+ 	AuditLog events.IAuditLog
+ 
+diff --git a/lib/config/configuration.go b/lib/config/configuration.go
+index a9c47ac67..de43f2f70 100644
+--- a/lib/config/configuration.go
++++ b/lib/config/configuration.go
+@@ -66,6 +66,8 @@ type CommandLineFlags struct {
+ 	NodeName string
+ 	// --auth-server flag
+ 	AuthServerAddr []string
++	// --auth-github-proxy flag
++	AuthGithubProxy string
+ 	// --token flag
+ 	AuthToken string
+ 	// CAPins are the SKPI hashes of the CAs used to verify the Auth Server.
+@@ -1764,6 +1766,14 @@ func Configure(clf *CommandLineFlags, cfg *service.Config) error {
+ 		}
+ 	}
+ 
++	if clf.AuthGithubProxy != "" {
++		addr, err := url.Parse(clf.AuthGithubProxy)
++		if err != nil {
++			return trace.BadParameter("cannot parse auth github proxy address: '%v'", clf.AuthGithubProxy)
++		}
++		cfg.Auth.GithubProxy = addr
++	}
++
+ 	// apply --name flag:
+ 	if clf.NodeName != "" {
+ 		cfg.Hostname = clf.NodeName
+diff --git a/lib/service/cfg.go b/lib/service/cfg.go
+index 931347293..cf132da14 100644
+--- a/lib/service/cfg.go
++++ b/lib/service/cfg.go
+@@ -530,6 +530,12 @@ type AuthConfig struct {
+ 
+ 	// KeyStore configuration. Handles CA private keys which may be held in a HSM.
+ 	KeyStore keystore.Config
++
++	// AuthGithubProxy is a string of proxy servers. it can be a http proxy or socks proxy. e.g.
++	// http://127.0.0.1:1111
++	// socks5://127.0.0.1:1111
++	GithubProxy *url.URL
++
+ }
+ 
+ // SSHConfig configures SSH server node role
+diff --git a/lib/service/service.go b/lib/service/service.go
+index f6bfadde9..5c3d94cbe 100644
+--- a/lib/service/service.go
++++ b/lib/service/service.go
+@@ -1239,6 +1239,7 @@ func (process *TeleportProcess) initAuthService() error {
+ 		StaticTokens:            cfg.Auth.StaticTokens,
+ 		Roles:                   cfg.Auth.Roles,
+ 		AuthPreference:          cfg.Auth.Preference,
++		AuthGithubProxy:         cfg.Auth.GithubProxy,
+ 		OIDCConnectors:          cfg.OIDCConnectors,
+ 		AuditLog:                process.auditLog,
+ 		CipherSuites:            cfg.CipherSuites,
+diff --git a/tool/teleport/common/teleport.go b/tool/teleport/common/teleport.go
+index 255d72d14..7ec717dd0 100644
+--- a/tool/teleport/common/teleport.go
++++ b/tool/teleport/common/teleport.go
+@@ -100,6 +100,8 @@ func Run(options Options) (app *kingpin.Application, executedCommand string, con
+ 	start.Flag("auth-server",
+ 		fmt.Sprintf("Address of the auth server [%s]", defaults.AuthConnectAddr().Addr)).
+ 		StringsVar(&ccf.AuthServerAddr)
++	start.Flag("auth-github-proxy",
++		"Address for Github proxy").StringVar(&ccf.AuthGithubProxy)
+ 	start.Flag("token",
+ 		"Invitation token to register with an auth server [none]").
+ 		StringVar(&ccf.AuthToken)
+--
+2.27.0
+
