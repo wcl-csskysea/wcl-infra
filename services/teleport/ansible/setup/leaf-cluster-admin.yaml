@@ -1,11 +1,8 @@
 ---
 - name: teleport leaf cluster admin
-  hosts: "{{ target_group }}"
+  hosts: leaf-cluster-admin
   become: yes
   vars_prompt:
-    - name: target_group
-      prompt: "which group you want to apply to : \n {{ groups.keys() | join('\n') }} \n"
-      private: no
     - name: trusted_token
       #Run this command on the root-cluster server to generate the token
       prompt: 'tctl tokens add --type=trusted_cluster --ttl=30m <enter trusted token>'
