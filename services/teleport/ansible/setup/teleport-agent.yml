@@ -1,8 +1,12 @@
 ---
 - name: Download or Update/Install Teleport for agent
-  hosts: monitor
+  hosts: "{{ target_group }}"
   become: yes
   vars_prompt:
+    - name: target_group
+      prompt: "which group you want to apply to : \n {{ groups.keys() | join('\n') }} \n"
+      private: no
+
     - name: agent_token
       #Run this command on the leaf-cluster admin server to generate the token
       prompt: 'tctl tokens add --type=node --ttl=30m <enter node token>'
