@@ -18,6 +18,10 @@ tco_prod
 
 [wiredcraft_infra]
 monitor
+kibana
+es-1
+es-2
+es-3
 
 [tco_dev]
 omnisaas-tco-dev-db
