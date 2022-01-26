@@ -3,7 +3,6 @@
   hosts: omnisaas-admin
   become: yes
   vars_prompt:
-    - name: k8sconfigfile
       #only support single cluster for using playbook,
       #if there was two or more pls use merge-kubeconfig.sh generated merged-kubeconfig file by manual 
       #/infrastructure/services/teleport/ansible/setup/roles/kubernetes/templates/scripts/merge-kubeconfig.sh
@@ -14,6 +13,7 @@
       #Change the name and location of automatically generated files as /root/.kube/kubeconfig
       #Notice: you still need to create developer and devops sa,clusterrole,clusterrolebind 
       #check services/teleport/ansible/setup/roles/kubernetes/templates/role directory.
+    - name: k8sconfigfile
       prompt: 'could you generated k8s config at /root/.kube/config? [yes / no]'
       default: 'no'
       private: false

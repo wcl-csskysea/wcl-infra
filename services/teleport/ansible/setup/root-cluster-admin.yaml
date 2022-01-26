@@ -49,7 +49,7 @@
         - file:
             path: /etc/teleport.d
             state: directory
-     tags: install
+      tags: install
 
     - name: Generating  Configuration File
       block:

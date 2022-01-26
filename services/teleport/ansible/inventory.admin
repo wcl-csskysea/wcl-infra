@@ -16,6 +16,8 @@ tco-qa
 tco-staging
 tco-prod
 
+[monitor]
+monitor
 
 [tco-dev]
 omnisaas-tco-dev-db

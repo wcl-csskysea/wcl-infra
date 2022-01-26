@@ -1,6 +1,6 @@
 ---
 - name: Download or Update/Install Teleport for agent
-  hosts: bby
+  hosts: monitor
   become: yes
   vars_prompt:
     - name: agent_token

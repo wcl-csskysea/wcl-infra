@@ -1,5 +1,5 @@
 teleport:
-  nodename: teleport-admin
+  nodename: wiredcraft
   data_dir: /var/lib/teleport
   log:
     output: stderr
@@ -16,13 +16,13 @@ teleport:
     
 auth_service:
   enabled: "yes"
-  listen_addr: 0.0.0.0:3025
-  cluster_name: teleport-admin
+  listen_addr: 0.0.0.0:3030
+  cluster_name: wiredcraft
 ssh_service:
   enabled: "yes"
   labels:
     env: prod
-    project: teleport-admin
+    project: wiredcraft
 proxy_service:
   enabled: "yes"
   tunnel_listen_addr: 0.0.0.0:3024
@@ -31,6 +31,11 @@ proxy_service:
   public_addr: teleport.wiredcraft.cn:443
   kube_listen_addr: 0.0.0.0:3026
   https_keypairs:
+  #use Cerbot to generate certificate
+  #by manual:
+  #certbot --manual --preferred-challenges dns certonly -d teleport.wiredcraft.cn
+  #by automatically:
+  #
   - key_file: /etc/letsencrypt/live/teleport.wiredcraft.cn/privkey.pem
     cert_file: /etc/letsencrypt/live/teleport.wiredcraft.cn/fullchain.pem
   acme:
