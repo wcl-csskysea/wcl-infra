@@ -9,7 +9,9 @@ spec:
     cluster_labels:
       '*': '*'
     node_labels:
-      env: '*'
+      env:
+        - 'staging'
+        - 'prod'
       project: wiredcraft
     logins:
     - devops

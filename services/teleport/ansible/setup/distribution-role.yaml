@@ -4,8 +4,7 @@
   become: yes
   vars_prompt:
     - name: role_name
-      prompt: 'distribution the specified Role,if not enter anything, will update all of the roles'
-      default: 'empty'
+      prompt: "Which roles you want to apply(input 'all' to apply all roles):\n\n{{ lookup('fileglob', 'templates/public/roles/*.yaml', wantlist=True) | map('basename') | join('\n')}}\n"
       private: false
 
   tasks:
@@ -21,7 +20,7 @@
             var: role_list.stdout_lines
         - shell: 
             "/usr/local/bin/tctl create -f /etc/teleport.d/roles/{{ role_name }}"
-      when: role_name != 'empty'
+      when: role_name != 'all'
 
     - name: distribution all of the  roles.
       block:
@@ -36,4 +35,4 @@
         - shell: 
             "/usr/local/bin/tctl create -f {{ item }}"
           loop: "{{ role_list.stdout_lines }}"
-      when: role_name == 'empty'
+      when: role_name == 'all'

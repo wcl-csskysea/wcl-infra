@@ -9,7 +9,9 @@ spec:
     cluster_labels:
       '*': '*'
     node_labels:
-      'env': 'staging'
+      env:
+        - 'staging'
+        - 'leaf-admin'
     logins:
     - devops
     - developer
