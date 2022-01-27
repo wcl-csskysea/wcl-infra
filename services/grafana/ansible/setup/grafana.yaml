@@ -1,0 +1,62 @@
+- hosts: monitor
+  tasks:
+    - name: Include all common vars
+      include_vars:
+        dir: ../../../../vars/ansible/
+        extensions:
+          - 'yaml'
+        ignore_unknown_extensions: true
+
+    - name: Start Grafana
+      docker_container:
+        name: "grafana-v6"
+        image: "{{ grafana_image }}"
+        state: started
+        pull: false
+        restart: true
+        restart_policy: always
+        hostname: "grafana"
+        log_driver: json-file
+        log_options:
+          max-size: "{{ docker_log_max_size }}"
+          max-file: "{{ docker_log_max_file }}"
+        ports:
+          - "80:3000"
+        env: "{{ grafana_env }}"
+        user: root
+        volumes:
+          - /data/grafana-v6/:/var/lib/grafana
+        networks:
+          - name: "{{ monitor_docker_network }}"
+
+    - name: Start Grafana Image Renderer
+      docker_container:
+        name: "renderer"
+        image: "{{ grafana_image_renderer_image }}"
+        state: started
+        pull: false
+        restart: true
+        restart_policy: always
+        hostname: "grafana-image-renderer"
+        log_driver: json-file
+        log_options:
+          max-size: "{{ docker_log_max_size }}"
+          max-file: "{{ docker_log_max_file }}"
+        ports:
+          - "8081"
+        user: root
+        env: "{{ grafana_image_renderer_env }}"
+        networks:
+          - name: "{{ monitor_docker_network }}"
+
+    - name: Wait until Grafana is listening on 80
+      uri:
+        url: "http://{{ ansible_default_ipv4.address }}"
+        method: GET
+        return_content: yes
+        status_code: "200"
+      register: statusCode_output
+      until: statusCode_output.status == 200
+      retries: 10
+      delay: 5
+
