@@ -1,0 +1,31 @@
+#
+# Grafana
+#
+grafana_image: "grafana/grafana:8.0.6"
+grafana_env:
+  GF_SERVER_ROOT_URL: https://{{ monitor_domain | default(ansible_default_ipv4.address) }}
+  GF_SECURITY_ADMIN_USER: "admin"
+  GF_SECURITY_ADMIN_PASSWORD: "{{ vault_grafana_initial_password }}"
+  GF_SECURITY_ALLOW_EMBEDDING: 'true'
+  GF_USERS_ALLOW_SIGN_UP: 'false'
+  GF_AUTH_ANONYMOUS_ENABLED: 'false'
+  GF_AUTH_ANONYMOUS_ORG_NAME: 'Hagerty-public'
+  GF_AUTH_ANONYMOUS_ORG_ROLE: Viewer
+  GF_SMTP_ENABLED: 'true'
+  GF_SMTP_HOST: postfix:25
+  GF_SMTP_USER: "{{ monitor_email_user }}"
+  GF_SMTP_PASSWORD: "{{ monitor_email_pass }}"
+  GF_SMTP_SKIP_VERIFY: 'true'
+  GF_SMTP_FROM_ADDRESS: "{{ monitor_email }}"
+  GF_SMTP_FROM_NAME: "Wiredcraft Monitor"
+  GF_RENDERING_SERVER_URL: http://renderer:8081/render
+  GF_RENDERING_CALLBACK_URL: http://grafana-v6:3000/
+  GF_LOG_FILTERS: rendering:debug
+
+#
+# Grafana image renderer
+#
+grafana_image_renderer_image: grafana/grafana-image-renderer:latest
+# https://github.com/grafana/grafana-image-renderer/blob/master/docs/remote_rendering_using_docker.md#environment-variables
+grafana_image_renderer_env:
+  BROWSER_TZ: Asia/Shanghai

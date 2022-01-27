@@ -1,0 +1,7 @@
+monitor_domain_cn: 'monitoring.service.wiredcraft.com:4443'
+monitor_domain_us: 'monitoring-us.service.wiredcraft.com'
+monitor_domain: "{{ monitor_domain_cn if region == 'cn' else monitor_domain_us }}"
+monitor_docker_network: monitor
+monitor_email: monitor@wiredcraft.com
+monitor_email_user: "{{ monitor_email.split('@')[0] }}"
+monitor_email_pass: "{{ vault_monitor_email_pass }}"
