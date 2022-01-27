@@ -61,6 +61,12 @@ omnisaas-ss-prod-db
 suitsupply_staging
 suitsupply_prod
 
+[demo_prod]
+omnisaas-demo-prod-db
+
+[demo:children]
+demo_prod
+
 [bby:children]
 bby_staging
 bby_prod
