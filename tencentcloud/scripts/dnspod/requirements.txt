@@ -1,0 +1,4 @@
+#Or try to use below command 
+#pip3 install -i https://mirrors.tencent.com/pypi/simple/ --upgrade tencentcloud-sdk-python
+
+tencentcloud-sdk-python
