@@ -1,6 +1,9 @@
 .*
 !.gitignore
 !.placeholder
+!.github
+*.tfstate
+*.tfstate.backup
 
 *retry
 *pyc
