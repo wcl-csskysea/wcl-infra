@@ -11,6 +11,21 @@ grafana_env:
   GF_AUTH_ANONYMOUS_ENABLED: 'false'
   GF_AUTH_ANONYMOUS_ORG_NAME: 'Hagerty-public'
   GF_AUTH_ANONYMOUS_ORG_ROLE: Viewer
+
+  # [auth.github]
+  GF_AUTH_GITHUB_ENABLED: 'true'
+  GF_AUTH_GITHUB_CLIENT_ID: 8337a7802050b2f4c809
+  GF_AUTH_GITHUB_CLIENT_SECRET: "{{ vault_grafana_github_client_secret }}"
+  GF_AUTH_GITHUB_ALLOW_SIGN_UP: 'true'
+  # space-delimited organization names
+  GF_AUTH_GITHUB_ALLOWED_ORGANIZATIONS: Wiredcraft
+  # comma-delimited team ids
+  # @Wiredcraft/wcl-devops: 2621504
+  # @Wiredcraft/wcl-devops-core: 5405242
+  # @Wiredcraft/wcl-devops-core-members: 26163
+  # @Wiredcraft/wcl-devops-new: 5566829
+  GF_AUTH_GITHUB_TEAM_IDS: '2621504,5405242,26163,5566829'
+
   GF_SMTP_ENABLED: 'true'
   GF_SMTP_HOST: postfix:25
   GF_SMTP_USER: "{{ monitor_email_user }}"
