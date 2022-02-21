@@ -1,0 +1,4 @@
+provider "grafana" {
+  alias = "org_%s"
+  org_id = module.grafana_orgs["%s"].org_id
+}

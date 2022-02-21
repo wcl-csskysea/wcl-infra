@@ -1,0 +1,14 @@
+module "grafana_teams_%[1]s" {
+  source   = "./teams"
+  providers = {
+    github = github
+    grafana = grafana.org_%[1]s
+  }
+
+  github_teams  = local.github_teams
+  grafana_users = module.grafana_users.grafana_users
+
+  grafana_admin_teams  = var.grafana_orgs["%[2]s"].admin_teams
+  grafana_editor_teams = var.grafana_orgs["%[2]s"].editor_teams
+  grafana_viewer_teams = var.grafana_orgs["%[2]s"].viewer_teams
+}
