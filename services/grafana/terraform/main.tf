@@ -1,4 +1,13 @@
 terraform {
+  backend "s3" {
+    bucket  = "terraform-infrastructure-state"
+    key     = "terraform-grafana/terraform.tfstate"
+    region  = "cn-north-1"
+    encrypt = true
+
+    dynamodb_table = "terraform-infrastructure-state-lock"
+  }
+
   required_providers {
     github = {
       source  = "integrations/github"
