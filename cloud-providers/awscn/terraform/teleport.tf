@@ -114,26 +114,11 @@ resource "aws_dynamodb_table" "teleport_events" {
 ##########################################
 resource "aws_s3_bucket" "teleport_sessions" {
   bucket = "teleport-sessions"
-  acl    = "private"
-
-
-  versioning {
-    enabled = true
-  }
 
   lifecycle {
     prevent_destroy = true
   }
 
-  lifecycle_rule {
-    id      = "sessions files"
-    enabled = true
-
-    transition {
-      days          = 730
-      storage_class = "GLACIER"
-    }
-  }
 }
 
 
