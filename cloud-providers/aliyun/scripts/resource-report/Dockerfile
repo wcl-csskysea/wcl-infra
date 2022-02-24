@@ -1,11 +1,11 @@
-FROM testcab/yay
+FROM homebrew/brew:3.3.16
 
-RUN yay -Syu --noconfirm --needed \
-  aliyun-cli \
-  jq \
-  python-apprise \
-  ruby-mustache
+RUN brew install aliyun-cli
+
+RUN sudo apt-get update \
+  && sudo apt-get install -y jq ruby-mustache \
+  && sudo rm -rf /var/lib/apt/lists/*
 
 COPY . .
 
-ENTRYPOINT ["./generate-and-send-report"]
+ENTRYPOINT ["./generate-report"]

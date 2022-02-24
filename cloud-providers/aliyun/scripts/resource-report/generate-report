@@ -41,11 +41,3 @@ jq -s 'map(.Data.Items.Item)|add' reports/instance-bill-*.json \
 # Generate html and CSV report
 mustache "$report_json" billing-report.html.mustache > "$report_html"
 mustache "$report_json" billing-report.csv.mustache > "$report_csv"
-
-# Send mail
-apprise \
-  -t "Aliyun Billing Report for $billing_cycle" \
-  --attach "$report_csv" \
-  --input-format html \
-  "$APPRISE_SERVER_URL&name=$MAIL_FROM_NAME&to=$MAIL_TO_EMAILS" \
-  < "$report_html"

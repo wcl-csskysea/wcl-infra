@@ -1,5 +1,5 @@
 *
 # Explicitly add everything we need
-!generate-and-send-report
+!generate-report
 !*.jq
 !*.mustache
