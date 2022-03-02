@@ -160,12 +160,12 @@ inputs = {
         "wcl-devops-lead"
       ]
       editor_teams = []
-      viewer_teams = []
-      admin_users = []
-      editor_users = []
-      viewer_users = [
+      viewer_teams = [
         "wcl-access-grafana"
       ]
+      admin_users = []
+      editor_users = []
+      viewer_users = []
     },
 
     # org_id=13
