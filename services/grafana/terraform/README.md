@@ -45,7 +45,9 @@ services/grafana/terraform
 
 ## How to run
 
-1.  Fill in required environment variables in `.env`, an example can be found at `.env.example`.
+1.  Fill in required environment variables in `.env`.
+
+    An example can be found at `.env.example`. The requirements of those env vars and how they are used are also documented in `.env.example`.
 
 1.  Update `inputs.hcl` file to configure Terraform variables.
 
