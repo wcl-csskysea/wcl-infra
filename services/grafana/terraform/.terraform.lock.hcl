@@ -6,6 +6,7 @@ provider "registry.terraform.io/grafana/grafana" {
   constraints = "~> 1.19"
   hashes = [
     "h1:B2/Xi+a3tzAkK8cgnXxwM7GYvWPGYNpXKM3d0smrYLU=",
+    "h1:GxnM9Hc47hN8dvPQBJId1g9N65Ns5yfabjFtR1h0MHU=",
     "zh:01c42944e6fe94301b639a96d3dad3407e946cb40f858b21ec4662e21a030bc3",
     "zh:145c9ce8dc2691300a81f61964e802acf5bc891a627f4805b0f98846399499bc",
     "zh:18a16eaef3cf2cade2db1653bdb73ae10e7b25f6d4fc741d6df6fb4eddbfb342",
@@ -27,6 +28,7 @@ provider "registry.terraform.io/hashicorp/random" {
   constraints = "~> 3.1"
   hashes = [
     "h1:BZMEPucF+pbu9gsPk0G0BHx7YP04+tKdq2MrRDF1EDM=",
+    "h1:rKYu5ZUbXwrLG1w81k7H3nce/Ys6yAxXhWcbtk36HjY=",
     "zh:2bbb3339f0643b5daa07480ef4397bd23a79963cc364cdfbb4e86354cb7725bc",
     "zh:3cd456047805bf639fbf2c761b1848880ea703a054f76db51852008b11008626",
     "zh:4f251b0eda5bb5e3dc26ea4400dba200018213654b69b4a5f96abee815b4f5ff",
@@ -46,6 +48,7 @@ provider "registry.terraform.io/integrations/github" {
   constraints = "~> 4.20"
   hashes = [
     "h1:8aEltkf7TY+fPzD6t1jjk5zVEsj7FHLzhNFsUpZhohA=",
+    "h1:Cn8FlSQya+gweH7ApeGdjcx9gyloFPXW6Zsb6Kc8X74=",
     "zh:1501c3ccaf624cf6d9d311eb59f911fa0cf431d4728af3b103e01c0eb4201efb",
     "zh:18eca616b2eb0868fd411835b5d04898ef7a82803ac900571bfc4bccdda1192e",
     "zh:194a711aee04329bbfff57a7c882bca55e9d96fc665c4aefb0e73bd214587c35",
