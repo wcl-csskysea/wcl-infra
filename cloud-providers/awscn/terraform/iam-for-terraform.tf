@@ -5,6 +5,7 @@ variable "terraforms" {
   type = set(string)
   default = [
     "terraform-grafana",
+    "terraform-github"
   ]
   description = "user to use terraform S3/DynamoDB"
 }
@@ -113,3 +114,9 @@ resource "aws_iam_access_key" "terraform" {
 #  content  = aws_iam_access_key.terraform[each.key].secret
 #  filename = ".aws_secret_for_${each.key}"
 #}
+#
+output "aws_iam_for_terraform_access_key" {
+  value = [
+    for access_key in aws_iam_access_key.terraform : access_key.id
+  ]
+}
