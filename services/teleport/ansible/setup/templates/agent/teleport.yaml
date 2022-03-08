@@ -3,7 +3,7 @@ teleport:
     data_dir: /var/lib/teleport/
     auth_token: "{{ agent_token }}"
     auth_servers:
-      - "{{ leaf_admin_ip }}:3030"
+      - "{{ leaf_admin_host }}"
 
 auth_service:
   enabled: "no"

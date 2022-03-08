@@ -13,9 +13,9 @@
       private: false
 
   vars:
-    ansible_ssh_common_args: ' -o StrictHostKeyChecking=accept-new -o ProxyCommand="ssh -W %h:%p -q {{ jump_server }}"'
+    ansible_ssh_common_args: ' -o StrictHostKeyChecking=accept-new {% if jump_server is defined %}-o ProxyCommand="ssh -W %h:%p -q {{ jump_server }}"{% endif %}'
     ansible_user: wcladmin
-        
+
   tasks:
     - name: create user devops/developer and upload devops sudo file
       block:
