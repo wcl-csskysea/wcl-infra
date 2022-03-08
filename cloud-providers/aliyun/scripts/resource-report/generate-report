@@ -9,29 +9,38 @@ mkdir -p reports
 rm -rf reports/*
 
 # Default billing cycle to last month, alternatively set it in $1.
-billing_cycle=${1:-$(date --date 'last month' +'%Y-%m')}
-report_json=reports/billing_data_$billing_cycle.json
-report_csv=reports/billing_data_$billing_cycle.csv
-report_html=reports/billing_data_$billing_cycle.html
+billing_cycle_start=${1:-$(date --date 'last month' +'%Y-%m')}
+billing_cycle_end=${2:-$billing_cycle_start}
+billing_cycles=($billing_cycle_start)
+while [[ ${billing_cycles[-1]} < $billing_cycle_end ]]; do
+  billing_cycles+=($(date --date "${billing_cycles[-1]}-01 + 1 month" +'%Y-%m'))
+done
 
-# Paging
+report_json=reports/billing_data_$billing_cycle_start-$billing_cycle_end.json
+report_csv=reports/billing_data_$billing_cycle_start-$billing_cycle_end.csv
+report_html=reports/billing_data_$billing_cycle_start-$billing_cycle_end.html
+
 # Set page size to max (300)
 page_size=300
-page_num=1
-continue=true
 
-# Fetch data
-while [ "$continue" = true ]; do
-  paged_json=reports/instance-bill-page-$page_num.json
+# Loop months and pages
+for billing_cycle in "${billing_cycles[@]}"; do
+  page_num=1
+  continue=true
 
-  aliyun bssopenapi QuerySplitItemBill \
-    --BillingCycle "$billing_cycle" \
-    --PageSize "$page_size" \
-    --PageNum "$page_num" \
-    > "$paged_json"
+  # Fetch data
+  while [ "$continue" = true ]; do
+    paged_json=reports/instance-bill-$billing_cycle-page-$page_num.json
 
-  ((page_num+=1))
-  continue=$(jq '.Data.PageNum * .Data.PageSize < .Data.TotalCount' "$paged_json")
+    aliyun bssopenapi QuerySplitItemBill \
+      --BillingCycle "$billing_cycle" \
+      --PageSize "$page_size" \
+      --PageNum "$page_num" \
+      > "$paged_json"
+
+    ((page_num+=1))
+    continue=$(jq '.Data.PageNum * .Data.PageSize < .Data.TotalCount' "$paged_json")
+  done
 done
 
 # Merge results of all pages and do processing
