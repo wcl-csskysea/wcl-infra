@@ -20,11 +20,13 @@ grafana_env:
   # space-delimited organization names
   GF_AUTH_GITHUB_ALLOWED_ORGANIZATIONS: Wiredcraft
   # comma-delimited team ids
+  # @Wiredcraft/wcl-access-grafana: 5745894
   # @Wiredcraft/wcl-devops: 2621504
   # @Wiredcraft/wcl-devops-core: 5405242
   # @Wiredcraft/wcl-devops-core-members: 26163
+  # @Wiredcraft/wcl-devops-lead: 5567148
   # @Wiredcraft/wcl-devops-new: 5566829
-  GF_AUTH_GITHUB_TEAM_IDS: '2621504,5405242,26163,5566829'
+  GF_AUTH_GITHUB_TEAM_IDS: '5745894,2621504,5405242,26163,5567148,5566829'
 
   GF_SMTP_ENABLED: 'true'
   GF_SMTP_HOST: postfix:25
