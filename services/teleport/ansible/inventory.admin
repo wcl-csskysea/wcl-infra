@@ -16,6 +16,9 @@ tco_qa
 tco_staging
 tco_prod
 
+[galderma_dev]
+galderma-dev-all-in-one
+
 [wiredcraft_infra]
 monitor
 kibana
