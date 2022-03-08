@@ -23,6 +23,9 @@ es-1
 es-2
 es-3
 
+[wiredcraft_infra_dedicated]
+harbor-china
+
 [tco_dev]
 omnisaas-tco-dev-db
 
