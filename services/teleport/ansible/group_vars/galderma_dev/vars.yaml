@@ -1,0 +1,4 @@
+---
+labels_env: "dev"
+labels_project: "galderma"
+leaf_admin_host: "teleport.wiredcraft.cn:443"
