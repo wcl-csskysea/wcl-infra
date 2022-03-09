@@ -26,9 +26,11 @@ es-1
 es-2
 es-3
 es-apm
+google-analytics-proxy
 
 [wiredcraft_infra_dedicated]
 harbor-china
+sentry
 
 [tco_dev]
 omnisaas-tco-dev-db

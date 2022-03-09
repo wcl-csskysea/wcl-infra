@@ -48,6 +48,11 @@ Host monitor
   Port 40024
   User wcladmin
 
+Host google-analytics-proxy
+  Hostname 172.16.0.10
+  User wcladmin
+  ProxyCommand ssh -W %h:%p -q kibana
+
 Host brease
   Hostname brease.io
   User root
