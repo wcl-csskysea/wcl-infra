@@ -25,6 +25,7 @@ kibana
 es-1
 es-2
 es-3
+es-apm
 
 [wiredcraft_infra_dedicated]
 harbor-china
