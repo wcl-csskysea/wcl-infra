@@ -1,0 +1,18 @@
+github_org: "Wiredcraft"
+
+github_leader_teams:
+  - "wiredcraft-leaders"
+  - "wcl-devop-lead"
+
+github_core_teams:
+  - "wiredcraft-core-members"
+
+github_devops_teams:
+  - "wcl-devops"
+  - "wcl-devops-new"
+
+github_kibana_teams:
+  - "wcl-access-elk"
+
+github_grafana_teams:
+  - "wcl-access-grafana"

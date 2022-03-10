@@ -1,0 +1,42 @@
+---
+- hosts: kibana.teleport-admin
+  tasks:
+    - name: Include all common vars
+      include_vars:
+        dir: ../../../../vars/ansible/
+        extensions:
+          - 'yaml'
+        ignore_unknown_extensions: true
+
+    - name: Setup oauth2-proxy container
+      docker_container:
+        name: oauth2-proxy
+        image: "quay.io/oauth2-proxy/oauth2-proxy:v5.1.1"
+        state: started
+        # pull: true
+        restart: true
+        restart_policy: always
+        hostname: oauth2-proxy-{{ ansible_hostname }}
+        log_driver: json-file
+        log_options:
+          max-size: "{{ docker_log_max_size }}"
+          max-file: "{{ docker_log_max_file }}"
+        ports:
+          - 4180:4180
+        command:
+          - -provider=github
+          - -client-id="{{ vault_oauth_client_id }}"
+          - -client-secret="{{ vault_oauth_client_secret }}"
+          - -github-org="{{ github_org }}"
+          - -github-team="{{ (github_leader_teams + github_core_teams + github_devops_teams + github_kibana_teams) | join(',')}}"
+          - -email-domain='*'
+          - -http-address="0.0.0.0:4180"
+          - -upstream=http://kibana:5601
+          - -cookie-secret="{{ vault_cookie_secret }}"
+          - -cookie-domain="{{ logs_domain }}"
+          - -redirect-url="{{ logs_host }}/oauth2/callback"
+          - -cookie-secure=true
+          - -cookie-name=elk
+          - -request-logging=true
+        networks:
+          - name: "{{ logs_docker_network }}"

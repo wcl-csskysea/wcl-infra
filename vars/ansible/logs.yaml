@@ -1,0 +1,3 @@
+logs_docker_network: elk
+logs_domain: logs.service.wiredcraft.com
+logs_host: "https://{{ logs_domain }}:4443"
