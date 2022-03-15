@@ -1,0 +1,36 @@
+---
+- name: 'setup kibana'
+  hosts: kibana
+  tasks:
+    - name: Include all common vars
+      include_vars:
+        dir: ../../../../vars/ansible/
+        extensions:
+          - 'yaml'
+        ignore_unknown_extensions: true
+
+    - name: 'kibana | create container'
+      docker_container:
+        name: "{{ kibana_container_name }}"
+        image: "{{ kibana_docker_image }}"
+        state: started
+        restart: true
+        restart_policy: always
+        hostname: "kibana-{{ ansible_hostname }}"
+        log_driver: json-file
+        log_options:
+          max-size: "{{ docker_log_max_size }}"
+          max-file: "{{ docker_log_max_file }}"
+        ports:
+        - "{{ kibana_port }}"
+        networks:
+        - name: "{{ logs_docker_network }}"
+        network_mode: bridge
+        container_default_behavior: compatibility
+        command_handling: compatibility
+        memory: "{{ kibana_container_memory }}"
+        memory_swap: "{{ kibana_container_memory }}"
+        env:
+          ELASTICSEARCH_HOSTS: "http://elasticsearch:9200"
+          ELASTICSEARCH_REQUESTTIMEOUT: "180000"
+          SERVER_MAXPAYLOADBYTES: "10485760"
