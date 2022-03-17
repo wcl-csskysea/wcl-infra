@@ -1,0 +1,7 @@
+---
+
+kibana_container_name: 'kibana'
+kibana_container_memory: '2G'
+
+kibana_docker_image: "elastic/kibana:7.16.2"
+kibana_port: "5601"
