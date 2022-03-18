@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>DevOps</title>
+    <meta name="keywords" content="Wiredcraft DevOps">
+    <link rel='stylesheet' id='font-awesome-css'
+        href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css' type='text/css'
+        media='all' />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css"
+        integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+    <link rel='stylesheet' id='style-css' href='./assets/css/style.css?ver=2.0.0' type='text/css' media='all' />
+</head>
+
+<body class="main-content">
+    <div class="site-list">
+        {{ range .Site.Data.sites }}
+        <div class="site-catalog">
+            <h2><i class="{{ .icon }}" id="{{ md5 .taxonomy }}"></i>{{.taxonomy }}</h2>
+            <div class="row">
+                {{ range .sites }}
+                <div class="site-item col-6 col-sm-4 col-md-3 col-lg-3">
+                    <a href="{{ .url }}" target="_blank" class="site-card" data-toggle="tooltip" data-placement="bottom"
+                        title="{{ .url }}">
+                        <div class="site-logo">
+                            <img src="{{ .logo }}" onerror="javascript:this.src='./assets/images/favicon.png'"
+                                width="40">
+                        </div>
+                        <div class="site-details">
+                            <div class="site-name">
+                                {{ .title }}
+                            </div>
+                            <p class="site-description">{{ .description }}</p>
+                        </div>
+                    </a>
+                </div>
+                {{ end }}
+            </div>
+        </div>
+        <br />
+        {{ end }}
+    </div>
+    <footer>
+        Copyright © {{ now.Format "2006"}} Wiredcraft
+    </footer>
+</body>
+
+</html>
