@@ -1,0 +1,5 @@
+- hosts: monitor.teleport-admin
+  tasks:
+    - name: ping
+      ansible.builtin.ping:
+
