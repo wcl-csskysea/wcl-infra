@@ -1,0 +1,44 @@
+---
+- taxonomy: Monitoring
+  icon: fa-bell-o
+  sites:
+    - title: Grafana
+      logo: assets/images/logos/grafana.svg
+      url: https://monitoring.service.wiredcraft.com:4443/
+      description: Monitoring for China Infra
+    - title: Sentry
+      logo: assets/images/logos/sentry-3.svg
+      url: https://sentry-v2.wiredcraft.cn
+      description: Sentry for China Infra
+    - title: PagerDuty
+      logo: assets/images/logos/pagerduty.svg
+      url: https://wiredcraft.pagerduty.com/
+      description: PagerDuty for escalation
+    - title: ES APM
+      logo: assets/images/logos/es-apm.svg
+      url: https://apm.wiredcraft.cn/
+      description: The endpoint for Elasticsearch APM
+
+- taxonomy: Team
+  icon: fa-users
+  sites:
+    - title: Teleport
+      logo: assets/images/logos/teleport.png
+      url: https://teleport.wiredcraft.cn/
+      description: Teleport dashboard
+
+- taxonomy: CI/CD
+  icon: fa-cogs
+  sites:
+    - title: Harbor
+      logo: assets/images/logos/harbor.svg
+      url: https://registry.wiredcraft.cn/
+      description: Harbor registry in China
+
+- taxonomy: Logging
+  icon: fa-files-o
+  sites:
+    - title: Kibana
+      logo: assets/images/logos/elastic-kibana.svg
+      url: https://logs.service.wiredcraft.com:4443/
+      description: Kibana dashboard for China Infra

@@ -1,0 +1,39 @@
+---
+- name: 'setup landing-page container'
+  hosts: monitor.teleport-admin
+  tasks:
+    - name: Include all common vars
+      include_vars:
+        dir: ../../../../vars/ansible/
+        extensions:
+          - 'yaml'
+        ignore_unknown_extensions: true
+
+    - name: Log into private registry
+      docker_login:
+        registry: "{{ docker_registry_cn }}"
+        username: "{{ docker_registry_cn_pull_user_name }}"
+        password: "{{ vault_docker_registry_cn_pull_user_password }}"
+
+    - name: 'landing-page | create container'
+      docker_container:
+        name: "landing-page"
+        image: "{{ landing_page_docker_image }}"
+        state: started
+        restart: true
+        restart_policy: always
+        hostname: "landing-page-{{ ansible_hostname }}"
+        log_driver: json-file
+        log_options:
+          max-size: "{{ docker_log_max_size }}"
+          max-file: "{{ docker_log_max_file }}"
+        ports:
+          - "{{ landing_page_port }}:80"
+        networks:
+          - name: "{{ monitor_docker_network }}"
+
+    - name: Log out private registry
+      docker_login:
+        registry: "{{ docker_registry_cn }}"
+        username: "{{ docker_registry_cn_pull_user_name }}"
+        state: absent

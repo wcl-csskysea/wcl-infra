@@ -3,3 +3,5 @@
 #
 docker_log_max_size: "50m"
 docker_log_max_file: "100"
+docker_registry_cn: "registry.wiredcraft.cn"
+docker_registry_cn_pull_user_name: "pull"
