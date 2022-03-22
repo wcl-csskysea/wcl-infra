@@ -21,6 +21,7 @@
         image: "{{ landing_page_docker_image }}"
         state: started
         restart: true
+        pull: true
         restart_policy: always
         hostname: "landing-page-{{ ansible_hostname }}"
         log_driver: json-file
