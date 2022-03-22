@@ -1,0 +1,4 @@
+---
+labels_env: "prod"
+labels_project: "wiredcraft"
+leaf_admin_host: "teleport.wiredcraft.cn:443"

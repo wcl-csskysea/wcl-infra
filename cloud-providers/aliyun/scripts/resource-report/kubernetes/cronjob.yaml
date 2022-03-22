@@ -1,0 +1,59 @@
+# TODO: Migrate to batch/v1 once we have kubernetes v1.21+
+# batch/v1beta1 will no longer be served in v1.25.
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: aliyun-scripts-resource-report
+spec:
+  # Report will be available after 10:00 on 4th of every month
+  schedule: "0 10 4 * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          restartPolicy: OnFailure
+
+          volumes:
+          - name: reports
+            emptyDir: {}
+
+          initContainers:
+          - name: generate-report
+            # Use a specific tag other than `latest` when deploying
+            image: registry.wiredcraft.cn/internal/aliyun-scripts-resource-report:latest
+            imagePullPolicy: Always
+            volumeMounts:
+            - name: reports
+              mountPath: /home/linuxbrew/reports
+            envFrom:
+            - secretRef:
+                name: aliyun-scripts-resource-report
+
+          containers:
+          - name: send-report
+            image: caronc/apprise:v0.7.0
+            volumeMounts:
+            - name: reports
+              mountPath: /work/reports
+            workingDir: /work
+            command:
+            - bash
+            - -c
+            - |
+              billing_cycle=${1:-$(date --date 'last month' +'%Y-%m')}
+              report_json=reports/billing_data_$billing_cycle.json
+              report_csv=reports/billing_data_$billing_cycle.csv
+              report_html=reports/billing_data_$billing_cycle.html
+
+              apprise -vvv \
+                -t "Aliyun Billing Report for $billing_cycle" \
+                --attach "$report_csv" \
+                --input-format html \
+                "$APPRISE_SERVER_URL&name=$MAIL_FROM_NAME&to=$MAIL_TO_EMAILS" \
+                < "$report_html"
+            envFrom:
+            - secretRef:
+                name: aliyun-scripts-resource-report
+
+          imagePullSecrets:
+          - name: harbor-auth

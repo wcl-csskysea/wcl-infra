@@ -1,5 +1,5 @@
 ---
 labels_env: "staging"
 labels_project: "suitsupply"
-leaf_admin_ip: "172.16.1.229"
+leaf_admin_host: "172.16.1.229:3030"
 jump_server: "omnisaas-admin"

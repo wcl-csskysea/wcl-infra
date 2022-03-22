@@ -1,0 +1,52 @@
+#!/usr/bin/env bash
+
+set -euxo pipefail
+
+# Set working directory to the script directory
+cd "$(dirname "$0")"
+# Create reports directory
+mkdir -p reports
+rm -rf reports/*
+
+# Default billing cycle to last month, alternatively set it in $1.
+billing_cycle_start=${1:-$(date --date 'last month' +'%Y-%m')}
+billing_cycle_end=${2:-$billing_cycle_start}
+billing_cycles=($billing_cycle_start)
+while [[ ${billing_cycles[-1]} < $billing_cycle_end ]]; do
+  billing_cycles+=($(date --date "${billing_cycles[-1]}-01 + 1 month" +'%Y-%m'))
+done
+
+report_json=reports/billing_data_$billing_cycle_start-$billing_cycle_end.json
+report_csv=reports/billing_data_$billing_cycle_start-$billing_cycle_end.csv
+report_html=reports/billing_data_$billing_cycle_start-$billing_cycle_end.html
+
+# Set page size to max (300)
+page_size=300
+
+# Loop months and pages
+for billing_cycle in "${billing_cycles[@]}"; do
+  page_num=1
+  continue=true
+
+  # Fetch data
+  while [ "$continue" = true ]; do
+    paged_json=reports/instance-bill-$billing_cycle-page-$page_num.json
+
+    aliyun bssopenapi QuerySplitItemBill \
+      --BillingCycle "$billing_cycle" \
+      --PageSize "$page_size" \
+      --PageNum "$page_num" \
+      > "$paged_json"
+
+    ((page_num+=1))
+    continue=$(jq '.Data.PageNum * .Data.PageSize < .Data.TotalCount' "$paged_json")
+  done
+done
+
+# Merge results of all pages and do processing
+jq -s 'map(.Data.Items.Item)|add' reports/instance-bill-*.json \
+  | jq -f billing-by-tags-and-products.jq > "$report_json"
+
+# Generate html and CSV report
+mustache "$report_json" billing-report.html.mustache > "$report_html"
+mustache "$report_json" billing-report.csv.mustache > "$report_csv"

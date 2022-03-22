@@ -1,5 +1,5 @@
 ---
 labels_env: "prod"
 labels_project: "bby"
-leaf_admin_ip: "172.42.92.204"
+leaf_admin_host: "172.42.92.204:3030"
 jump_server: "bby-admin"

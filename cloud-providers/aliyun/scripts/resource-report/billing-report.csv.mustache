@@ -1,0 +1,4 @@
+Customer,Environment,Product,Payment Amount,Instance IDs
+{{#.}}
+{{ Customer }},{{ Environment }},{{ ProductCode }},{{ PaymentAmount }},"{{#InstanceIDs}}{{.}} {{/InstanceIDs}}"
+{{/.}}

@@ -1,5 +1,5 @@
 ---
 labels_env: "prod"
 labels_project: "wiredcraft"
-leaf_admin_ip: "172.16.0.2"
+leaf_admin_host: "172.16.0.2:3030"
 jump_server: "teleport"

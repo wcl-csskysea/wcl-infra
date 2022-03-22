@@ -1,5 +1,0 @@
-Host dior-admin
-  Hostname 122.144.218.169
-  Port 22068
-  User wcladmin
-  ProxyCommand ssh -W %h:%p -q gw3

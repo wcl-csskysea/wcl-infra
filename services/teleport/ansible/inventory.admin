@@ -16,12 +16,21 @@ tco_qa
 tco_staging
 tco_prod
 
+[galderma_dev]
+galderma-dev-all-in-one
+
 [wiredcraft_infra]
 monitor
 kibana
 es-1
 es-2
 es-3
+es-apm
+google-analytics-proxy
+
+[wiredcraft_infra_dedicated]
+harbor-china
+sentry
 
 [tco_dev]
 omnisaas-tco-dev-db

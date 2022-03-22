@@ -1,0 +1,96 @@
+---
+- taxonomy: Monitoring
+  icon: fa-bell-o
+  sites:
+    - title: Grafana
+      logo: assets/images/logos/grafana.svg
+      url: https://monitoring.service.wiredcraft.com:4443/
+      description: Monitoring for China Infra
+    - title: Sentry
+      logo: assets/images/logos/sentry-3.svg
+      url: https://sentry-v2.wiredcraft.cn
+      description: Sentry for China Infra
+    - title: PagerDuty
+      logo: assets/images/logos/pagerduty.svg
+      url: https://wiredcraft.pagerduty.com/
+      description: PagerDuty for escalation
+    - title: ES APM
+      logo: assets/images/logos/es-apm.svg
+      url: https://apm.wiredcraft.cn/
+      description: The endpoint for Elasticsearch APM
+
+- taxonomy: Team
+  icon: fa-users
+  sites:
+    - title: Teleport
+      logo: assets/images/logos/teleport.png
+      url: https://teleport.wiredcraft.cn/
+      description: Teleport dashboard
+    - title: Jira boards
+      logo: assets/images/logos/jira.svg
+      url: https://wiredcraft.atlassian.net/jira/software/projects/DEVOPS/boards/76
+      description: Jira board for DevOps team
+    - title: Confluence
+      logo: assets/images/logos/confluence.svg
+      url: https://wiredcraft.atlassian.net/wiki/spaces/knowledge/pages/239894643/DevOps
+      description: Confluence page for DevOps team
+    - title: Bitwarden
+      logo: assets/images/logos/bitwarden.svg
+      url: https://vault.bitwarden.com/
+      description: Password sharing/mangement
+    - title: Lucidchart
+      logo: assets/images/logos/lucidchart.svg
+      url: https://lucid.app/documents
+      description: Diagram tool
+
+- taxonomy: CI/CD
+  icon: fa-cogs
+  sites:
+    - title: Harbor
+      logo: assets/images/logos/harbor.svg
+      url: https://registry.wiredcraft.cn/
+      description: Harbor registry in China
+    - title: Github
+      logo: assets/images/logos/github.svg
+      url: https://github.com/Wiredcraft/
+      description: For all code repos
+    - title: Github for ops
+      logo: assets/images/logos/github.svg
+      url: https://github.com/wiredcraft-ops/
+      description: For some public ops repos e.g. ansible roles
+    - title: NPM
+      logo: assets/images/logos/npm.svg
+      url: https://www.npmjs.com/org/wiredcraft
+      description: For nodejs npm packages
+
+- taxonomy: Logging
+  icon: fa-files-o
+  sites:
+    - title: Kibana
+      logo: assets/images/logos/elastic-kibana.svg
+      url: https://logs.service.wiredcraft.com:4443/
+      description: Kibana dashboard for China Infra
+
+- taxonomy: Cloud Provider
+  icon: fa-cloud
+  sites:
+    - title: Aliyun
+      logo: assets/images/logos/aliyun.svg
+      url: https://console.aliyun.com/
+      description: For OmniSaas mostly
+    - title: Qingcloud
+      logo: assets/images/logos/qingcloud.ico
+      url: https://console.qingcloud.com/sh1/instances/
+      description: For most of the Wiredcraft Infra e.g. logging/monitor
+    - title: AWS CN
+      logo: assets/images/logos/aws.svg
+      url: https://console.amazonaws.cn/console/home?region=cn-north-1
+      description: For Wiredcraft infra
+    - title: Digitalocean
+      logo: assets/images/logos/digitalocean.svg
+      url: https://digitalocean.com/
+      description: For us servers
+    - title: Azure
+      logo: assets/images/logos/azure.svg
+      url: https://portal.azure.com
+      description: Only for MS Teams account management
