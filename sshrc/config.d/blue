@@ -205,6 +205,11 @@ Host blue-staging-db-orders
   User wcladmin
   ProxyCommand ssh -W %h:%p -q blue-admin
 
+Host blue-staging-db-storylines
+  Hostname 172.16.2.46
+  Port 22
+  User wcladmin
+  ProxyCommand ssh -W %h:%p -q blue-admin
 
 Host blue-pre-prod-db-users-1
   Hostname 172.16.3.45
@@ -268,11 +273,14 @@ Host blue-pre-prod-db-orders-1
   User wcladmin
   ProxyCommand ssh -W %h:%p -q blue-admin
 
-
 Host blue-dev-db
   Hostname 10.0.1.12
   Port 22
   User wcladmin
   ProxyCommand ssh -W %h:%p -q blue-admin
 
-
+Host blue-dev-db-storyline
+  Hostname 10.0.1.8
+  Port 22
+  User wcladmin
+  ProxyCommand ssh -W %h:%p -q blue-admin
