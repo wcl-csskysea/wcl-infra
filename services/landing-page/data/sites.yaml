@@ -27,8 +27,8 @@
       url: https://meet.google.com/zof-emkd-ofw
       description: Daily scrum meeting ( only if you want a scrum meeting )
     - title: Weekly huddle
-      logo: assets/images/logos/google-meeting.svg
-      url:  https://meet.google.com/pzw-rvjy-ovo
+      logo: assets/images/logos/ms-teams.svg
+      url:  https://teams.microsoft.com/l/meetup-join/19%3a48c9ef214ac04119a0663a88682f1e16%40thread.tacv2/1648195409832?context=%7b%22Tid%22%3a%22f71cc258-deb2-469c-bbfb-178d3484f666%22%2c%22Oid%22%3a%229403dea6-ae9a-4e67-8bae-a98dbafa0fe5%22%7d
       description: Weekly huddle meeting at Friday 4pm
     - title: Teleport
       logo: assets/images/logos/teleport.png
