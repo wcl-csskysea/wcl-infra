@@ -22,6 +22,14 @@
 - taxonomy: Team
   icon: fa-users
   sites:
+    - title: Scrum Meeting
+      logo: assets/images/logos/google-meeting.svg
+      url: https://meet.google.com/zof-emkd-ofw
+      description: Daily scrum meeting ( only if you want a scrum meeting )
+    - title: Weekly huddle
+      logo: assets/images/logos/google-meeting.svg
+      url:  https://meet.google.com/pzw-rvjy-ovo
+      description: Weekly huddle meeting at Friday 4pm
     - title: Teleport
       logo: assets/images/logos/teleport.png
       url: https://teleport.wiredcraft.cn/
@@ -79,7 +87,7 @@
       url: https://console.aliyun.com/
       description: For OmniSaas mostly
     - title: Qingcloud
-      logo: assets/images/logos/qingcloud.ico
+      logo: assets/images/logos/qingcloud.png
       url: https://console.qingcloud.com/sh1/instances/
       description: For most of the Wiredcraft Infra e.g. logging/monitor
     - title: AWS CN
