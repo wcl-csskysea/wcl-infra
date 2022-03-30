@@ -1,8 +1,4 @@
-1. cd to this folder
-1. update site data `data/sites.yaml`
-1. mount the image assets:
-```
-git worktree add -B assets-images-for-landing-page  themes/devops-landing-page/static/assets/images  origin/assets-images-for-landing-page
-```
-1. `hugo server` or `hugo build`
+This repo is just for deployment, cd ansible and check the README
 
+
+for the code go to products repo: https://github.com/Wiredcraft/products/tree/master/landing-page
