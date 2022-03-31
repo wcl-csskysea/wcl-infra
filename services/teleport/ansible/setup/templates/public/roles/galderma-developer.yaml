@@ -1,0 +1,15 @@
+kind: role
+version: v4
+metadata:
+  name: galderma-developer
+spec:
+  allow:
+    node_labels:
+      project: galderma
+      env:
+        - dev
+        - staging
+    logins:
+    - developer
+
+  deny: {}

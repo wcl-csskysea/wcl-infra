@@ -7,19 +7,35 @@ spec:
   display: Github
   redirect_url: https://teleport.wiredcraft.cn/v1/webapi/github/callback
   teams_to_logins:
+  # Projects
+
+  ## bby
+  - logins:
+    - bby-developer
+    organization: Wiredcraft
+    team: burberry
+
+  ## galderma
+  - logins:
+    - galderma-developer
+    organization: Wiredcraft
+    team: wcl-galderma
+
+  # DevOps
+  ## DevOps New
   - logins:
     - devops-new
     - wiredcraft-devops
     organization: Wiredcraft
     team: wcl-devops-new
-  - logins:
-    - bby-developer
-    organization: Wiredcraft
-    team: burberry
+
+  ## DevOps Regular
   - logins:
     - devops
     organization: Wiredcraft
     team: wcl-devops
+
+  ## Admin
   - logins:
     - administrator
     organization: Wiredcraft
