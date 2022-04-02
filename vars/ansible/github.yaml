@@ -13,6 +13,7 @@ github_devops_teams:
 
 github_kibana_teams:
   - "wcl-access-elk"
+  - "tiffany-development-team"
 
 github_grafana_teams:
   - "wcl-access-grafana"
