@@ -1,0 +1,28 @@
+Host omni-us-admin
+  Hostname 157.245.134.13
+  Port 22
+  User wcladmin
+
+Host monitor-us
+  Hostname 198.199.100.211
+  Port 22
+  User wcladmin
+
+Host kibana-us
+  Hostname logs-us.service.wiredcraft.com
+  User wcladmin
+
+Host es-us-1
+  Hostname 10.112.0.5
+  User wcladmin
+  ProxyCommand ssh -W %h:%p -q kibana-us
+
+Host es-us-2
+  Hostname 10.112.0.6
+  User wcladmin
+  ProxyCommand ssh -W %h:%p -q kibana-us
+
+Host es-us-3
+  Hostname 10.112.0.4
+  User wcladmin
+  ProxyCommand ssh -W %h:%p -q kibana-us
