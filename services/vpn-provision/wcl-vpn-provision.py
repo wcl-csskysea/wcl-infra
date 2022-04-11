@@ -2,18 +2,13 @@
 # -*- coding: utf-8 -*- 
 import re,os,sys,json
 import string,random,copy
-import smtplib, ssl
 import FortigateApi
-from email.mime.multipart import MIMEMultipart
-from jinja2 import Environment, FileSystemLoader
-from email.mime.text import MIMEText
+from .send_gmail import Mail
 
 reload(sys)
-
 sys.setdefaultencoding('utf8')
 
 dict_user_email_list = []
-
 characters = list(string.ascii_letters + string.digits + "!@#$%^&*()")
 
 def print_usage():
@@ -37,8 +32,6 @@ def generate_random_password():
     random.shuffle(password_list)
     final_pass = "".join(password_list)
     return final_pass
-
-
 
 class ArgsParser(object):
 
@@ -117,44 +110,6 @@ class FortientVPNCreator(object):
     def setUsers2Group(self, group_name,members):
         self.fg.SetUser2Group(group_name,members)
        
-class Mail(object):
-
-    def __init__(self):
-        self.port = 465
-        self.smtp_server_domain_name = "smtp.gmail.com"
-        self.sender_mail = ""
-        self.password = ""
-
-    def send(self, email_addr,username,password):
-        # ssl_context = ssl.create_default_context()
-        # service = smtplib.SMTP_SSL(self.smtp_server_domain_name, self.port, context=ssl_context)
-        service = smtplib.SMTP_SSL(self.smtp_server_domain_name, self.port)
-        service.login(self.sender_mail, self.password)
-        
-        root = os.path.dirname(os.path.abspath(__file__))
-        templates_dir = os.path.join(root, 'templates')
-        env = Environment( loader = FileSystemLoader(templates_dir) )
-        template = env.get_template('email_template.htm') 
-        filename = os.path.join(root, 'html', '{}.html'.format(username))
-        with open(filename, 'w') as fh:
-            fh.write(template.render(
-            username = username,
-            password = password
-    ))
-
-        with  open(filename,"rb") as fd:
-            mail_body = fd.read()
-
-        message = MIMEText(mail_body, 'html', 'utf-8')
-        
-        message['From'] = self.sender_mail
-        message['To'] = email_addr
-        message['Subject'] = "vpn account distribution"
-        try:
-            result = service.sendmail(self.sender_mail, email_addr, message.as_string())
-        except:
-            print("send email failed!")
-        service.quit()
 
 def main():
     # step 1: get username+email address for each user.
