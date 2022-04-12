@@ -1,6 +1,8 @@
 #! /usr/bin/python
 # -*- coding: utf-8 -*- 
+from ast import arg
 import re,os,sys,json
+import argparse
 import string,random,copy
 import FortigateApi
 from .send_gmail import Mail
@@ -11,13 +13,6 @@ sys.setdefaultencoding('utf8')
 dict_user_email_list = []
 characters = list(string.ascii_letters + string.digits + "!@#$%^&*()")
 
-def print_usage():
-    msg = '''
-    usage: wcl-vpn-account-distribution.py add <username>/<email address>
-    for example: wcl-vpn-account-distribution.py add victor.chen/victor.chan@wiredcraft.com
-    of course you can input multiple users once.
-    '''
-    print(msg)
 
 def generate_random_password():
 	## length of password from the user
@@ -33,31 +28,18 @@ def generate_random_password():
     final_pass = "".join(password_list)
     return final_pass
 
-class ArgsParser(object):
-
+def init_user_email_list(users=[],emails=[]):
     '''
-    add which accounts need to be created into queue, after created,set state to done.
+    get all inputs(users,email address) from cli,and generate passwords.
     '''
-    def __init__(self):
-        pass
+    user_counts = len(users)
+    user_email_dict = {'user':'','email':'','password':''}
+    for i in range(0,user_counts-1):
+        user_email_dict['user'] = users[i]
+        user_email_dict['email'] = emails[i]
+        user_email_dict['password'] = generate_random_password()
+        dict_user_email_list.append(user_email_dict.copy())
 
-    def addUserEmailList(self,accounts_list=[]):
-        raw_vpn_accounts_list = []
-        raw_vpn_accounts_list.extend(accounts_list)
-        dict_vpn_account = {}
-
-        for each_account in raw_vpn_accounts_list:
-            dict_vpn_account['user']= each_account.split('/')[0]
-            dict_vpn_account['email'] = each_account.split('/')[1]
-            dict_user_email_list.append(dict_vpn_account.copy())
-        print(dict_user_email_list)
-
-    def remove(self,accounts_list=[]):
-        pass
-
-    def updateState(self,state):
-        pass
-    
 class FortientVPNCreator(object):
 
     def __init__(self):
@@ -68,7 +50,6 @@ class FortientVPNCreator(object):
         self.fg = FortigateApi.Fortigate(ip=self.ipplusport,vdom=self.vdom,user=self.admin,passwd=self.adminpwd)
         self.group_name = ""
         self.memberlist = []
-
 
     def addusers(self,username_list):
         for user in username_list:
@@ -119,22 +100,20 @@ def main():
     ftg.initMembersList('ssl-vpn')
 
     for each_account in dict_user_email_list:
-        vpn_pass = generate_random_password()
-        each_account['password'] = vpn_pass
-        ftg.adduser(each_account['user'],vpn_pass)
+        #create vpn account in forient firewall.
+        ftg.adduser(each_account['user'],each_account['password'])
+        # combine existing vpn account members and new joined user together.
         ftg.adduser2MemberList(each_account['user'])        
-
+    # put all vpn members under some group in forient firewall.
     ftg.setUsers2Group(group_name,ftg.memberlist)
-
+    # send notification email for vpn provision one by one.
     for each_account in dict_user_email_list:
         mail.send(each_account['email'],each_account['user'],each_account['password'])
 
 if __name__ == '__main__':
-
-    if len(sys.argv) < 3:
-        print_usage()
-        sys.exit()
-    if sys.argv[1] == "add":
-        ArgsParser().addUserEmailList(sys.argv[2:])
-
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--usersname',type=str,nargs='+')
+    parser.add_argument('--usersemail',type=str,nargs='+')
+    args = parser.parse_args()
+    init_user_email_list(args.usersname,args.usersemail)
     main()
