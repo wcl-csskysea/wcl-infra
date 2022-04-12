@@ -21,9 +21,12 @@ class Mail(object):
         
         root = os.path.dirname(os.path.abspath(__file__))
         templates_dir = os.path.join(root, 'templates')
+        render_dir = os.path.join(root, 'html')
         env = Environment( loader = FileSystemLoader(templates_dir) )
         template = env.get_template('email_template.htm') 
-        filename = os.path.join(root, 'html', '{}.html'.format(username))
+        if not os.path.exists(render_dir):
+            os.mkdir(render_dir)
+        filename = os.path.join(render_dir,'{}.html'.format(username))
         with open(filename, 'w') as fh:
             fh.write(template.render(
             username = username,
@@ -37,7 +40,8 @@ class Mail(object):
         
         message['From'] = self.sender_mail
         message['To'] = email_addr
-        message['Subject'] = "vpn account distribution"
+        message['Cc'] = self.sender_mail
+        message['Subject'] = "vpn account provisioin"
         try:
             result = service.sendmail(self.sender_mail, email_addr, message.as_string())
         except:

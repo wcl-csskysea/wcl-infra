@@ -5,10 +5,15 @@ import re,os,sys,json
 import argparse
 import string,random,copy
 import FortigateApi
-from .send_gmail import Mail
+from send_gmail import Mail
 
-reload(sys)
-sys.setdefaultencoding('utf8')
+if sys.version_info[0] < 3:
+    reload(sys)
+    sys.setdefaultencoding('utf8')
+else:
+    import importlib
+    importlib.reload(sys)
+
 
 dict_user_email_list = []
 characters = list(string.ascii_letters + string.digits + "!@#$%^&*()")
@@ -32,13 +37,15 @@ def init_user_email_list(users=[],emails=[]):
     '''
     get all inputs(users,email address) from cli,and generate passwords.
     '''
+
     user_counts = len(users)
     user_email_dict = {'user':'','email':'','password':''}
-    for i in range(0,user_counts-1):
+    for i in range(0,user_counts):
         user_email_dict['user'] = users[i]
         user_email_dict['email'] = emails[i]
         user_email_dict['password'] = generate_random_password()
         dict_user_email_list.append(user_email_dict.copy())
+    print(dict_user_email_list)
 
 class FortientVPNCreator(object):
 
@@ -66,12 +73,15 @@ class FortientVPNCreator(object):
 
     def adduser(self,username,vpn_pass):
         init_user_list = self.getusers()
+        rc = 0
         if username in init_user_list:
             print('username %s has existed!\n' % username)
-             
+            rc = 255
+              
         else:
             # vpn_pass = generate_random_password()
             self.fg.AddUserLocal(username,vpn_pass,'password')
+        return rc
 
     def initMembersList(self,group_name):
         '''
@@ -101,19 +111,20 @@ def main():
 
     for each_account in dict_user_email_list:
         #create vpn account in forient firewall.
-        ftg.adduser(each_account['user'],each_account['password'])
-        # combine existing vpn account members and new joined user together.
-        ftg.adduser2MemberList(each_account['user'])        
+        rc = ftg.adduser(each_account['user'],each_account['password'])
+        if rc == 0:
+            # combine existing vpn account members and new joined user together.
+            ftg.adduser2MemberList(each_account['user'])   
+            #send notification email one by one.
+            mail.send(each_account['email'],each_account['user'],each_account['password'])          
     # put all vpn members under some group in forient firewall.
     ftg.setUsers2Group(group_name,ftg.memberlist)
-    # send notification email for vpn provision one by one.
-    for each_account in dict_user_email_list:
-        mail.send(each_account['email'],each_account['user'],each_account['password'])
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser()
-    parser.add_argument('--usersname',type=str,nargs='+')
-    parser.add_argument('--usersemail',type=str,nargs='+')
+    parser = argparse.ArgumentParser(description='wiredcraft vpn account provision')
+    parser.print_usage()
+    parser.add_argument('--usersname',type=str,nargs='+',help='Input username please!')
+    parser.add_argument('--usersemail',type=str,nargs='+',help='Input user email please!')
     args = parser.parse_args()
     init_user_email_list(args.usersname,args.usersemail)
     main()
