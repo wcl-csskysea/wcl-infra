@@ -50,10 +50,10 @@ def init_user_email_list(users=[],emails=[]):
 class FortientVPNCreator(object):
 
     def __init__(self):
-        self.ipplusport = ""
-        self.vdom = ""
-        self.admin = ""
-        self.adminpwd = ""
+        self.ipplusport = "10.10.0.1:5443"
+        self.vdom = "root"
+        self.admin = os.getenv('FTG_ADMIN')
+        self.adminpwd = os.getenv('FTG_ADMIN_PASSWORD')
         self.fg = FortigateApi.Fortigate(ip=self.ipplusport,vdom=self.vdom,user=self.admin,passwd=self.adminpwd)
         self.group_name = ""
         self.memberlist = []

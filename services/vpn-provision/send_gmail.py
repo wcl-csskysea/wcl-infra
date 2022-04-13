@@ -6,12 +6,16 @@ from email.mime.text import MIMEText
 from jinja2 import Environment, FileSystemLoader
 
 class Mail(object):
+    '''
+    Description: send notificatin email through gmail.
+    
+    '''
 
     def __init__(self):
         self.port = 465
         self.smtp_server_domain_name = "smtp.gmail.com"
-        self.sender_mail = ""
-        self.password = ""
+        self.sender_mail = os.getenv('EMAIL_SENDER')
+        self.password = os.getenv('EMAIL_SENDER_PASSWORD')
 
     def send(self, email_addr,username,password):
         # ssl_context = ssl.create_default_context()
