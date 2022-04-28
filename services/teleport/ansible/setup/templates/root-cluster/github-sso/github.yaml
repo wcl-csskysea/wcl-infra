@@ -21,6 +21,12 @@ spec:
     organization: Wiredcraft
     team: wcl-galderma
 
+  ## blue
+  - logins:
+    - blue-developer
+    organization: Wiredcraft
+    team: adidas-wcl-dev
+
   # DevOps
   ## DevOps New
   - logins:

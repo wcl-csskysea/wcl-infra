@@ -1,0 +1,16 @@
+kind: role
+version: v4
+metadata:
+  name: blue-developer
+spec:
+  allow:
+    node_labels:
+      project: blue
+      env:
+        - dev
+        - staging
+        - pre_prod
+    logins:
+    - developer
+
+  deny: {}
