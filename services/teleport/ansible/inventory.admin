@@ -2,6 +2,7 @@
 teleport
 omnisaas-admin
 bby-admin
+blue-admin
 
 [root_cluster_admin]
 teleport
@@ -9,6 +10,7 @@ teleport
 [leaf_cluster_admin]
 omnisaas-admin
 bby-admin
+blue-admin
 
 [tco:children]
 tco_dev
@@ -110,3 +112,28 @@ bby-prod-pg-2
 
 [bby_tool]
 bby-registry
+
+[blue:children]
+blue_dev
+blue_staging
+blue_pre_prod
+blue_prod
+
+[blue_dev]
+blue-dev-db
+blue-dev-db-storyline
+
+[blue_staging]
+blue-staging-db-users
+blue-staging-db-orders
+blue-staging-db-storylines
+
+[blue_pre_prod]
+blue-pre-prod-db-storylines-[1:3]
+blue-pre-prod-db-users-[1:3]
+blue-pre-prod-redis-[1:3]
+
+[blue_prod]
+blue-prod-db-storylines-[1:5]
+blue-prod-db-users-[1:9]
+blue-prod-redis-[1:3]
