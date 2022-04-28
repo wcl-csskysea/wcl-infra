@@ -4,6 +4,8 @@ metadata:
   name: blue-developer
 spec:
   allow:
+    cluster_labels:
+      'project': 'blue'
     node_labels:
       project: blue
       env:

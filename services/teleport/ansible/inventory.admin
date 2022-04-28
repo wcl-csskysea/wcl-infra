@@ -8,8 +8,8 @@ blue-admin
 teleport
 
 [leaf_cluster_admin]
-# omnisaas-admin
-# bby-admin
+omnisaas-admin
+bby-admin
 blue-admin
 
 [tco:children]
