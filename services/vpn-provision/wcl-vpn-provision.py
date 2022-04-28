@@ -106,7 +106,7 @@ def main():
     # step 1: get username+email address for each user.
     ftg = FortientVPNCreator()
     mail = Mail()
-    group_name = 'testgroup'
+    group_name = 'ssl-vpn-created-by-bot'
     ftg.initMembersList('ssl-vpn')
 
     for each_account in dict_user_email_list:
