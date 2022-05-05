@@ -102,11 +102,12 @@ class FortientVPNCreator(object):
         self.fg.SetUser2Group(group_name,members)
        
 
-def main():
+def main(fgt_groupname=''):
     # step 1: get username+email address for each user.
     ftg = FortientVPNCreator()
     mail = Mail()
-    group_name = 'ssl-vpn-created-by-bot'
+    # group_name = 'ssl-vpn-created-by-bot'
+    group_name = fgt_groupname
     ftg.initMembersList('ssl-vpn')
 
     for each_account in dict_user_email_list:
@@ -123,8 +124,9 @@ def main():
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='wiredcraft vpn account provision')
     parser.print_usage()
-    parser.add_argument('--usersname',type=str,nargs='+',help='Input username please!')
-    parser.add_argument('--usersemail',type=str,nargs='+',help='Input user email please!')
+    parser.add_argument('-u','--usersname',type=str,nargs='+',help='Input username please!')
+    parser.add_argument('-m','--usersemail',type=str,nargs='+',help='Input user email please!')
+    parser.add_argument('-g','--groupname',type=str,default='ssl-vpn-created-by-bot')
     args = parser.parse_args()
     init_user_email_list(args.usersname,args.usersemail)
-    main()
+    main(args.groupname)

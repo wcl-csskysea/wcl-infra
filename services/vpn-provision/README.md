@@ -34,7 +34,7 @@ export EMAIL_SENDER_PASSWORD=
 
 then 
 ```
-source envsetting
+source ./git envsetting
 ```
 finally execute the following commandline:
 
