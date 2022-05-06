@@ -21,7 +21,7 @@ please go to https://myaccount.google.com/lesssecureapps and open this option "A
 
 1. set necessary environments
 
-assign values in evesetting file
+copy .env.example to .env and assign values in .env file
 ```
 # FTG_ADMIN&FTG_ADMIN_PASSWORD: your login user and passwords in fortigate web-ui
 export FTG_ADMIN=
@@ -32,13 +32,14 @@ export EMAIL_SENDER=
 export EMAIL_SENDER_PASSWORD=
 ```
 
-then 
 ```
-source ./git envsetting
+source ./.env
 ```
 finally execute the following commandline:
 
 `python3 wcl-vpn-provision.py --usersname xxx --usersemail xxx@xxx.com`
+or use short option cli
+`python3 wcl-vpn-provision.py -u xxx -m xxx@xxx.com`
 
 ## Notices:
 

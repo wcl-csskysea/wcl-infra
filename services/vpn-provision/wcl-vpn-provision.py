@@ -1,4 +1,4 @@
-#! /usr/bin/python
+#! /usr/bin/env python3
 # -*- coding: utf-8 -*- 
 from ast import arg
 import re,os,sys,json
@@ -108,7 +108,7 @@ def main(fgt_groupname=''):
     mail = Mail()
     # group_name = 'ssl-vpn-created-by-bot'
     group_name = fgt_groupname
-    ftg.initMembersList('ssl-vpn')
+    ftg.initMembersList(fgt_groupname)
 
     for each_account in dict_user_email_list:
         #create vpn account in forient firewall.

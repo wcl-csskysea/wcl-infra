@@ -45,7 +45,7 @@ class Mail(object):
         message['From'] = self.sender_mail
         message['To'] = email_addr
         message['Cc'] = self.sender_mail
-        message['Subject'] = "vpn account provisioin"
+        message['Subject'] = "Wiredcraft VPN"
         try:
             result = service.sendmail(self.sender_mail, email_addr, message.as_string())
         except:
