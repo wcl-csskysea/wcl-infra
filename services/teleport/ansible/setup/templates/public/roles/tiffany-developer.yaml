@@ -1,0 +1,14 @@
+kind: role
+version: v4
+metadata:
+  name: tiffany-developer
+spec:
+  allow:
+    cluster_labels:
+      'project': 'omni-saas-admin'
+    node_labels:
+      'env': qa
+    logins:
+    - developer
+
+  deny: {}
