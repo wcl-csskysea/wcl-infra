@@ -7,8 +7,15 @@ spec:
     cluster_labels:
       'project': 'omni-saas-admin'
     node_labels:
-      'env': qa
+      'env':
+      - dev
+      - qa
+      - staging
     logins:
     - developer
+    kubernetes_groups:
+    - developer
+    kubernetes_labels:
+      'env': 'omnisaas'
 
   deny: {}
