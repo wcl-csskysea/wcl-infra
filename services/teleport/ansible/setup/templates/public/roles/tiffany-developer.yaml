@@ -11,6 +11,8 @@ spec:
       - dev
       - qa
       - staging
+      'project': 
+      - tco
     logins:
     - developer
     kubernetes_groups:
