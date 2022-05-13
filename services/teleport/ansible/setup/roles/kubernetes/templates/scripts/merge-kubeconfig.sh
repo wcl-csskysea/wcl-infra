@@ -11,7 +11,7 @@ IFS=":"
 export KUBECONFIG="$*"
 
 # When $KUBECONFIG contains a list of files, kubectl will merge them.
-kubectl config view --raw >merged-kubeconfig
+kubectl config view --raw > kubeconfig
 
 echo "Wrote merged-kubeconfig.
 
