@@ -1,6 +1,6 @@
 ---
 - name: teleport leaf cluster admin
-  hosts: leaf-cluster-admin
+  hosts: leaf_cluster_admin
   become: yes
   vars_prompt:
     - name: trusted_token

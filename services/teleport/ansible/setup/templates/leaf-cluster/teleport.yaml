@@ -28,5 +28,5 @@ kubernetes_service:
   listen_addr: 0.0.0.0:3027
   kubeconfig_file: "/root/.kube/kubeconfig"
   labels:
-    env: "{{ kubernetes_env }}"
+    env: "{{ cluster }}"
 

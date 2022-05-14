@@ -6,8 +6,8 @@ metadata:
 rules:
 - apiGroups: ["*"]
   resources: ["deployments","services","cronjobs","jobs"]
-  verbs: ["get", "watch", "list"]
+  verbs: ["get", "watch", "list","create"]
   
 - apiGroups: ["*"]
-  resources: ["pods"]
-  verbs: ["get","watch","list","delete"]
+  resources: ["pods","pods/exec"]
+  verbs: ["get","watch","list","delete","create"]

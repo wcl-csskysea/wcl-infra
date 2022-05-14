@@ -10,15 +10,26 @@
 
 - name: use scripts get-kubeconfig.sh generate kubeconfig
   shell: "cd /root/.kube &&  sh /root/.kube/scripts/get-kubeconfig.sh"
+  when: k8sconfigfile == 'single'
 
-- name: upload k8s developer role directory
-  copy: 
-    src: templates/role
-    dest: /root/.kube/
+- name: use scripts merge-kubeconfig.sh combine the two config
+  shell: "cd /root/.kube &&  sh /root/.kube/scripts/merge-kubeconfig.sh staging-config prod-config "
+  when: k8sconfigfile == 'two'
 
-- name: create k8s developer sa && clusterrole && clusterolebinding
-  shell: "kubectl create sa developer -n teleport && kubectl create -f /root/.kube/role/developer-clusteerrole.yaml && kubectl create -f /root/.kube/role/developer-clusterrolebind.yaml"
+#if you have two environment, you may need to re-run this task in different kube config. just use --tags to specific this task.
+- name: create sa and apply the related role 
+  block:
+    - shell: "kubectl create sa developer -n teleport"
+      ignore_errors: True
+    - shell: "kubectl create sa devops -n teleport"
+      ignore_errors: True
+    - name: apply developer role
+      k8s:
+        definition: "{{ lookup('template', '{{ item }}') | from_yaml }}"
+      with_fileglob:
+        - "templates/role/developer-clusterrole.yaml"
+        - "templates/role/developer-clusterrolebind.yaml"
+        - "templates/role/devops-clusterrole.yaml"
+        - "templates/role/devops-clusterrolebind.yaml"
+  tags: applyrole
 
-- name: create k8s devops sa && clusterrole && clusterolebinding
-  shell: "kubectl create sa devops -n teleport && kubectl create -f /root/.kube/role/devops-clusteerrole.yaml && kubectl create -f /root/.kube/role/devops-clusterrolebind.yaml"
-  

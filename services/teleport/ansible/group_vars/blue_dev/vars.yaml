@@ -1,0 +1,5 @@
+---
+labels_env: "dev"
+labels_project: "blue"
+leaf_admin_host: "10.0.0.4:3030"
+jump_server: "blue-admin"

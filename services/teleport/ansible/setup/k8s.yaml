@@ -13,14 +13,10 @@
       #Change the name and location of automatically generated files as /root/.kube/kubeconfig
       #Notice: you still need to create developer and devops sa,clusterrole,clusterrolebind 
       #check services/teleport/ansible/setup/roles/kubernetes/templates/role directory.
+
     - name: k8sconfigfile
-      prompt: 'could you generated k8s config at /root/.kube/config? [yes / no]'
-      default: 'no'
-      private: false
-    
-    - name: kubernetes_env
-      prompt: 'label kubernetes [project_name]'
-      default: 'none'
+      prompt: 'pls put k8s kubeconfig file in /root/.kube/config , if there are two envinronment,named prod-config and staging-config then put these in /root/.kube/ , do not change the name. '
+      default: 'single / two'
       private: false
 
   vars:
@@ -28,7 +24,7 @@
 
   roles:
     - role: kubernetes 
-      when: k8sconfigfile == 'yes'
+      when: k8sconfigfile is defined
 
   tasks:
     - name: Generating Configuration File
@@ -44,4 +40,4 @@
             state: restarted
             enabled: yes
             daemon_reload: yes
-      when: k8sconfigfile == 'yes'
+      when: k8sconfigfile is defined

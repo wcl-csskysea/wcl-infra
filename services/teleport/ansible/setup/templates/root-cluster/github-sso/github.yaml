@@ -9,6 +9,12 @@ spec:
   teams_to_logins:
   # Projects
 
+  ## tco
+  - logins:
+    - tiffany-developer
+    organization: Wiredcraft
+    team: tiffany-development-team
+    
   ## bby
   - logins:
     - bby-developer
@@ -20,6 +26,12 @@ spec:
     - galderma-developer
     organization: Wiredcraft
     team: wcl-galderma
+
+  ## blue
+  - logins:
+    - blue-developer
+    organization: Wiredcraft
+    team: adidas-wcl-dev
 
   # DevOps
   ## DevOps New
